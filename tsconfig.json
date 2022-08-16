@@ -37,6 +37,5 @@
   "include": [
     "./src",
     "webpack.config.js",
-    "index.d.ts"
   ]
 }
