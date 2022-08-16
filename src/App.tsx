@@ -1,5 +1,6 @@
 import { getWords } from './apiHelpers/words/wordsController';
 import React, { FC } from 'react';
+import './styles/index.scss';
 import classes from './app.module.scss';
 import logo from './assets/icons/rs-logo.svg';
 
