@@ -1,8 +1,7 @@
-import { Configuration, DefinePlugin } from 'webpack';
+import { DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import path from 'path';
-import CopyPlugin from 'copy-webpack-plugin';
 
 const webpackConfig = () => ({
   entry: './src/index.tsx',
@@ -19,15 +18,8 @@ const webpackConfig = () => ({
   module: {
     rules: [
       {
-        test: /\.(svg|png|jpg|jpeg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
-          },
-        ],
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.tsx?$/,
@@ -48,6 +40,7 @@ const webpackConfig = () => ({
               modules: true,
             },
           },
+          'sass-loader',
         ],
       },
     ],
@@ -64,9 +57,6 @@ const webpackConfig = () => ({
 
     new DefinePlugin({
       'process.env': process.env.production || !process.env.development,
-    }),
-    new CopyPlugin({
-      patterns: [{ from: 'public/assets', to: 'assets' }],
     }),
   ],
 });

@@ -19,8 +19,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module",
         "project": [
-            "./tsconfig.json",
-            "./src/index.d.ts"
+            "./tsconfig.json"
         ]
     },
     "plugins": [
