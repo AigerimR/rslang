@@ -1,12 +1,12 @@
 @import './styles/index.scss';
 
 .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  min-width: 320px;
 }
 
-.header {
-  @include font(50px, 40px, black, 500);
+.container {
+  max-width: 1420px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
 }
