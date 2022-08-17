@@ -21,7 +21,6 @@
 
   &_link {
     position: relative;
-    padding-bottom: 10px;
     transition: all 0.5s ease;
     cursor: pointer;
 
@@ -32,6 +31,7 @@
       bottom: 0;
       width: 0;
       height: 2px;
+      margin-bottom: -7px;
       background: linear-gradient(to right, $color-turquoise-surf, $color-golden-poppy, $color-charm-pink 100%);
       transform: translateX(-50%);
       transition: width 0.5s ease 0s, right 0.5s ease 0s;

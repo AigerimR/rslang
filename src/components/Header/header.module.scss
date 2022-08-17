@@ -17,6 +17,10 @@
   color: $color-turquoise-surf;
   cursor: pointer;
 
+  &:hover {
+    transform: scale(1.1);
+  }
+
   &_L {
     color: $color-june-bud;
   }
@@ -58,4 +62,8 @@
   border: none;
   filter: invert(77%) sepia(42%) saturate(3353%) hue-rotate(1deg) brightness(106%) contrast(104%);
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
