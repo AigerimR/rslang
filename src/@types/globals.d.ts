@@ -18,5 +18,12 @@ declare module '*.svg' {
   export = value;
 }
 
-declare module '*.module.css';
-declare module '*.module.scss';
+declare module '*.module.scss' {
+  const content: { [className: string]: string };
+  export = content;
+}
+
+declare module '*.scss' {
+  const content: { [className: string]: string };
+  export = content;
+}
