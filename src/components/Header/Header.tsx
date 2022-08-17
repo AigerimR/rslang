@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import MainPage from '../MainPage/MainPage';
 import AboutPage from '../AboutPage/AboutPage';
