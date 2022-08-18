@@ -1,26 +1,16 @@
-import React, { FC } from 'react';
+import React from 'react';
 import classes from './header.module.scss';
+import Logo from './Logo/Logo';
 import Menu from './Menu/Menu';
+import Registration from '../Buttons/Registration/Registration';
 
-const Header: FC = () => {
+const Header = () => {
   return (
     <header className={classes.header}>
       <div className={classes.container}>
-        <div className={classes.logo_container}>
-          <a className={classes.logo_link} href='#'>
-            <h1 className={classes.logo}>
-              RS
-              <span className={classes.logo_L}>L</span>
-              <span className={classes.logo_ang}>ang</span>
-            </h1>
-          </a>
-          <div className={classes.logo_slogan}>
-            <span>Открой с</span>
-            <span>нами мир</span>
-          </div>
-        </div>
+        <Logo />
         <Menu />
-        <button className={classes.enter_btn}></button>
+        <Registration />
       </div>
     </header>
   )

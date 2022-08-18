@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import classes from './menu.module.scss';
 
-const Menu: FC = () => {
+const Menu = () => {
   return (
     <nav className={classes.menu}>
       <div className={classes.menu_btn}>

@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import classes from './footer.module.scss';
 import logoRSSchool from '../../assets/svg/rsschool.svg';
 import logoGitHub from '../../assets/svg/github.svg';
 
-const Footer: FC = () => {
+const Footer = () => {
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
