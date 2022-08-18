@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import classes from './menu.module.scss';
 
-const Menu: FC = () => {
+const Menu = () => {
   const [menuActive, setMenuActive] = useState(false);
   return (
     <nav className={classes.menu}>
