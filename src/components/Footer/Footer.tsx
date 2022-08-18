@@ -14,11 +14,11 @@ const Footer = () => {
           <p className={classes.year}>2022</p>
         </div>
         <div className={classes.github_group}>
-          <a className={classes.github_link} href='https://github.com/solomonya' target='_blank'>
+          <a className={classes.github_link} href='https://github.com/AigerimR' target='_blank'>
             <img className={`${classes.github_logo} ${classes.aigerim}`} src={logoGitHub} alt='GitHub' />
             <p className={classes.github_name} >Айгерим</p>
           </a>
-          <a className={classes.github_link} href='https://github.com/AigerimR' target='_blank'>
+          <a className={classes.github_link} href='https://github.com/solomonya' target='_blank'>
             <img className={`${classes.github_logo} ${classes.solomon}`} src={logoGitHub} alt='GitHub' />
             <p className={classes.github_name} >Соломон</p>
           </a>
