@@ -1,0 +1,39 @@
+@import '../../app.module.scss';
+.card{
+  background-color: $color-gainsboro;
+  width: 300px;
+  height: 80px;
+  transition: 0.5s;
+  text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  &:hover{
+    width: 400px;
+    height: 400px;
+  } 
+  &_word{
+    margin: 0;
+  }
+  &_trans{
+    margin: 0;
+  }
+}
+
+.img{
+  // width: 20%;
+  // height: 120px;
+  // position: absolute;
+  // left: 25%;
+  margin: -20px auto 0 auto;
+  background-color: rgb(197, 196, 255);
+  &:hover{
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.innerContent{
+  text-align: left;
+}
