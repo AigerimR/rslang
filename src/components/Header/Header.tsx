@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './header.module.scss';
 import Logo from './Logo/Logo';
 import Menu from './Menu/Menu';
-import Registration from '../Buttons/Registration/Registration';
+import AuthorizationBtn from '../Buttons/AuthorizationBtn/AuthorizationBtn';
 
 const Header = () => {
   return (
@@ -11,7 +11,7 @@ const Header = () => {
         <div className={classes.container}>
           <Logo />
           <Menu />
-          <Registration />
+          <AuthorizationBtn />
         </div>
       </header>
     </div>

@@ -1,8 +1,8 @@
 import React from 'react';
-import classes from './registration.scss';
+import classes from './authorizationBtn.module.scss';
 import { Link } from 'react-router-dom';
 
-const Registration = () => {
+const AuthorizationBtn = () => {
   return (
       <div>
         <Link to="/authorization"><button className={classes.enter_btn}></button></Link>
@@ -10,4 +10,4 @@ const Registration = () => {
   )
 };
 
-export default Registration;
+export default AuthorizationBtn;
