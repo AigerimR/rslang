@@ -56,7 +56,8 @@
       flex-direction: column;
       justify-content: space-between;
       width: 30px;
-      height: 24px;
+      height: 30px;
+      padding: 3px 0;
       cursor: pointer;
 
       span {
@@ -83,6 +84,10 @@
       box-shadow: $color-gainsboro 0px 1px 4px;
     }
 
+    &_active {
+      display: flex;
+    }
+
     &_shadow {
       position: fixed;
       z-index: 3;
@@ -94,6 +99,7 @@
     }
 
     &_open {
+      padding: 0;
       span {
         &:nth-child(1) {
           transform: rotate(-45deg) translate(-10px, 10px);

@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import classes from './menu.module.scss';
 
-const Menu = () => {
+const Menu: FC = () => {
+  const [menuActive, setMenuActive] = useState(false);
   return (
     <nav className={classes.menu}>
-      <div className={classes.menu_btn}>
+      <div className={menuActive ? `${classes.menu_btn} ${classes.menu_open}` : classes.menu_btn} onClick={() => setMenuActive(!menuActive)}>
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <div className={classes.menu_shadow}></div>
-      <ul className={classes.menu_list}>
+      <div className={classes.menu_shadow} style={menuActive ? { display: 'block' } : { display: 'none' }}></div>
+      <ul className={menuActive ? `${classes.menu_list} ${classes.menu_active}` : classes.menu_list}>
+
         <li className={classes.menu_item}>
           <a className={classes.menu_link}>О нас</a>
         </li>
