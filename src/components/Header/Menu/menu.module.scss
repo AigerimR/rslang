@@ -1,7 +1,9 @@
 @import '../../../app.module.scss';
 
 .menu {
-  margin-left: auto;
+  &_container {
+    margin-left: auto;
+  }
 
   &_btn,
   &_cover,
@@ -49,6 +51,8 @@
 
 @media screen and (max-width: 900px) {
   .menu {
+      position: relative;
+
     &_btn {
       position: relative;
       z-index: 7;
@@ -72,13 +76,14 @@
     }
 
     &_list {
-      display: none;
-      position: absolute;
+      position: fixed;
       z-index: 5;
       top: 0;
       right: 0;
+      display: none;
       flex-direction: column;
       align-items: flex-start;
+      min-width: 240px;
       padding: 100px 50px 30px;
       background-color: $color-raisin-black;
       box-shadow: $color-gainsboro 0px 1px 4px;
@@ -99,7 +104,9 @@
     }
 
     &_open {
+      position: absolute;
       padding: 0;
+
       span {
         &:nth-child(1) {
           transform: rotate(-45deg) translate(-10px, 10px);
