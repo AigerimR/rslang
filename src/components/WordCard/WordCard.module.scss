@@ -1,39 +1,82 @@
 @import '../../app.module.scss';
+* {
+  box-sizing: border-box;
+  // padding: 0;
+  // margin: 0;
+}
+
 .card{
-  background-color: $color-gainsboro;
+  background-color: $color-white;
   width: 300px;
-  height: 80px;
-  transition: 0.5s;
+  height: 65px;
+  margin: 20px;
+  transition: all 0.5s ease-in-out;
   text-align: center;
-  padding: 10px;
+  padding: 10px 30px;
   border-radius: 20px;
   overflow: hidden;
-
+  border: solid 1px $color-gainsboro;
+  box-shadow: 5px 3px 3px $color-gainsboro;
+  font-size: 20px;
   &:hover{
-    width: 400px;
-    height: 400px;
+    height: 100%;
   } 
+  &_header,
+  &_action{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    // padding: 0 15px;
+  }
+  // &_header p{
+  //   font-size: small;
+  // }
   &_word{
     margin: 0;
   }
   &_trans{
     margin: 0;
   }
-}
-
-.img{
-  // width: 20%;
-  // height: 120px;
-  // position: absolute;
-  // left: 25%;
-  margin: -20px auto 0 auto;
-  background-color: rgb(197, 196, 255);
-  &:hover{
+  &_img{
     width: 200px;
     height: 200px;
+    border-radius: 20px;
   }
+}
+
+
+.btn{
+ &_round{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  &:hover{
+    cursor: pointer;
+    } 
+ }
+ &_icon{
+  width: 20px;
+  height: 20px;
+  // border-radius: 50%;
+ }
+
+  // &_sound{
+  // //   background-image: url(../../assets/icons/sound.svg);
+  // //   background-repeat: no-repeat;
+  // // background-position: center;
+  // // background-size: contain;
+  // width: 40px;
+  // height: 40px;
+  // border-radius: 50%;
+  // }
 }
 
 .innerContent{
   text-align: left;
+  font-size: small;
 }
