@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classes from './menu.module.scss';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -15,22 +16,22 @@ const Menu = () => {
         <ul className={menuActive ? `${classes.menu_list} ${classes.menu_active}` : classes.menu_list}>
 
           <li className={classes.menu_item}>
-            <a className={classes.menu_link}>О нас</a>
+          <Link to="/about" className={classes.menu_link}>О нас</Link>
           </li>
           <li className={classes.menu_item}>
-            <a className={classes.menu_link}>Учебник</a>
+            <Link to="/textbook" className={classes.menu_link}>Учебник</Link>
           </li>
           <li className={classes.menu_item}>
-            <a className={classes.menu_link}>Аудиовызов</a>
+            <Link to="/audio-game" className={classes.menu_link}>Аудиовызов</Link>
           </li>
           <li className={classes.menu_item}>
-            <a className={classes.menu_link}>Спринт</a>
+            <Link to="/sprint-game" className={classes.menu_link}>Спринт</Link>
           </li>
           <li className={classes.menu_item}>
-            <a className={classes.menu_link}>Сложные слова</a>
+            <Link to="/complex-words" className={classes.menu_link}>Сложные слова</Link>
           </li>
           <li className={classes.menu__item}>
-            <a className={classes.menu_link}>Статистика</a>
+            <Link to="/statistics" className={classes.menu_link}>Статистика</Link>
           </li>
         </ul>
       </nav>
