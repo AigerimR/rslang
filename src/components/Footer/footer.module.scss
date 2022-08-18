@@ -36,7 +36,7 @@
 
 .year {
   flex: 1;
-  color: $color-june-bud;
+  color: $color-golden-poppy;
   font-size: calc(2.125rem + ((1vw - 7.67px) * 2.144));
   font-weight: 700;
 }
@@ -73,7 +73,7 @@
 
   &_name {
     position: relative;
-    color: $color-golden-poppy;
+    color: $color-turquoise-surf;
     font-size: 1rem;
     font-weight: 500;
 
@@ -101,7 +101,7 @@
 }
 
 .lazzat {
-  filter: invert(44%) sepia(98%) saturate(832%) hue-rotate(153deg) brightness(92%) contrast(101%);
+  filter: invert(86%) sepia(23%) saturate(7217%) hue-rotate(0deg) brightness(103%) contrast(106%);
 }
 
 @media screen and (max-width: 540px) {
