@@ -1,0 +1,82 @@
+@import '../mainPage.module.scss';
+
+.description {
+  padding-bottom: 80px;
+  font-family: 'Comfortaa', cursive;
+  background-color: $color-creame;
+
+  &_title {
+    margin-top: calc(0.0625rem + ((1vw - 3.2px) * -8.8393));
+    font-family: 'Neucha', cursive;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &_notice {
+    margin-top: 1rem;
+    color: $color-venetian-red;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    text-transform: uppercase;
+    text-align: center;
+
+    span {
+      font-size: 1.5rem;
+    }
+  }
+
+  &_cards {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  &_card {
+    width: 300px;
+    padding: 20px;
+    font-size: 1.1rem;
+    line-height: 150%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    &:nth-child(1) {
+      background-color: #b1d864;
+    }
+
+    &:nth-child(2) {
+      background-color: #6cc9c9;
+    }
+
+    &:nth-child(3) {
+      background-color: #e7d56b;
+    }
+
+    &:nth-child(4) {
+      background-color: #eba164;
+    }
+
+    &_title {
+      font-family: 'Neucha', cursive;
+      font-size: 1.7rem;
+      font-weight: 400;
+      text-align: center;
+    }
+
+    &_info {
+      margin-top: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .description {
+    &_card {
+      width: 100%;
+    }
+  }
+}
