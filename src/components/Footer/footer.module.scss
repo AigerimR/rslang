@@ -1,6 +1,9 @@
 @import '../../app.module.scss';
 
 .footer {
+  position: relative;
+  z-index: 3;
+  bottom: 0;
   padding: 10px 0;
   background-color: #231f20;
 

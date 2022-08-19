@@ -6,15 +6,13 @@ import AuthorizationBtn from '../Buttons/AuthorizationBtn/AuthorizationBtn';
 
 const Header = () => {
   return (
-    <div>
-      <header className={classes.header}>
-        <div className={classes.container}>
-          <Logo />
-          <Menu />
-          <AuthorizationBtn />
-        </div>
-      </header>
-    </div>
+    <header className={classes.header}>
+      <div className={classes.container}>
+        <Logo />
+        <Menu />
+        <AuthorizationBtn />
+      </div>
+    </header>
   )
 };
 

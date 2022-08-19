@@ -51,11 +51,11 @@
 
 @media screen and (max-width: 900px) {
   .menu {
-      position: relative;
+    position: relative;
 
     &_btn {
       position: relative;
-      z-index: 7;
+      z-index: 12;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -76,10 +76,10 @@
     }
 
     &_list {
-      position: fixed;
-      z-index: 5;
-      top: 0;
-      right: 0;
+      position: absolute;
+      z-index: 10;
+      top: -43px;
+      right: -70px;
       display: none;
       flex-direction: column;
       align-items: flex-start;
@@ -95,7 +95,7 @@
 
     &_shadow {
       position: fixed;
-      z-index: 3;
+      z-index: 8;
       top: 0;
       left: 0;
       width: 100%;
