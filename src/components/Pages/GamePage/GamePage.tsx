@@ -2,6 +2,7 @@ import { IGamesPageProps } from '../../../@types/gamesPage';
 import React, { FC, PropsWithChildren } from 'react';
 import DifficultyLevels from '../../../components/DifficultyLevels/DifficultyLevels';
 import classes from './gamePage.module.scss';
+import CountdownTimer from '../../../components/CountdownTimer/CountdownTime';
 
 const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, children }) => {
   return (
@@ -13,6 +14,7 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, 
         <DifficultyLevels />
         <button>Начать игру</button>
         {children}
+        <CountdownTimer time={5} cb={() => alert('game is finished!')} />
       </div>
     </section>
   );
