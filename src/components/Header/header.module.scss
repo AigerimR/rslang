@@ -1,0 +1,14 @@
+@import '../../app.module.scss';
+
+.header {
+  width: 100%;
+  padding: 20px 0;
+  background-color: $color-raisin-black;
+
+  .container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
