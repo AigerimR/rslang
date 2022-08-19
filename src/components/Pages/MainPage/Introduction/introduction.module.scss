@@ -34,7 +34,8 @@
   &_title {
     position: relative;
     font-size: 2rem;
-    letter-spacing: 0.15rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
 
     &::before {
       content: '\201c';
@@ -99,10 +100,14 @@
   }
 
   &_item {
-    margin-left: 16px;
+    margin-top: 8px;
     color: $color-blue-green;
-    list-style: georgian;
     font-size: 1rem;
+
+    &::before {
+      content: ('\1F60E');
+      padding-right: 8px;
+    }
   }
 
   &_girl {
