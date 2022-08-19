@@ -2,10 +2,14 @@ import React, { FC, useEffect, useState } from "react";
 import { TWord } from "../../@types/words";
 import WordCard from "../WordCard/WordCard";
 import { getWords } from "../../apiHelpers/words/wordsController";
+import { ClassNames } from "@emotion/react";
+import { collapseClasses } from "@mui/material";
+import classes from "./CardsContainer.module.scss"
 
 
 
-const Textbook: FC = () => {
+
+const CardsContainer: FC = () => {
   let [data, setData] = useState<TWord[]>();
   // const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
   // let id = '5e9f5ee35eb9e72bc21af4a0';
@@ -17,25 +21,19 @@ const Textbook: FC = () => {
     // return res;
   }
   
-  if(data === undefined){
-    return  <div>
-    </div>
-  }
-  else{
-    data.forEach(el=>{
+    let wordCard = data?.map(el=>{
       return (
-        <div>
-          {/* <WordCard id={el.id} /> */}
-          {/* <button>AIKA</button> */}
-        </div>
+        // <div>
+          <WordCard id={el.id} key={el.id}/>
+        // </div>
       );
     })
-  }
+    // wordCard.addEventListener()
   return(
-    <div>
-      <h2>aika</h2>
+    <div className={classes.cards_container}>
+      {wordCard}
     </div>
   )
 }
 
-export default Textbook;
+export default CardsContainer;
