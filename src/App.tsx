@@ -10,14 +10,14 @@ import {
   Route
 } from 'react-router-dom';
 
-import MainPage from './components/MainPage/MainPage';
-import AboutPage from './components/AboutPage/AboutPage';
-import StatisticsPage from './components/StatisticsPage/StatisticsPage';
-import AudioGame from './components/AudioGame/AudioGame';
-import SprintGame from './components/SprintGame/SprintGame';
-import ComplexWords from './components/ComplexWords/ComplexWords';
-import Textbook from './components/Textbook/Textbook';
-import Authorization from './components/Authorization/Authorization';
+import MainPage from './components/Pages/MainPage/MainPage';
+import AboutPage from './components/Pages/AboutPage/AboutPage';
+import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
+import AudioGame from './components/Games/AudioGame/AudioGame';
+import SprintGame from './components/Games/SprintGame/SprintGame';
+import ComplexWords from './components/Pages/ComplexWords/ComplexWords';
+import Textbook from './components/Pages/Textbook/Textbook';
+import Authorization from './components/Pages/Authorization/Authorization';
 
 
 const App: FC = () => {
