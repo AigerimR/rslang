@@ -1,0 +1,149 @@
+@import '../mainPage.module.scss';
+
+.introduction {
+  position: relative;
+  z-index: -2;
+  padding-top: calc(3.125rem + ((1vw - 3.2px) * 2.6786));
+  padding-bottom: calc(3.125rem + ((1vw - 3.2px) * 15.1786));
+  background-color: $color-mentol-green;
+
+  &_container {
+    display: flex;
+    padding-top: calc(1.25rem + ((1vw - 3.2px) * 2.6786));
+    justify-content: space-between;
+  }
+
+  &_content {
+    padding-right: 16px;
+  }
+
+  &_blockquote {
+    position: relative;
+    right: 0;
+    color: $color-old-mauve;
+    font-family: 'Neucha', cursive;
+    text-align: right;
+
+    p {
+      margin-top: 16px;
+      font-size: 1.2rem;
+      text-align: right;
+    }
+  }
+
+  &_title {
+    position: relative;
+    font-size: 2rem;
+    letter-spacing: 0.15rem;
+
+    &::before {
+      content: '\201c';
+      left: -20px;
+      font-family: Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    &::after {
+      content: '\201e';
+      right: -20px;
+      font-family: Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+  }
+
+  &_info {
+    color: $color-dark-chocolate;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 150%;
+  }
+
+  &_friend {
+    color: $color-venetian-red;
+    font-size: 1.4rem;
+    line-height: 300%;
+  }
+
+  &_question {
+    span {
+      color: $color-venetian-red;
+    }
+  }
+
+  &_list {
+    margin-top: 16px;
+
+    &_mark {
+      display: inline-block;
+      font-family: 'Neucha', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 0.15rem;
+      margin: 5px 0;
+      padding: 2px 5px;
+      color: $color-navy;
+      background-color: $color-golden-poppy;
+      border-radius: 5px;
+    }
+
+    &_invitation {
+      margin-top: 16px;
+      color: $color-venetian-red;
+      font-size: 1.3rem;
+      text-align: right;
+    }
+  }
+
+  &_item {
+    margin-left: 16px;
+    color: $color-blue-green;
+    list-style: georgian;
+    font-size: 1rem;
+  }
+
+  &_girl {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    min-width: 300px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &_wave {
+    position: absolute;
+    bottom: 0;
+
+    path {
+      fill: $color-creame;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .introduction {
+    &_container {
+      flex-direction: column;
+    }
+
+    &_content {
+      padding-right: 0;
+    }
+
+    &_girl {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      img {
+        width: 300px;
+      }
+    }
+  }
+}
