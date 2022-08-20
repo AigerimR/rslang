@@ -33,9 +33,8 @@ const App: FC = () => {
               <GamePage
                 title='Спринт'
                 description='Спринт - это игра на скорость. Даны слово на английском, и его перевод, отметь правильно ли указан перевод для слова, и набери как можно больше баллов'
-              >
-                <SprintGame />
-              </GamePage>
+                game='sprint'
+              ></GamePage>
             }
           />
           <Route path='/complex-words' element={<ComplexWords />} />
