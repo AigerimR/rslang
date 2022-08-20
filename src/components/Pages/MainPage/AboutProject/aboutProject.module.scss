@@ -1,7 +1,9 @@
 @import '../mainPage.module.scss';
 
-.description {
-  padding-bottom: 80px;
+.aboutProject {
+  position: relative;
+  z-index: -2;
+  padding-bottom: calc(3.125rem + ((1vw - 3.2px) * 15.1786));
   font-family: 'Comfortaa', cursive;
   background-color: $color-creame;
 
@@ -39,31 +41,33 @@
   &_card {
     width: 300px;
     padding: 20px;
+    color: $color-raisin-black;
     font-size: 1.1rem;
+    font-weight: 600;
     line-height: 150%;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     &:nth-child(1) {
-      background-color: #b1d864;
+      background-color: $color-light-lime-green;
     }
 
     &:nth-child(2) {
-      background-color: #6cc9c9;
+      background-color: $color-moonstone-blue;
     }
 
     &:nth-child(3) {
-      background-color: #e7d56b;
+      background-color: $color-pikachu-yellow;
     }
 
     &:nth-child(4) {
-      background-color: #eba164;
+      background-color: $color-sandy-brown;
     }
 
     &_title {
       font-family: 'Neucha', cursive;
       font-size: 1.7rem;
-      font-weight: 400;
+      font-weight: 600;
       text-align: center;
     }
 
@@ -71,10 +75,20 @@
       margin-top: 1rem;
     }
   }
+
+  &_wave {
+    position: absolute;
+    z-index: -3;
+    bottom: -20px;
+
+    path {
+      fill: $color-turquoise-surf;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .description {
+  .aboutProject {
     &_card {
       width: 100%;
     }
