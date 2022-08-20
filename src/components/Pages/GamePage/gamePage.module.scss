@@ -1,0 +1,21 @@
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50%;
+}
+
+.title {
+  text-align: center;
+}
+
+.description {
+  text-align: center;
+}

@@ -13,7 +13,7 @@ const Header = () => {
         <AuthorizationBtn />
       </div>
     </header>
-  )
+  );
 };
 
 export default Header;
