@@ -2,11 +2,18 @@
 
 .wrapper {
   min-width: 320px;
+  overflow: hidden;
 }
 
 .container {
-  max-width: 1420px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
 }
