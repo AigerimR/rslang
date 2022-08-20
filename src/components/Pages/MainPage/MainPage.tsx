@@ -4,7 +4,7 @@ import WaveHeader from '../../Waves/WaveHeader';
 import WaveFooter from '../../Waves/WaveFooter';
 import Introduction from './Introduction/Introduction';
 import AboutProject from './AboutProject/AboutProject';
-import AboutTeam from './AboutTeam/AboutTeam';
+import Team from './Team/Team';
 
 const MainPage = () => {
   return (
@@ -13,7 +13,7 @@ const MainPage = () => {
       <main className={classes.main_page}>
         <Introduction />
         <AboutProject />
-        <AboutTeam />
+        <Team />
       </main>
       <WaveFooter />
     </div>
