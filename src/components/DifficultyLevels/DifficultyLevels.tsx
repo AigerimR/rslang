@@ -7,7 +7,7 @@ const DifficultyLevels: FC<{ setLevel: (level: string) => void }> = ({ setLevel 
   const levels: number[] = [1, 2, 3, 4, 5, 6];
   const [checked, setChecked] = useState<string>('');
 
-  const handleChange = (e: React.FormEvent<HTMLUListElement>) => {
+  const handleChange = () => (e: React.FormEvent<HTMLUListElement>) => {
     const targetEl = e.target as HTMLInputElement;
     const difficultyValue = targetEl.value;
     setChecked(difficultyValue);
@@ -17,12 +17,7 @@ const DifficultyLevels: FC<{ setLevel: (level: string) => void }> = ({ setLevel 
   const isChecked = (level: number) => level.toString() === checked;
 
   return (
-    <ul
-      className={classes.list}
-      onChange={(e) => {
-        handleChange(e);
-      }}
-    >
+    <ul className={classes.list} onChange={handleChange()}>
       {levels.map((level) => {
         return (
           <li className={classes.item} key={uuidv4()}>
