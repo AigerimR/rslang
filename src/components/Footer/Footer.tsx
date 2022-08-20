@@ -8,21 +8,21 @@ const Footer = () => {
     <footer className={classes.footer}>
       <div className={classes.container}>
         <div className={classes.rsschool_group}>
-          <a className={classes.rsschool_link} href='https://rs.school/' target='_blank'>
+          <a className={classes.rsschool_link} href='https://rs.school/' target='_blank' rel="noreferrer">
             <img className={classes.rsschool_logo} src={logoRSSchool} alt='RSSchool Logo' />
           </a>
           <p className={classes.year}>2022</p>
         </div>
         <div className={classes.github_group}>
-          <a className={classes.github_link} href='https://github.com/AigerimR' target='_blank'>
+          <a className={classes.github_link} href='https://github.com/AigerimR' target='_blank' rel="noreferrer">
             <img className={`${classes.github_logo} ${classes.aigerim}`} src={logoGitHub} alt='GitHub' />
             <p className={classes.github_name} >Айгерим</p>
           </a>
-          <a className={classes.github_link} href='https://github.com/solomonya' target='_blank'>
+          <a className={classes.github_link} href='https://github.com/solomonya' target='_blank' rel="noreferrer">
             <img className={`${classes.github_logo} ${classes.solomon}`} src={logoGitHub} alt='GitHub' />
             <p className={classes.github_name} >Соломон</p>
           </a>
-          <a className={classes.github_link} href='https://github.com/2248lm' target='_blank'>
+          <a className={classes.github_link} href='https://github.com/2248lm' target='_blank' rel="noreferrer">
             <img className={`${classes.github_logo} ${classes.lazzat}`} src={logoGitHub} alt='GitHub' />
             <p className={classes.github_name} >Лаззат</p>
           </a>
