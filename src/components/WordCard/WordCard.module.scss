@@ -1,8 +1,8 @@
 @import '../../app.module.scss';
 * {
   box-sizing: border-box;
-  // padding: 0;
-  // margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .card{
@@ -10,7 +10,7 @@
   background-color: $color-white;
   // width: 100%;
   width: 310px;
-  // height: 70px;
+  height: 70px;
   margin: 5px;
   transition: all 0.5s ease-in-out;
   text-align: center;
@@ -20,10 +20,10 @@
   border: solid 1px $color-gainsboro;
   box-shadow: 5px 3px 3px $color-gainsboro;
   font-size: 20px;
-  // &:hover{
-  //   height: 100%;
-  //   z-index: 10;
-  // } 
+  &:hover{
+    height: 100%;
+    z-index: 10;
+  } 
   &_header,
   &_action{
     display: flex;
@@ -41,24 +41,36 @@
   }
   &_trans{
     margin: 0;
-    text-align: left;
   }
   &_transcript{
     margin: 0;
   }
   &_img{
     width: 240px;
-    height: 200px;
+    height: 180px;
     border-radius: 20px;
+    margin-top: 10px;
   }
 }
 
+// .innerContent h3{
+//   margin-top: 10px;
+// }
 .innerContent{
-  // position: absolute;
-  // top: 70px;
-  // left: 0;
+  h3{
+    margin: 10px 0 5px 0;
+  }
+  h4{
+    text-decoration: underline;
+    margin-top: 10px;
+  }
+  p{
+    font-size: 15px;
+  }
+  &_text{
+    padding-left: 10px;
+  }
 }
-
 .btn{
  &_round{
   width: 40px;

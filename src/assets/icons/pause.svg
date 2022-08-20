@@ -1,0 +1,20 @@
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 5.19 5.69" id="pause">
+    <defs>
+      <linearGradient id="linear-gradient" x1="2.59" y1="5.25" x2="2.59" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#bd1c8a"></stop>
+        <stop offset="1" stop-color="#961756"></stop>
+      </linearGradient>
+    </defs>
+    <title>Pause</title>
+    <g>
+      <g id="Layer_2">
+        <g id="Layer_1-2">
+          <path d="M3.19,0,4.35,0l.8,0,0,3.27-.05,1.9-.64,0-1.31,0L3.13,2.72,3.19,0ZM0,.14,1.55,0l.5,0L2,1.31,2,3.16l0,2.08-2,0L0,5.15v-5Z"></path>
+          <path d="M2.05,5.24l-2,0L0,5.15l.05.4.09.14L2,5.64l0-.4Zm1.14,0,.08.36,1.23.09.59-.08,0-.36-.64,0-1.31,0Z"></path>
+          <path d="M3.19,0,3.13,2.72v.14l0-2.52L4.35.3l.8,0,0,3.06V3.31L5.15,0l-.8,0L3.19,0ZM0,.43,1.55.34l.5,0V.08l-.5,0L0,.14V.43Z"></path>
+        </g>
+      </g>
+    </g>
+  </symbol>
+</svg>

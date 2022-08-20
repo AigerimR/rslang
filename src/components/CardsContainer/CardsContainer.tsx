@@ -16,7 +16,7 @@ const CardsContainer: FC = () => {
   useEffect(()=>{getData()}, []);
 
   const getData = async () => {
-    const res = await getWords(1,1);
+    const res = await getWords(1,2);
     setData(res);
     // return res;
   }
