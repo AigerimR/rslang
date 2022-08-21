@@ -16,6 +16,13 @@
     }
   }
 
+  &_control_btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
   &_container {
     display: flex;
     flex-direction: column;
