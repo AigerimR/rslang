@@ -4,7 +4,7 @@
   position: relative;
   z-index: 3;
   bottom: 0;
-  padding: 10px 0;
+  height: 90px;
   background-color: #231f20;
 
   .container {
@@ -12,6 +12,7 @@
     gap: 20px;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
   }
 }
 
@@ -109,8 +110,11 @@
 
 @media screen and (max-width: 540px) {
   .footer {
+    height: 130px;
+
     .container {
       flex-direction: column;
+      padding-top: 10px;
       padding-bottom: 20px;
     }
   }
