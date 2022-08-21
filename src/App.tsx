@@ -11,7 +11,6 @@ import {
 } from 'react-router-dom';
 
 import MainPage from './components/Pages/MainPage/MainPage';
-import AboutPage from './components/Pages/AboutPage/AboutPage';
 import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
 import AudioGame from './components/Games/AudioGame/AudioGame';
 import SprintGame from './components/Games/SprintGame/SprintGame';
@@ -26,16 +25,15 @@ const App: FC = () => {
     <div className={classes.wrapper} >
       <Router>
         <Header />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/textbook" element={<Textbook />} />
-            <Route path="/audio-game" element={<AudioGame />} />
-            <Route path="/sprint-game" element={<SprintGame />} />
-            <Route path="/complex-words" element={<ComplexWords />} />
-            <Route path="/statistics" element={<StatisticsPage />} />
-            <Route path="/authorization" element={<Authorization />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/textbook" element={<Textbook />} />
+          <Route path="/audio-game" element={<AudioGame />} />
+          <Route path="/sprint-game" element={<SprintGame />} />
+          <Route path="/complex-words" element={<ComplexWords />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
+          <Route path="/authorization" element={<Authorization />} />
+        </Routes>
         <Footer />
       </Router>
     </div >
