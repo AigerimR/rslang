@@ -16,15 +16,15 @@ const Units: React.FC <{updateUnit: (x: number) => number}>  = (props) => {
 
   return(
     <div className={classes.units_block}>
-    <h4>РАЗДЕЛЫ</h4>
-    <div className={classes.units} onClick = {handleChange}>
-      <button className={classes.btn_unit} id="0">A1</button>
-      <button className={classes.btn_unit} id="1">A2</button>
-      <button className={classes.btn_unit} id="2">B1</button>
-      <button className={classes.btn_unit} id="3">B2</button>
-      <button className={classes.btn_unit} id="4">C1</button>
-      <button className={classes.btn_unit} id="5">C2</button>
-    </div>
+      <h4>РАЗДЕЛЫ</h4>
+      <div className={classes.units} onClick = {handleChange}>
+        <button className={classes.btn_unit} id="0">A1</button>
+        <button className={classes.btn_unit} id="1">A2</button>
+        <button className={classes.btn_unit} id="2">B1</button>
+        <button className={classes.btn_unit} id="3">B2</button>
+        <button className={classes.btn_unit} id="4">C1</button>
+        <button className={classes.btn_unit} id="5">C2</button>
+      </div>
     </div>
   );
 }

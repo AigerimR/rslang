@@ -1,0 +1,16 @@
+@import '../../app.module.scss';
+* {
+  box-sizing: border-box;
+}
+
+.cards{
+  &_container{
+    width: 92%;
+    margin: auto;
+    row-gap: 2px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(30px, auto);
+  }
+} 
+

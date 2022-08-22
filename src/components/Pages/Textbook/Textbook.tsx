@@ -3,6 +3,8 @@ import { TWord } from "../../../@types/words";
 import { getWords } from "../../../apiHelpers/words/wordsController";
 import Units from "./Units/Units";
 import Paginationmui from './Pagination/Paginationmui';
+import CardsContainer from "../../CardsContainer/CardsContainer";
+import { ClassNames } from '@emotion/react';
 
 const Textbook: React.FC = () => {
   const [page, setPage] = useState<number>(0);
@@ -20,10 +22,11 @@ const Textbook: React.FC = () => {
   useEffect(()=>{getData()}, [page, unit]);
   
   return(
-    <>
+    <div>
       <Units updateUnit={updateUnit}/>
       <Paginationmui updatePage={updatePage} />
-    </>
+      <CardsContainer data={data!} />
+    </div>
   );
 }
 
