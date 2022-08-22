@@ -1,6 +1,7 @@
 import { EStatusCode } from './../../enums/serverStatusCode';
-import { TWord } from './../../@types/words';
+import { TWord, TSprintGameWord } from './../../@types/words';
 import axios, { AxiosResponse } from 'axios';
+import getRandomPage from './utils/getRandomPage';
 
 const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 
@@ -20,4 +21,23 @@ export const getWord = (id: string): Promise<TWord> => {
       response.status === EStatusCode.Ok ? response.data : Promise.reject(response),
     )
     .catch((response: AxiosResponse) => console.error(response.statusText));
+};
+
+export const getSprintGameWords = (
+  group: number,
+  page: number = getRandomPage(),
+): Promise<TSprintGameWord[]> => {
+  return getWords(group, page).then((words) => {
+    const sprintWords: TSprintGameWord[] = [];
+    words.forEach((word) => {
+      const sprintWord: TSprintGameWord = {
+        id: word.id,
+        word: word.word,
+        translate: words[getRandomPage()].wordTranslate,
+        rightTranslate: word.wordTranslate,
+      };
+      sprintWords.push(sprintWord);
+    });
+    return sprintWords;
+  });
 };

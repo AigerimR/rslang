@@ -1,4 +1,3 @@
-import { getWord } from './apiHelpers/words/wordsController';
 import React, { FC } from 'react';
 import './styles/index.scss';
 import classes from './app.module.scss';
@@ -10,14 +9,12 @@ import MainPage from './components/Pages/MainPage/MainPage';
 import AboutPage from './components/Pages/AboutPage/AboutPage';
 import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
 import AudioGame from './components/Games/AudioGame/AudioGame';
-import SprintGame from './components/Games/SprintGame/SprintGame';
 import ComplexWords from './components/Pages/ComplexWords/ComplexWords';
 import Textbook from './components/Pages/Textbook/Textbook';
 import Authorization from './components/Pages/Authorization/Authorization';
 import GamePage from './components/Pages/GamePage/GamePage';
 
 const App: FC = () => {
-  getWord('5e9f5ee35eb9e72bc21af4a0').then((word) => console.log(word));
   return (
     <div className={classes.wrapper}>
       <Router>
