@@ -1,8 +1,13 @@
+import getRandomPage from '../../../apiHelpers/words/utils/getRandomPage';
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import GameStatistics from '../GameStatisitcs/GameStatistics';
 import SprintGame from '../SprintGame/SprintGame';
 
-const Game: FC<{ difficultyLevel: string; game: string }> = ({ difficultyLevel, game }) => {
+const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
+  difficultyLevel,
+  game,
+  page = getRandomPage(),
+}) => {
   const [isGameFinished, setIsGameFinished] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
   const [accuracy, setAccuracy] = useState<number>(0);
@@ -17,6 +22,7 @@ const Game: FC<{ difficultyLevel: string; game: string }> = ({ difficultyLevel, 
   const games = {
     sprint: (
       <SprintGame
+        page={page}
         difficultyLevel={difficultyLevel}
         score={score}
         handleFinishGame={() => {

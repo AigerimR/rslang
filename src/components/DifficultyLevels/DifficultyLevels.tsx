@@ -16,12 +16,25 @@ const DifficultyLevels: FC<{ setLevel: (level: string) => void }> = ({ setLevel 
 
   const isChecked = (level: number) => level.toString() === checked;
 
+  const englishLevels = {
+    1: 'A1',
+    2: 'A2',
+    3: 'B1',
+    4: 'B2',
+    5: 'C1',
+    6: 'C2',
+  };
+
   return (
     <ul className={classes.list} onChange={handleChange()}>
       {levels.map((level) => {
         return (
-          <li className={classes.item} key={uuidv4()}>
-            <label className={isChecked(level) ? classes.label__checked : ''}>
+          <li key={uuidv4()}>
+            <label
+              className={
+                isChecked(level) ? ` ${classes.label} ${classes.label__checked}` : classes.label
+              }
+            >
               <input
                 type='radio'
                 className={classes.radio}
@@ -29,7 +42,7 @@ const DifficultyLevels: FC<{ setLevel: (level: string) => void }> = ({ setLevel 
                 value={level}
                 defaultChecked={isChecked(level)}
               />
-              {level}
+              {englishLevels[level]}
             </label>
           </li>
         );

@@ -9,11 +9,11 @@ import TSprintGameProps from '../../../@types/sprintGame';
 const SprintGame: FC<TSprintGameProps> = ({
   difficultyLevel,
   score,
+  page,
   handleFinishGame,
   handleScore,
   handleAnswer,
   handleRightAnswer,
-  page = getRandomPage(),
 }) => {
   const [wordsList, setWords] = useState<TSprintGameWord[]>([
     {
@@ -25,10 +25,14 @@ const SprintGame: FC<TSprintGameProps> = ({
   ]);
   const [index, setIndex] = useState<number>(0);
 
+  const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
-    getSprintGameWords(parseFloat(difficultyLevel), page).then((words) => {
-      setWords(words);
-    });
+    getSprintGameWords(parseFloat(difficultyLevel), page)
+      .then((words) => {
+        setWords(words);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const checkAnswer = (answer: boolean) => {
@@ -48,6 +52,8 @@ const SprintGame: FC<TSprintGameProps> = ({
       checkAnswer(answer);
     };
   };
+
+  if (loading) return <h2>Loading...</h2>;
 
   return (
     <div className={classes.container}>
