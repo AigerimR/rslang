@@ -4,9 +4,9 @@ import classes from './sprintGame.module.scss';
 import { TSprintGameWord } from '../../../@types/words';
 import { getSprintGameWords } from '../../../apiHelpers/words/wordsController';
 import getRandomPage from '../../../apiHelpers/words/utils/getRandomPage';
-import TSprintGameProps from '../../../@types/sprintGame';
+import ISprintGameProps from '../../../interfaces/sprintGame';
 
-const SprintGame: FC<TSprintGameProps> = ({
+const SprintGame: FC<ISprintGameProps> = ({
   difficultyLevel,
   score,
   page,

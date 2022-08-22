@@ -1,11 +1,8 @@
-type TSprintGameProps = {
-  difficultyLevel: string;
-  page: number;
-  score: number;
+interface IGame {
   handleScore: (score: number) => void;
   handleFinishGame: (isFinish: boolean) => void;
   handleAnswer: () => void;
   handleRightAnswer: () => void;
-};
+}
 
-export default TSprintGameProps;
+export default IGame;
