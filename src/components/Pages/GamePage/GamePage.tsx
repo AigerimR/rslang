@@ -3,6 +3,7 @@ import React, { FC, PropsWithChildren, useState } from 'react';
 import classes from './gamePage.module.scss';
 import DifficultyLevels from '../../../components/DifficultyLevels/DifficultyLevels';
 import SprintGame from '../../Games/SprintGame/SprintGame';
+import Modal from '../../../components/Modal/Modal';
 
 const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, game }) => {
   const [isGameStart, setIsGameStart] = useState<boolean>(false);
@@ -16,8 +17,6 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, 
 
   const startGame = () => setIsGameStart(true);
 
-  if (isGameStart) return gameComponent;
-
   return (
     <>
       <section className={classes.section}>
@@ -28,6 +27,14 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, 
           <DifficultyLevels setLevel={setDifficultyLevel} />
           <button onClick={startGame}>Начать</button>
         </div>
+        <Modal
+          isOpen={isGameStart}
+          handleClose={() => {
+            setIsGameStart(false);
+          }}
+        >
+          {gameComponent}
+        </Modal>
       </section>
     </>
   );
