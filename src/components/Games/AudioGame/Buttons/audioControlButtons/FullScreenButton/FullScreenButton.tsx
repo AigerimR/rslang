@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import classes from '../audioControlButton.module.scss';
-import WarningPopup from '../../WarningPopup/WarningPopup';
+import classes from '../audioControlButtons.module.scss';
+import WarningPopup from '../../../Popups/WarningPopup/WarningPopup';
 
 const FullScreenButton = () => {
   const [modalActive, setModalActive] = useState(false);

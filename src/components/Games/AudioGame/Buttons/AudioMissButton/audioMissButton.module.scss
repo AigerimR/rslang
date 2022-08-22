@@ -1,0 +1,23 @@
+@import '../../../../../app.module.scss';
+
+.audio_miss_btn {
+  width: 160px;
+  padding: 3px 0;
+  color: $color-creame;
+  font-size: 1.5rem;
+  background-color: $color-old-mauve;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-turquoise-surf;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .audio_miss_btn {
+    width: 140px;
+    font-size: 1.3rem;
+  }
+}

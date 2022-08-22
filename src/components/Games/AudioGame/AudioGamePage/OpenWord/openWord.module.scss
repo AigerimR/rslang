@@ -1,0 +1,71 @@
+@import '../../../../../app.module.scss';
+
+.audio {
+  &_open_word {
+    display: none;
+    flex-direction: column;
+    gap: 32px;
+
+    &_img {
+      width: 180px;
+      height: 180px;
+      background-image: url('../../../../../assets/img/read-girl.png');
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center;
+      border-radius: 50%;
+    }
+
+    &_context {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+
+      &_sound {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        background-image: url('../../../../../assets/svg/headphone.svg');
+        background-color: $color-old-mauve;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: center;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $color-turquoise-surf;
+        }
+      }
+
+      &_value {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .audio {
+    &_open_word {
+      gap: 20px;
+
+      &_img {
+        width: 120px;
+        height: 120px;
+      }
+
+      &_context {
+        &_sound {
+          width: 40px;
+          height: 40px;
+        }
+
+        &_value {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}

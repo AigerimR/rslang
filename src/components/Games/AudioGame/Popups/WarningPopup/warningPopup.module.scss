@@ -1,4 +1,4 @@
-@import '../../../../app.module.scss';
+@import '../../../../../app.module.scss';
 
 .warningPopup {
   &_wrapper {
@@ -46,9 +46,10 @@
     padding: 8px;
     color: $color-black;
     font-size: 1.2rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-radius: 8px;
+    border: solid 2px $color-quincy;
     cursor: pointer;
 
     &:nth-child(1) {

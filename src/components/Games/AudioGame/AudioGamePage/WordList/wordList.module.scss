@@ -1,0 +1,53 @@
+@import '../../../../../app.module.scss';
+
+.audio {
+  &_list {
+    display: flex;
+    gap: 20px 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    font-size: 1.5rem;
+
+    &_item {
+      position: relative;
+      cursor: pointer;
+
+      &:hover {
+        color: $color-navy;
+        transition: 0.5s ease;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          margin-bottom: -7px;
+          background: linear-gradient(to right, $color-turquoise-surf, $color-golden-poppy, $color-june-bud 100%);
+          transform: translateX(-50%);
+          transition: width 0.5s ease 0s, right 0.5s ease 0s;
+        }
+      }
+
+      &_wrong {
+        color: $color-old-mauve;
+        text-decoration: line-through;
+      }
+
+      &_other {
+        color: $color-old-mauve;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .audio {
+    &_list {
+      gap: 12px 32px;
+      font-size: 1.1rem;
+    }
+  }
+}

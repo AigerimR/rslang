@@ -1,0 +1,98 @@
+@import '../../../../../app.module.scss';
+
+.levelPopup {
+  &_wrapper {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 320px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(41, 41, 41, 0.6);
+  }
+
+  &_container {
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    padding: 30px 20px;
+    text-align: center;
+    background-color: $color-sandy-brown;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  &_title {
+    font-size: 1.5rem;
+  }
+
+  &_btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 10% 0;
+  }
+
+  &_btn {
+    width: 50px;
+    height: 50px;
+    color: $color-creame;
+    font-family: 'Neucha', cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    border: solid 1px $color-quincy;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:nth-child(1) {
+      background-color: $color-spanish-purple;
+    }
+
+    &:nth-child(2) {
+      background-color: $color-venetian-red;
+    }
+
+    &:nth-child(3) {
+      color: $color-black;
+      background-color: $color-alloy-orange;
+    }
+
+    &:nth-child(4) {
+      color: $color-black;
+      background-color: $color-mahogany;
+    }
+
+    &:nth-child(5) {
+      background-color: $color-midnight-green;
+    }
+
+    &:nth-child(6) {
+      background-color: $color-rich-black;
+    }
+  }
+
+  &_play_btn {
+    padding: 8px;
+    color: $color-black;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background-color: $color-creame;
+    border-radius: 8px;
+    border: solid 2px $color-quincy;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

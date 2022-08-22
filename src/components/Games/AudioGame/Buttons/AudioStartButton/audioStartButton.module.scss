@@ -1,0 +1,18 @@
+@import '../../../../../app.module.scss';
+
+.audio_start_btn {
+  width: fit-content;
+  padding: 2px 8px;
+  font-family: 'Neucha', cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background-color: transparent;
+  border: solid 2px $color-dark-chocolate;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-sandy-brown;
+  }
+}
