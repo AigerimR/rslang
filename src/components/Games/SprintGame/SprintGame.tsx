@@ -4,9 +4,15 @@ import classes from './sprintGame.module.scss';
 import { TSprintGameWord } from '../../../@types/words';
 import { getSprintGameWords } from '../../../apiHelpers/words/wordsController';
 import getRandomPage from '../../../apiHelpers/words/utils/getRandomPage';
+import TSprintGameProps from '../../../@types/sprintGame';
 
-const SprintGame: FC<{ difficultyLevel: string; page?: number }> = ({
+const SprintGame: FC<TSprintGameProps> = ({
   difficultyLevel,
+  score,
+  handleFinishGame,
+  handleScore,
+  handleAnswer,
+  handleRightAnswer,
   page = getRandomPage(),
 }) => {
   const [wordsList, setWords] = useState<TSprintGameWord[]>([
@@ -17,6 +23,7 @@ const SprintGame: FC<{ difficultyLevel: string; page?: number }> = ({
       rightTranslate: '',
     },
   ]);
+  const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
     getSprintGameWords(parseFloat(difficultyLevel), page).then((words) => {
@@ -24,56 +31,53 @@ const SprintGame: FC<{ difficultyLevel: string; page?: number }> = ({
     });
   }, []);
 
-  const [isGameFinished, setIsGameFinished] = useState<boolean>(false);
-
-  const [score, setScore] = useState<number>(0);
-
-  const [index, setIndex] = useState<number>(0);
-
   const checkAnswer = (answer: boolean) => {
     const rightAnswer = wordsList[index].translate === wordsList[index].rightTranslate;
-    answer === rightAnswer
-      ? setScore((prevScore) => prevScore + 10)
-      : setScore((prevScore) => prevScore - 10);
+    if (answer === rightAnswer) {
+      handleScore(score + 10);
+      handleRightAnswer();
+    } else {
+      handleScore(score);
+    }
     setIndex(getRandomPage());
   };
 
-  if (!isGameFinished) {
-    return (
-      <div>
-        <h2 className={classes.title}>THIS IS SPRINT</h2>
-        <h2 className={classes.title}>Difficulty level {difficultyLevel}</h2>
-        <CountdownTimer
-          time={10}
-          cb={(intervalId) => {
-            clearInterval(intervalId);
-            setIsGameFinished(true);
-          }}
-        />
-        <h5>{score}</h5>
-        <h5>{wordsList[index].word}</h5>
-        <h5>{wordsList[index].translate}</h5>
-        <div className={classes.buttonsContainer}>
-          <button
-            onClick={() => {
-              checkAnswer(true);
-            }}
-          >
-            Верно
-          </button>
-          <button
-            onClick={() => {
-              checkAnswer(false);
-            }}
-          >
-            Неверно
-          </button>
-        </div>
-      </div>
-    );
-  }
+  const handleUserAnswer = (answer: boolean) => {
+    return () => {
+      handleAnswer();
+      checkAnswer(answer);
+    };
+  };
 
-  return <h1>{score}</h1>;
+  return (
+    <div className={classes.container}>
+      <h5>Score: {score}</h5>
+      <h5>
+        {wordsList[index].word} это {wordsList[index].translate} ?
+      </h5>
+      <div className={classes.buttonsContainer}>
+        <button
+          onClick={handleUserAnswer(true)}
+          className={`${classes.button} ${classes.button_correct}`}
+        >
+          Верно
+        </button>
+        <button
+          onClick={handleUserAnswer(false)}
+          className={`${classes.button} ${classes.button_incorrect}`}
+        >
+          Неверно
+        </button>
+      </div>
+      <CountdownTimer
+        time={30}
+        cb={(intervalId) => {
+          clearInterval(intervalId);
+          handleFinishGame(true);
+        }}
+      />
+    </div>
+  );
 };
 
 export default SprintGame;

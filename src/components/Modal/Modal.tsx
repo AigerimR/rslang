@@ -17,10 +17,12 @@ const Modal: FC<TModalProps> = ({ children, isOpen, handleClose }) => {
   return (
     <ReactPortal wrapperId='react-portal-modal-container'>
       <div className={classes.modal}>
-        <button onClick={handleClose} className={classes.closeBtn}>
-          Close
-        </button>
-        <div className={classes.children}>{children}</div>
+        <div className={classes.container}>
+          <button onClick={handleClose} className={classes.closeBtn}>
+            X
+          </button>
+          <div className={classes.children}>{children}</div>
+        </div>
       </div>
     </ReactPortal>
   );
