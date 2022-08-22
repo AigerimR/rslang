@@ -6,10 +6,13 @@
 }
 
 .card{
-  // position: relative;
+  position: relative;
   background-color: $color-white;
   // width: 100%;
   width: 310px;
+  // height: 100%;
+  // grid-row: span 1;
+
   height: 70px;
   margin: 5px;
   // transition: all 0.5s ease-in-out;
@@ -20,10 +23,11 @@
   border: solid 1px $color-gainsboro;
   box-shadow: 5px 3px 3px $color-gainsboro;
   font-size: 20px;
+  transition: 0.2s all;
   &:hover{
     height: 100%;
-    z-index: 10;
     grid-row: span 6;
+    // transition-delay:4s;
   } 
   &_header,
   &_action{
@@ -100,6 +104,11 @@
   &:hover{
     cursor: pointer;
     } 
+ }
+ &_expand{
+  position: absolute;
+  top: 20px;
+  right: 10px;
  }
  &_icon{
   width: 20px;

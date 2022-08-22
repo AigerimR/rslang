@@ -1,0 +1,19 @@
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 6.16 7.04" id="arrowL">
+    <defs>
+      <linearGradient id="linear-gradient" x1="335.84" y1="6.62" x2="335.84" gradientTransform="matrix(-1, 0, 0, 1, 338.92, 0)" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#ffcceb"></stop>
+        <stop offset="1" stop-color="#fff"></stop>
+      </linearGradient>
+    </defs>
+    <title>ARROWL</title>
+    <g>
+      <g id="Layer_2">
+        <g id="Layer_1-2">
+          <polygon points="4.24 0 0 3.31 4.24 6.62 4.24 4.86 6.16 4.86 6.16 1.76 4.24 1.76 4.24 0 4.24 0"></polygon>
+          <path d="M4.24,4.86H6.16v.42H4.24V4.86ZM.38,3.61l3.86,3V7L0,3.73V3.31l.38.3Z"></path>
+        </g>
+      </g>
+    </g>
+  </symbol>
+</svg>
