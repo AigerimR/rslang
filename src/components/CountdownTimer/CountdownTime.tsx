@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 
-const CountdownTimer: FC<{ time: number; cb: () => void }> = ({ time, cb }) => {
+const CountdownTimer: FC<{ time: number; cb: (intervalId) => void }> = ({ time, cb }) => {
   const [currentTime, setTime] = useState(time);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (currentTime !== 0) tick();
-      else cb();
+      else cb(intervalId);
     }, 1000);
 
     return () => {

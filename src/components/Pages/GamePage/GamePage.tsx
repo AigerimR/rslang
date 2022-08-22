@@ -17,26 +17,21 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, 
 
   const startGame = () => setIsGameStart(true);
 
+  const stopGame = () => setIsGameStart(false);
+
   return (
-    <>
-      <section className={classes.section}>
-        <div className={classes.container}>
-          <h1>{title}</h1>
-          <p>{description}</p>
-          <h2>Уровень сложности</h2>
-          <DifficultyLevels setLevel={setDifficultyLevel} />
-          <button onClick={startGame}>Начать</button>
-        </div>
-        <Modal
-          isOpen={isGameStart}
-          handleClose={() => {
-            setIsGameStart(false);
-          }}
-        >
-          {gameComponent}
-        </Modal>
-      </section>
-    </>
+    <section className={classes.section}>
+      <div className={classes.container}>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <h2>Уровень сложности</h2>
+        <DifficultyLevels setLevel={setDifficultyLevel} />
+        <button onClick={startGame}>Начать</button>
+      </div>
+      <Modal isOpen={isGameStart} handleClose={stopGame}>
+        {gameComponent}
+      </Modal>
+    </section>
   );
 };
 
