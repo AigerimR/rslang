@@ -14,3 +14,10 @@ export type TWord = {
   textMeaningTranslate: string;
   wordTranslate: string;
 };
+
+export type TSprintGameWord = {
+  id: string;
+  word: string;
+  translate: string;
+  rightTranslate: string;
+};
