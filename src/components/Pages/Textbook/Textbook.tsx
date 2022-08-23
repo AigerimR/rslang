@@ -4,14 +4,15 @@ import { getWords } from "../../../apiHelpers/words/wordsController";
 import Units from "./Units/Units";
 import Paginationmui from './Pagination/Paginationmui';
 import CardsContainer from "../../CardsContainer/CardsContainer";
-import { ClassNames } from '@emotion/react';
+import classes from "./Textbook.module.scss"
 
 const Textbook: React.FC = () => {
   const [page, setPage] = useState<number>(0);
-  const updatePage = (x:number): number => { setPage(x); return x};
+  const updatePage = (page:number): void => { setPage(page);};
 
   const [unit, setUnit] = useState(0);
-  const updateUnit = (u:number): number => { setUnit(u); return u};  
+  const [unitColor, setUnitColor] = useState('#bbd66c');
+  const updateUnit = (unit:number, unitColor: string): void => { setUnit(unit); setUnitColor(unitColor);};  
 
   let [data, setData] = useState<TWord[]>();
   const getData = async () => {
@@ -22,10 +23,10 @@ const Textbook: React.FC = () => {
   useEffect(()=>{getData()}, [page, unit]);
   
   return(
-    <div>
+    <div className={classes.textbook}>
       <Units updateUnit={updateUnit}/>
       <Paginationmui updatePage={updatePage} />
-      <CardsContainer data={data!} />
+      <CardsContainer data={data!} unitColor = {unitColor}/>
     </div>
   );
 }

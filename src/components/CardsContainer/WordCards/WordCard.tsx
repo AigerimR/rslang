@@ -7,9 +7,10 @@ import tickIcon from '../../../assets/svg/tick.svg';
 import crossIcon from '../../../assets/svg/cross.svg';
 import playIcon from '../../../assets/svg/play.svg';
 
-const WordCard: React.FC<{id: string}> = (props) => {
+const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
   let id = props.id;
+  let unitColor = props.unitColor;  
   
   let [btnSoundOn, setSoundBtn] = useState<Boolean>(true);
   let [data, setData] = useState<TWord>();
@@ -45,7 +46,7 @@ const WordCard: React.FC<{id: string}> = (props) => {
     </div>
   }
   return (
-    <div className={classes.card} key={id}>
+    <div className={classes.card} key={id} style={{ backgroundColor: `${unitColor}` }}>
       <div>
         <h3 className={classes.card_word}>{data.word}</h3>
         <p className={classes.card_transcript}>{data.transcription}</p>

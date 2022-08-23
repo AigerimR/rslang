@@ -13,12 +13,15 @@
   margin: 5px;
   text-align: center;
   padding: 6px 30px;
-  border-radius: 20px;
   overflow: hidden;
-  border: solid 1px $color-gainsboro;
-  box-shadow: 5px 3px 3px $color-gainsboro;
   font-size: 20px;
   transition: 0.2s all;
+  color: $color-raisin-black;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 150%;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   &:hover{
     height: 100%;

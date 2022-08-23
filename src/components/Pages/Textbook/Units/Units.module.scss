@@ -11,22 +11,56 @@
     text-align: center;
     margin-top: 10px;
   }
+
+  &_title {
+    color: $color-venetian-red;
+    font-family: 'Neucha', cursive;
+    font-size: 1.7rem;
+    font-weight: 600;
+    text-align: center;
+  }
 }
 
 .btn{
   &_unit{
-    background-color: $color-white;
-    width: 60px;
+    font-family: 'Neucha', cursive;
+    width: 45px;
     height: 45px;
-    margin: 10px;
+    margin-top: 10px;
     text-align: center;
+    padding-right: 2px;
+    padding-top: 2px;
     border-radius: 50%;
     overflow: hidden;
     border: solid 1px $color-gainsboro;
-    box-shadow: 5px 3px 3px $color-gainsboro;
     font-size: 20px;
+    transition: transform 0.2s;
     &:hover{
       cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      transform: scale(1.3);
     } 
+  }
+  &_active{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1.3);
+  }
+  &_a1{
+    background-color: $color-light-lime-green;
+  }
+  &_a2{
+    background-color: $color-dark-lime-green;
+  }
+  &_b1{
+    background-color: $color-pikachu-yellow;
+  }
+  &_b2{
+    background-color: $color-sandy-brown;
+  }
+  &_c1{
+    background-color: $color-mentol-green;
+  }
+  &_c2{
+    background-color: $color-turquoise-surf;
   }
 }
