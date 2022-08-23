@@ -28,7 +28,6 @@ const App: FC = () => {
         <Header />
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/about" element={<AboutPage />} />
             <Route path="/textbook" element={<Textbook />} />
             <Route path="/audio-game" element={<AudioGame />} />
             <Route path="/sprint-game" element={<SprintGame />} />

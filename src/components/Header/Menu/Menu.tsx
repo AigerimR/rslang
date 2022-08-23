@@ -15,9 +15,6 @@ const Menu = () => {
         <div className={classes.menu_shadow} style={menuActive ? { display: 'block' } : { display: 'none' }}></div>
         <ul className={menuActive ? `${classes.menu_list} ${classes.menu_active}` : classes.menu_list}>
           <li className={classes.menu_item}>
-            <Link to="/about" className={classes.menu_link} onClick={() => setMenuActive(false)}>О нас</Link>
-          </li>
-          <li className={classes.menu_item}>
             <Link to="/textbook" className={classes.menu_link} onClick={() => setMenuActive(false)}>Учебник</Link>
           </li>
           <li className={classes.menu_item}>
