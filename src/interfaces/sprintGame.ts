@@ -2,7 +2,7 @@ import IGame from './game';
 
 interface ISprintGameProps extends IGame {
   difficultyLevel: string;
-  page: number;
+  page?: number;
   score: number;
 }
 

@@ -2,9 +2,9 @@ import CountdownTimer from '../../../components/CountdownTimer/CountdownTime';
 import React, { FC, useEffect, useState } from 'react';
 import classes from './sprintGame.module.scss';
 import { TSprintGameWord } from '../../../@types/words';
-import { getSprintGameWords } from '../../../apiHelpers/words/wordsController';
-import getRandomPage from '../../../apiHelpers/words/utils/getRandomPage';
+import { getAllSprintWords, getPageSprintWords } from '../../../apiHelpers/words/wordsController';
 import ISprintGameProps from '../../../interfaces/sprintGame';
+import getRandomIndex from '../../../utils/getRandomIndex';
 
 const SprintGame: FC<ISprintGameProps> = ({
   difficultyLevel,
@@ -15,7 +15,7 @@ const SprintGame: FC<ISprintGameProps> = ({
   handleAnswer,
   handleRightAnswer,
 }) => {
-  const [wordsList, setWords] = useState<TSprintGameWord[]>([
+  const [wordsList, setWords] = useState<TSprintGameWord[] | void>([
     {
       id: '',
       word: '',
@@ -28,11 +28,10 @@ const SprintGame: FC<ISprintGameProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getSprintGameWords(parseFloat(difficultyLevel), page)
-      .then((words) => {
-        setWords(words);
-      })
-      .finally(() => setLoading(false));
+    const words: Promise<TSprintGameWord[] | void> = page
+      ? getPageSprintWords(parseFloat(difficultyLevel), page)
+      : getAllSprintWords(parseFloat(difficultyLevel));
+    words.then((words) => setWords(words)).finally(() => setLoading(false));
   }, []);
 
   const checkAnswer = (answer: boolean) => {
@@ -43,7 +42,8 @@ const SprintGame: FC<ISprintGameProps> = ({
     } else {
       handleScore(score);
     }
-    setIndex(getRandomPage());
+    const nextIndex = page ? getRandomIndex(20) : getRandomIndex(120);
+    setIndex(nextIndex);
   };
 
   const handleUserAnswer = (answer: boolean) => {

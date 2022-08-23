@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from './audioGame.module.scss';
 import AudioMainPage from './AudioMainPage/AudioMainPage';
+import classes from './audiogame.module.scss';
 
 const AudioGame = () => {
   return (
@@ -8,8 +8,8 @@ const AudioGame = () => {
       <div className={classes.container}>
         <AudioMainPage />
       </div>
-    </main >
-  )
+    </main>
+  );
 };
 
 export default AudioGame;

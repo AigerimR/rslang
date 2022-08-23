@@ -1,4 +1,3 @@
-import getRandomPage from '../../../apiHelpers/words/utils/getRandomPage';
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import GameStatistics from '../GameStatisitcs/GameStatistics';
 import SprintGame from '../SprintGame/SprintGame';
@@ -6,7 +5,7 @@ import SprintGame from '../SprintGame/SprintGame';
 const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   difficultyLevel,
   game,
-  page = getRandomPage(),
+  page,
 }) => {
   const [isGameFinished, setIsGameFinished] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
