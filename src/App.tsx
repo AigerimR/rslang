@@ -16,7 +16,7 @@ import AudioGame from './components/Games/AudioGame/AudioGame';
 import SprintGame from './components/Games/SprintGame/SprintGame';
 import ComplexWords from './components/Pages/ComplexWords/ComplexWords';
 import Textbook from './components/Pages/Textbook/Textbook';
-import Authorization from './components/Pages/Authorization/Authorization';
+import Authorization from './components/Header/Authorization/Authorization';
 
 
 const App: FC = () => {
