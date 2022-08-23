@@ -5,6 +5,7 @@
 
 .cards{
   &_container{
+    // position: relative;
     width: 92%;
     margin: auto;
     row-gap: 2px;
@@ -14,3 +15,13 @@
   }
 } 
 
+.Modal{
+  width: 70%;
+  height: 200px;
+  position: absolute;
+    top: 400px;
+    left: 400px;
+    right: 40px;
+    bottom: 40px;
+    background-color: papayawhip;
+}

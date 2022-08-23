@@ -1,11 +1,14 @@
 import { TWord } from "../../../@types/words";
 import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
+
 import { getWord } from "../../../apiHelpers/words/wordsController";
 import classes from "./WordCard.module.scss"
 import plusIcon from '../../../assets/svg/plus.svg';
 import tickIcon from '../../../assets/svg/tick.svg';
 import crossIcon from '../../../assets/svg/cross.svg';
 import playIcon from '../../../assets/svg/play.svg';
+
 
 const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
@@ -14,6 +17,7 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   
   let [btnSoundOn, setSoundBtn] = useState<Boolean>(true);
   let [data, setData] = useState<TWord>();
+  let [modalIsOpen, setModalIsOpen] = useState<Boolean>(false);
 
   useEffect(()=>{getData(id)}, []);
 
@@ -45,32 +49,39 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
     return  <div>
     </div>
   }
-  return (
-    <div className={classes.card} key={id} style={{ backgroundColor: `${unitColor}` }}>
-      <div>
-        <h3 className={classes.card_word}>{data.word}</h3>
-        <p className={classes.card_transcript}>{data.transcription}</p>
-      </div>
+  return (<>
+    <Modal isOpen = {modalIsOpen} className={classes.Modal} onRequestClose = {()=> setModalIsOpen(false)}>
+      {/* <button onClick={() => setModalIsOpen(false)}>close modal</button> */}
+      {/* <div className={classes.card}> */}
+   
       <div>
         <div className={classes.card_header}>
-        <h4 className={classes.card_trans}>{data.wordTranslate}</h4>
+          <div>
+            <h3 className={classes.card_word}>{data.word}</h3>
+            <p className={classes.card_transcript}>{data.transcription}</p>
+            <h4 className={classes.card_trans}>{data.wordTranslate}</h4>
+          </div>
           <button className={classes.btn_round} onClick={handleAudio}>
             { btnSoundOn ? playOnIcon : playOffIcon }
           </button>
         </div>
         <div className={classes.innerContent}>
           <img src={`${BASE_URL}/${data.image}`} alt="img" className={classes.card_img}/>
-          <h4>Значение</h4>
-          <div className={classes.innerContent_text}>
-            <h3 dangerouslySetInnerHTML={{ __html: data.textMeaning }}></h3>
-            <p>{data.textMeaningTranslate}</p>
+          <div>
+            <h4>Значение</h4>
+            <div className={classes.innerContent_text}>
+              <h3 dangerouslySetInnerHTML={{ __html: data.textMeaning }}></h3>
+              <p>{data.textMeaningTranslate}</p>
+            </div>
+            <h4>Пример</h4>
+            <div className={classes.innerContent_text}>
+              <h3 dangerouslySetInnerHTML={{ __html: data.textExample }}></h3>
+              <p>{data.textExampleTranslate}</p>
+            </div>
           </div>
-          <h4>Пример</h4>
-          <div className={classes.innerContent_text}>
-            <h3 dangerouslySetInnerHTML={{ __html: data.textExample }}></h3>
-            <p>{data.textExampleTranslate}</p>
-          </div>
-          <div className={classes.card_action}>
+          
+        </div>
+        <div className={classes.card_action}>
             <button className={classes.btn_normal}>
               <svg className={classes.btn_icon} fill='$color-charm-pink'>
                 <use href={`${plusIcon}#plus`} />
@@ -88,9 +99,17 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
               Удалить
             </button>
           </div>
-        </div>
+      </div>
+    {/* </div> */}
+     </Modal>
+ 
+    <div className={classes.card_small} key={id} style={{ backgroundColor: `${unitColor}` }} onClick = {() => setModalIsOpen(true)}>
+      <div>
+        <h3 className={classes.card_small_word}>{data.word}</h3>
+        <p className={classes.card_small_transcript}>{data.transcription}</p>
       </div>
     </div>
+    </>
   );
 }
 
