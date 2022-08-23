@@ -3,7 +3,7 @@ import classes from './difficultyLevels.module.scss';
 import { v4 as uuidv4 } from 'uuid';
 
 const DifficultyLevels: FC<{ setLevel: (level: string) => void }> = ({ setLevel }) => {
-  const levels: number[] = [1, 2, 3, 4, 5, 6];
+  const levels: number[] = [0, 1, 2, 3, 4, 5];
   const [checked, setChecked] = useState<string>('');
 
   const handleChange = () => (e: React.FormEvent<HTMLUListElement>) => {
@@ -16,12 +16,12 @@ const DifficultyLevels: FC<{ setLevel: (level: string) => void }> = ({ setLevel 
   const isChecked = (level: number) => level.toString() === checked;
 
   const englishLevels = {
-    1: 'A1',
-    2: 'A2',
-    3: 'B1',
-    4: 'B2',
-    5: 'C1',
-    6: 'C2',
+    0: 'A1',
+    1: 'A2',
+    2: 'B1',
+    3: 'B2',
+    4: 'C1',
+    5: 'C2',
   };
 
   return (
