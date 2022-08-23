@@ -11,7 +11,6 @@ import {
 } from 'react-router-dom';
 
 import MainPage from './components/Pages/MainPage/MainPage';
-import AboutPage from './components/Pages/AboutPage/AboutPage';
 import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
 import AudioGame from './components/Games/AudioGame/AudioGame';
 import SprintGame from './components/Games/SprintGame/SprintGame';

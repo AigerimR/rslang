@@ -5,6 +5,8 @@ import Units from "./Units/Units";
 import Paginationmui from './Pagination/Paginationmui';
 import CardsContainer from "../../CardsContainer/CardsContainer";
 import classes from "./Textbook.module.scss"
+import { Link } from 'react-router-dom';
+
 
 const Textbook: React.FC = () => {
   const [page, setPage] = useState<number>(0);
@@ -25,6 +27,8 @@ const Textbook: React.FC = () => {
   return(
     <div className={classes.textbook}>
       <Units updateUnit={updateUnit}/>
+      <Link to="/sprint-game"><button className={classes.game_sprint}>Спринт</button></Link>
+      <Link to="/audio-game"><button className={classes.game_audio}>Аудиовызов</button></Link>
       <Paginationmui updatePage={updatePage} />
       <CardsContainer data={data!} unitColor = {unitColor}/>
     </div>

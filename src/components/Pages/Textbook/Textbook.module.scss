@@ -5,3 +5,40 @@
   padding-bottom: 40px;
   background-color: $color-creame;
 }
+
+.game{
+  &_sprint,
+  &_audio{
+    position: absolute;
+    background-color: #E9EBBE;
+    font-family: 'Neucha', cursive;
+    width: 120px;
+    height: 120px;
+    margin-top: 10px;
+    text-align: center;
+    padding-right: 2px;
+    padding-top: 2px;
+    border-radius: 50%;
+    color: $color-venetian-red;
+    border: none;
+    font-size: 20px;
+    transition: transform 0.2s;
+    &:hover{
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      transform: scale(1.1);
+    } 
+  }
+
+  &_sprint{
+    right: 230px;
+    top: 170px;
+    background-color: $color-sandy-brown;
+  }
+
+  &_audio{
+    right: 100px;
+    top: 100px;
+    background-color: $color-golden-poppy;
+  }
+}
