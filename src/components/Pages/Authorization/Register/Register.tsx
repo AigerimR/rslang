@@ -4,6 +4,7 @@ import { Avatar, Box, Button, TextField } from '@mui/material';
 import avatarIcon from '../../../assets/svg/enter.svg';
 import tickIcon from '../../../../assets/svg/tick.svg';
 import { grey } from '@mui/material/colors';
+import { createUser } from '../../../../apiHelpers/users/usersController';
 
 const Register: React.FC = () => {
   const USER_CHECK = /^[a-zA-Z][a-zA-Z0-9-_]{2,23}$/;
@@ -50,13 +51,14 @@ const Register: React.FC = () => {
   const handleSubmit = async(e) =>{
     e.preventDefault();
     console.log(name, email, password);
+    createUser({ "email": email, "password": password }).then((res) => console.log(res));
     setSuccess(true);
   }
   
   return (
     <>
       {/* <p ref={errorRef}>{errorMessage}</p> */}
-      <h4>Регистрация</h4>
+   
 
       <Box
         component="form"
@@ -108,10 +110,7 @@ const Register: React.FC = () => {
       <Button type="submit" variant="contained" sx={{width: '100%', mt: '20px', mb: '20px'}} disabled = {(!nameValid || !emailValid || !passwordValid || !passwordMatchValid) ? true : false}>Зарегистрироваться</Button>
       </Box>
 
-      <div>
-        <p>Уже зарегистрированы</p>
-        <a href="#">Войти</a>
-      </div>
+     
     </>
   );
 }

@@ -11,5 +11,15 @@
     display: grid;
     grid-template-columns: 1fr;
   }
+  &_header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.btn{
+  &_link{
+    
+  }
+
 }
 
