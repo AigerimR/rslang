@@ -18,7 +18,18 @@
 }
 .btn{
   &_link{
-    
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 5px;
+    &:hover{
+      cursor: pointer;
+      scale: 1.1;
+      // border-bottom: 2px solid $color-dark-lime-green;
+    }
+  }
+  &_active{
+    border-bottom: 2px solid $color-dark-lime-green;
   }
 
 }

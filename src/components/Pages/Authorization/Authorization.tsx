@@ -13,9 +13,8 @@ const Authorization: React.FC = () => {
       <div className={classes.auth_header}>
       {/* <Button variant="outlined" sx={{width: '100%', mt: '20px'}} onClick={()=>setState("register")}>Регистрация</Button>
       <Button variant="text" sx={{width: '100%', mt: '20px'}} onClick={()=>setState("login")}>Вход</Button> */}
-
-        <button onClick={()=>setState("register")} className = {`${classes.btn_link} ${classes.btn_active}`}>Регистрация</button>
-        <button onClick={()=>setState("login")}>Вход</button>
+        <button className = {`${classes.btn_link} ${state === 'register' ? classes.btn_active : ""}`} onClick={()=>setState("register")}>Регистрация</button>
+        <button className = {`${classes.btn_link} ${state === 'login' ? classes.btn_active : ""}`} onClick={()=>setState("login")}>Вход</button>
         {/* <h4>Регистрация</h4>
         <h4>Войти</h4> */}
       </div>
