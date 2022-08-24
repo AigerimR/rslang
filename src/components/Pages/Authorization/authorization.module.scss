@@ -1,0 +1,15 @@
+@import '../../../app.module.scss';
+
+.auth{
+  &_main{
+    background-color: $color-mentol-green;
+  }
+  &_container{
+    width: 400px;
+    padding: 40px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+

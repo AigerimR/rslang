@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import classes from "./authorization.module.scss"
+import Register from './Register/Register';
 
-function Authorization() {
-  return <h2>THIS IS Authorization</h2>;
+const Authorization: React.FC = () => {
+  
+  return (
+    <div className = {classes.auth_main}>
+      <div className = {classes.auth_container}>
+        <Register />
+        {/* <LogIn /> */}
+      </div>
+    </div>
+
+  );
 }
 
 export default Authorization;
