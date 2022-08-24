@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './header.module.scss';
 import Logo from './Logo/Logo';
 import Menu from './Menu/Menu';
-import AuthorizationBtn from '../Buttons/AuthorizationBtn/AuthorizationBtn';
+import AuthorizationBtn from './AuthorizationBtn/AuthorizationBtn';
 
 const Header = () => {
   return (
