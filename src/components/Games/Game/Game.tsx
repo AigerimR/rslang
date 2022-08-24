@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import GameStatistics from '../GameStatisitcs/GameStatistics';
 import SprintGame from '../SprintGame/SprintGame';
+import AudiocGame from '../AudioGame/Audiocall';
 
 const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   difficultyLevel,
@@ -40,6 +41,17 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   const games = {
     sprint: (
       <SprintGame
+        page={page}
+        difficultyLevel={difficultyLevel}
+        score={score}
+        handleFinishGame={memoziedHandleFinishGame}
+        handleScore={memoziedHandleScore}
+        handleAnswer={memoziedHandleAnswer}
+        handleRightAnswer={memoziedHandleRightAnswer}
+      />
+    ),
+    audiocall: (
+      <AudiocGame
         page={page}
         difficultyLevel={difficultyLevel}
         score={score}

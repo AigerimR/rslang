@@ -4,10 +4,8 @@ import classes from './app.module.scss';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import MainPage from './components/Pages/MainPage/MainPage';
 import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
-import AudioGame from './components/Games/AudioGame/AudioGame';
 import ComplexWords from './components/Pages/ComplexWords/ComplexWords';
 import Textbook from './components/Pages/Textbook/Textbook';
 import Authorization from './components/Pages/Authorization/Authorization';
@@ -21,13 +19,24 @@ const App: FC = () => {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/textbook' element={<Textbook />} />
-          <Route path='/audio-game' element={<AudioGame />} />
+          <Route
+            path='/audio-game'
+            element={
+              <GamePage
+                title='Аудиовызов'
+                gameDescription='Тренировка улучшает восприятие на слух'
+                ruleDescription='В этой игре нужно выбрать перевод услышанного слова.'
+                game='audiocall'
+              />
+            }
+          />
           <Route
             path='/sprint-game'
             element={
               <GamePage
                 title='Спринт'
-                description='Спринт - это игра на скорость. Даны слово на английском, и его перевод, отметь правильно ли указан перевод для слова, и набери как можно больше баллов'
+                gameDescription='Спринт - это игра на скорость'
+                ruleDescription='Даны слово на английском и его перевод, отметь правильно ли указан перевод для слова и набери как можно больше баллов.'
                 game='sprint'
               />
             }

@@ -1,5 +1,6 @@
 export interface IGamesPageProps {
   title: string;
-  description: string;
+  gameDescription: string;
+  ruleDescription: string;
   game: string;
 }

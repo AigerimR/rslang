@@ -5,7 +5,7 @@ import DifficultyLevels from '../../../components/DifficultyLevels/DifficultyLev
 import Modal from '../../../components/Modal/Modal';
 import Game from '../../../components/Games/Game/Game';
 
-const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, game }) => {
+const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, gameDescription, ruleDescription, game }) => {
   const [isGameStart, setIsGameStart] = useState<boolean>(false);
   const [difficultyLevel, setDifficultyLevel] = useState<string>('');
 
@@ -14,20 +14,25 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, description, 
   const stopGame = () => setIsGameStart(false);
 
   return (
-    <section className={classes.section}>
+    <main className={classes.page}>
       <div className={classes.container}>
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <h2>Уровень сложности</h2>
-        <DifficultyLevels setLevel={setDifficultyLevel} />
-        <button onClick={startGame} disabled={difficultyLevel === ''}>
-          Начать
-        </button>
+        <section className={classes.gameWrapper}>
+          <div className={classes.gameContainer}>
+            <h2 className={classes.gameTitle}>{title}</h2>
+            <p className={classes.gameInfo}>{gameDescription}</p>
+            <p className={classes.gameRule}>{ruleDescription}</p>
+            <p className={classes.gameLevelName}>Уровень сложности</p>
+            <DifficultyLevels setLevel={setDifficultyLevel} />
+            <button className={classes.gameStart} onClick={startGame} disabled={difficultyLevel === ''}>
+              Начать
+            </button>
+          </div>
+          <Modal isOpen={isGameStart} handleClose={stopGame}>
+            <Game difficultyLevel={difficultyLevel} game={game} />
+          </Modal>
+        </section>
       </div>
-      <Modal isOpen={isGameStart} handleClose={stopGame}>
-        <Game difficultyLevel={difficultyLevel} game={game} />
-      </Modal>
-    </section>
+    </main>
   );
 };
 
