@@ -4,6 +4,10 @@ import axios, { AxiosResponse } from 'axios';
 import getRandomIndex from '../../utils/getRandomIndex';
 import getSprintWord from './utils/getSprintWord';
 
+const WORDS_PER_PAGE = 20;
+const WORDS_PER_GROUP = 120;
+const PAGES_PER_GROUP = 6;
+
 const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 export const getWords = (group: number, page: number): Promise<TWord[]> => {
   return axios
@@ -26,9 +30,9 @@ export const getWord = (id: string): Promise<TWord> => {
 export const getPageSprintWords = (group: number, page: number): Promise<TSprintGameWord[]> => {
   return getWords(group, page).then((words) => {
     const sprintWords: TSprintGameWord[] = words.map(() => {
-      const index = getRandomIndex(20);
+      const index = getRandomIndex(WORDS_PER_PAGE);
       const word = words[index];
-      const randomWord = words[getRandomIndex(20)];
+      const randomWord = words[getRandomIndex(WORDS_PER_PAGE)];
       const sprintWord: TSprintGameWord = getSprintWord(word, randomWord);
       return sprintWord;
     });
@@ -37,7 +41,7 @@ export const getPageSprintWords = (group: number, page: number): Promise<TSprint
 };
 
 export const getAllSprintWords = (group: number): Promise<TSprintGameWord[] | void> => {
-  const promisesWords: Promise<Response>[] = new Array(6)
+  const promisesWords: Promise<Response>[] = new Array(PAGES_PER_GROUP)
     .fill(0)
     .map((el, index) => fetch(`${BASE_URL}/words/?page=${index}&group=${group}`));
 
@@ -48,9 +52,10 @@ export const getAllSprintWords = (group: number): Promise<TSprintGameWord[] | vo
     })
     .then((words) => {
       const sprintWords: TSprintGameWord[] = words.map(() => {
-        const index = getRandomIndex(120);
+        const index = getRandomIndex(WORDS_PER_GROUP);
         const word = words[index];
-        const sprintWord: TSprintGameWord = getSprintWord(word, words[getRandomIndex(120)]);
+        const randomWord = words[getRandomIndex(WORDS_PER_GROUP)];
+        const sprintWord: TSprintGameWord = getSprintWord(word, randomWord);
         return sprintWord;
       });
       return sprintWords;
