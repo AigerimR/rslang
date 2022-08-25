@@ -21,3 +21,12 @@ export type TSprintGameWord = {
   translate: string;
   rightTranslate: string;
 };
+
+export type TAudiocallWord = {
+  id: string;
+  word: string;
+  image: string;
+  audio: string;
+  rightTranslate: string;
+  translate: string[];
+};
