@@ -1,8 +1,9 @@
 import { EStatusCode } from './../../enums/serverStatusCode';
-import { TWord, TSprintGameWord } from './../../@types/words';
+import { TWord, TSprintGameWord, TAudiocallWord } from './../../@types/words';
 import axios, { AxiosResponse } from 'axios';
 import getRandomIndex from '../../utils/getRandomIndex';
 import getSprintWord from './utils/getSprintWord';
+import setAudiocallWord from './utils/setAudiocallWord';
 
 const WORDS_PER_PAGE = 20;
 const WORDS_PER_GROUP = 120;
@@ -59,6 +60,54 @@ export const getAllSprintWords = (group: number): Promise<TSprintGameWord[] | vo
         return sprintWord;
       });
       return sprintWords;
+    })
+    .catch((res) => console.error(res));
+};
+
+export const getPageAudiocallWords = (group: number, page: number): Promise<TAudiocallWord[]> => {
+  return getWords(group, page).then((words) => {
+    const audiocallWords: TAudiocallWord[] = words.map(() => {
+      const index = getRandomIndex(120);
+      const word = words[index];
+      const wordsList: string[] = [word.wordTranslate];
+      for (let n = 0; n < 4; n += 1) {
+        const i = getRandomIndex(120);
+        if (i !== index) {
+          const randomWord = words[i].wordTranslate;
+          wordsList.push(randomWord);
+        }
+      }
+      const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList);
+      return audiocallWord;
+    });
+    return audiocallWords;
+  });
+};
+
+export const getAllAudiocallWords = (group: number): Promise<TAudiocallWord[] | void> => {
+  const promisesWords: Promise<Response>[] = new Array(6)
+    .fill(0)
+    .map((el, index) => fetch(`${BASE_URL}/words/?page=${index}&group=${group}`));
+
+  return Promise.all(promisesWords)
+    .then((responses) => responses.map((res) => (res.ok ? res.json() : Promise.reject(res))))
+    .then((words) => Promise.all(words).then((words) => words.flat(2)))
+    .then((words) => {
+      const audiocallWords: TAudiocallWord[] = words.map(() => {
+        const index = getRandomIndex(120);
+        const word = words[index];
+        const wordsList: string[] = [word.wordTranslate];
+        for (let n = 0; n < 4; n += 1) {
+          const i = getRandomIndex(120);
+          if (i !== index) {
+            const randomWord = words[i].wordTranslate;
+            wordsList.push(randomWord);
+          }
+        }
+        const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList);
+        return audiocallWord;
+      });
+      return audiocallWords;
     })
     .catch((res) => console.error(res));
 };
