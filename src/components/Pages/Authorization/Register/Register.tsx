@@ -6,6 +6,7 @@ import tickIcon from '../../../../assets/svg/tick.svg';
 import { grey } from '@mui/material/colors';
 import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
 import { EStatusCode } from '../../../../enums/serverStatusCode';
+import CommonContext from '../../../Context/Context';
 
 const Register: React.FC = () => {
   const USER_CHECK = /^[a-zA-Z][a-zA-Z0-9-_]{2,23}$/;
@@ -70,7 +71,12 @@ const Register: React.FC = () => {
       else Promise.reject(res);
     });
   }
-  if(success) {return <Navigate to="/" />}
+  if(success) {return (
+    // <CommonContext.Consumer {({userLogged, toggleContext}) => toggleContext(userLogged)}>
+      <Navigate to="/" />
+    // </CommonContext.Consumer>
+
+  )}
 
   // const getData = async (id: string): Promise<void> => {
   //   const res = await getWord(id);

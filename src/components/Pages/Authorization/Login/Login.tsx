@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
 import { EStatusCode } from '../../../../enums/serverStatusCode';
@@ -8,6 +8,7 @@ import tickIcon from '../../../../assets/svg/tick.svg';
 import classes from "./login.module.scss"
 import { Box, Button, colors, TextField } from '@mui/material';
 import { green, grey } from '@mui/material/colors';
+import CommonContext from '../../../Context/Context';
 
 const Login: React.FC = () => {
 
@@ -21,6 +22,8 @@ const Login: React.FC = () => {
   useEffect(() => {setErrorMessage('')}, [email, password]);
   useEffect(() => {<Navigate to="/" />}, [ success ]);
 
+  const { userLogged, setUserLogged } = useContext(CommonContext);
+
   const handleSubmit = async(e) =>{
     e.preventDefault();
     loginUser({"email": email, "password": password} ).then(resp=> {
@@ -32,11 +35,25 @@ const Login: React.FC = () => {
         localStorage.setItem('refreshToken', resp.refreshToken);
         localStorage.setItem('userId', resp.userID);
         localStorage.setItem('name', resp.name);
+        setUserLogged(true);
       }
     })
   }
-  
-  if(success) {return <Navigate to="/" />}
+
+  // if(success) {return <Navigate to="/" />}
+  if(success) { return <Navigate to="/" />}
+  // if(success) {return (
+  //   <CommonContext.Consumer>
+  //       {({userLogged, toggleUserLogged})=>{
+  //         toggleUserLogged(userLogged);
+  //         console.log(userLogged);
+          
+  //         return(
+  //           <Navigate to="/" />
+  //         )
+  //       }}
+  //   </CommonContext.Consumer>
+  // )}
 
   return (
     <>
