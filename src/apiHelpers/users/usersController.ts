@@ -14,6 +14,8 @@ const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 // };
 
 export const createUser = async (user) => {
+  // createUser({ "email": "hello@user.com", "password": "Gfhjkm_123" });
+
   return await fetch(`${BASE_URL}/users`, {
     method: 'POST',
     headers: {
@@ -22,28 +24,30 @@ export const createUser = async (user) => {
     },
     body: JSON.stringify(user)
   })
-  .then((response) =>{
-    if(response.status === EStatusCode.Ok) {return response.json()}
-    else if (response.status === EStatusCode.ExistingUser) {return 'Такой пользователь уже существует'}
-    // else if (response.status === EStatusCode.ExistingUser) {throw( new Error ('Такой пользователь уже существует'))}
-    else Promise.reject(response);
-  }
-    
-        // response.status === EStatusCode.Ok ? response.json() : Promise.reject(response),
-      )
+  .then((response) =>{return response})
       .catch((e) => console.log(e.message));
   // return await rawResponse.json();
 };
-// export const createUser = async user => {
-//   const rawResponse = await fetch(`${BASE_URL}/users`, {
+// export const createUser = async (user) => {
+//   return await fetch(`${BASE_URL}/users`, {
 //     method: 'POST',
 //     headers: {
 //       'Accept': 'application/json',
 //       'Content-Type': 'application/json'
 //     },
 //     body: JSON.stringify(user)
-//   });
-//   return await rawResponse.json();
+//   })
+//   .then((response) =>{
+//     if(response.status === EStatusCode.Ok) {return response.json()}
+//     else if (response.status === EStatusCode.ExistingUser) {return 'Такой пользователь уже существует'}
+//     // else if (response.status === EStatusCode.ExistingUser) {throw( new Error ('Такой пользователь уже существует'))}
+//     else Promise.reject(response);
+//   }
+    
+//         // response.status === EStatusCode.Ok ? response.json() : Promise.reject(response),
+//       )
+//       .catch((e) => console.log(e.message));
+//   // return await rawResponse.json();
 // };
 
 // createUser({ "email": "hello@user.com", "password": "Gfhjkm_123" });
@@ -55,6 +59,8 @@ export const createUser = async (user) => {
 
 
 export const loginUser = async (user) => {
+  // loginUser({ "email": "hello@user.com", "password": "Gfhjkm_123" });
+
   const rawResponse = await fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {

@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import classes from "./register.module.scss"
 import { Avatar, Box, Button, TextField } from '@mui/material';
 import avatarIcon from '../../../assets/svg/enter.svg';
 import tickIcon from '../../../../assets/svg/tick.svg';
 import { grey } from '@mui/material/colors';
-import { createUser } from '../../../../apiHelpers/users/usersController';
+import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
+import { EStatusCode } from '../../../../enums/serverStatusCode';
 
 const Register: React.FC = () => {
   const USER_CHECK = /^[a-zA-Z][a-zA-Z0-9-_]{2,23}$/;
-  const PASSWORD_CHECK = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%&]).{7,20}$/;
+  const PASSWORD_CHECK = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
   const EMAIL_CHECK = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
   const userRef = useRef();
@@ -47,17 +49,38 @@ const Register: React.FC = () => {
   }, [password, passwordMatch]);
 
   useEffect(() => {setErrorMessage('')}, [name, email, password, passwordMatch ]);
+  useEffect(() => {<Navigate to="/" />}, [ success ]);
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
-    console.log(name, email, password);
-    createUser({ "email": email, "password": password }).then((res) => console.log(res));
-    setSuccess(true);
+    // console.log(name, email, password);
+    createUser({"name": name, "email": email, "password": password }).then(async (res) => {
+      if(res?.status === EStatusCode.Ok) {
+        const user = await res.json(); 
+        setSuccess(true); 
+        loginUser({"email": email, "password": password} ).then(resp=> {
+          console.log(resp); 
+          localStorage.setItem('userId', resp.userID);
+          localStorage.setItem('token', resp.token);
+          localStorage.setItem('refreshToken', resp.refreshToken);
+          localStorage.setItem('userId', resp.userID);
+          localStorage.setItem('name', resp.name);
+        })
+       return user}
+      else if (res?.status === EStatusCode.ExistingUser) {setErrorMessage('Такой пользователь уже существует')}
+      else Promise.reject(res);
+    });
   }
-  
+  if(success) {return <Navigate to="/" />}
+
+  // const getData = async (id: string): Promise<void> => {
+  //   const res = await getWord(id);
+  //   setData(res);
+  // }
+
   return (
     <>
-      {/* <p ref={errorRef}>{errorMessage}</p> */}
+      <p className={classes.err}>{errorMessage}</p>
    
 
       <Box

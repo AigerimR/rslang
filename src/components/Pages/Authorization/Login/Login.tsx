@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from "./authorization.module.scss"
-import { Avatar, Box, Button, TextField } from '@mui/material';
+import { Avatar, Box, Button, colors, TextField } from '@mui/material';
 import avatarIcon from '../../../assets/svg/enter.svg';
-import { grey } from '@mui/material/colors';
+import { green, grey } from '@mui/material/colors';
 
 const Login: React.FC = () => {
   const userRef = useRef();
@@ -43,8 +43,11 @@ const Login: React.FC = () => {
       {/* <TextField required id="outlined-required" label="имя" value={name} onChange={handleNameChange}/> */}
       <TextField required id="outlined-required" label="email" />
       <TextField required id="outlined-basic" label="пароль" variant="outlined" />
+      {/* '#00abcd' */}
       {/* <TextField required id="outlined-basic" label="подтвердите пароль" variant="outlined" /> */}
-      <Button variant="contained" sx={{width: '100%'}} >Войти</Button>
+      <Button variant="contained" sx={{width: '100%'}}>Войти</Button>
+      {/* <Button variant="contained" sx={{width: '100%', backgroundColor:'#00abcd'}}>Войти</Button> */}
+      {/* <button>Войти</button> */}
       </Box>
     </>
   );

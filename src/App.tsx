@@ -26,9 +26,10 @@ const App: FC = () => {
   
   // createUser({ "email": "h@mail.ru", "password": "Gfhjkm_123" }).then((res) => console.log(res));
   // loginUser({ "email": "he@mail.ru", "password": "Gfhjkm_123" }).then((res) => console.log(res));
-  
+
   // {id: '6306587b26895d00166717e8', email: 'h@mail.ru'}
   // getUserToken('6306587b26895d00166717e8').then((word) => console.log(word));
+  
   return (
     <div className={classes.wrapper} >
       <Router>

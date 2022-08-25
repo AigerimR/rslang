@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import classes from "./authorization.module.scss"
 import Login from './Login/Login';
@@ -11,19 +10,12 @@ const Authorization: React.FC = () => {
     <div className = {classes.auth_main}>
       <div className = {classes.auth_container}>
       <div className={classes.auth_header}>
-      {/* <Button variant="outlined" sx={{width: '100%', mt: '20px'}} onClick={()=>setState("register")}>Регистрация</Button>
-      <Button variant="text" sx={{width: '100%', mt: '20px'}} onClick={()=>setState("login")}>Вход</Button> */}
         <button className = {`${classes.btn_link} ${state === 'register' ? classes.btn_active : ""}`} onClick={()=>setState("register")}>Регистрация</button>
         <button className = {`${classes.btn_link} ${state === 'login' ? classes.btn_active : ""}`} onClick={()=>setState("login")}>Вход</button>
-        {/* <h4>Регистрация</h4>
-        <h4>Войти</h4> */}
       </div>
-        {(state === "register") ? 
-        <Register /> :
-        <Login />}
+        {(state === "register") ? <Register /> : <Login />}
       </div>
     </div>
-
   );
 }
 
