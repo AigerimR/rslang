@@ -1,10 +1,10 @@
-import CountdownTimer from '../../../components/CountdownTimer/CountdownTime';
 import React, { FC, useEffect, useState } from 'react';
 import classes from './audiocall.module.scss';
-import { TSprintGameWord } from '../../../@types/words';
-import { getAllSprintWords, getPageSprintWords } from '../../../apiHelpers/words/wordsController';
+import { TAudiocallWord } from '../../../@types/words';
+import { getAllAudiocallWords, getPageAudiocallWords } from '../../../apiHelpers/words/wordsController';
 import ISprintGameProps from '../../../interfaces/sprintGame';
 import getRandomIndex from '../../../utils/getRandomIndex';
+import mixArray from '../../../utils/mixArray';
 
 const AudioGame: FC<ISprintGameProps> = ({
   difficultyLevel,
@@ -15,73 +15,66 @@ const AudioGame: FC<ISprintGameProps> = ({
   handleAnswer,
   handleRightAnswer,
 }) => {
-  const [wordsList, setWords] = useState<TSprintGameWord[] | void>([
+  const [wordsList, setWords] = useState<TAudiocallWord[] | void>([
     {
       id: '',
       word: '',
-      translate: '',
+      image: '',
+      audio: '',
       rightTranslate: '',
+      translate: [],
     },
   ]);
   const [index, setIndex] = useState<number>(0);
-
   const [loading, setLoading] = useState<boolean>(true);
 
+  const [live, brokenLive]: string[] = ['favorite', 'heart_broken'];
+  let [live1, live2, live3, live4, live5]: boolean[] = new Array(5).fill(true);
+  let isVolumeUp: boolean = true;
+
   useEffect(() => {
-    const words: Promise<TSprintGameWord[] | void> = page
-      ? getPageSprintWords(parseFloat(difficultyLevel), page)
-      : getAllSprintWords(parseFloat(difficultyLevel));
+    const words: Promise<TAudiocallWord[] | void> = page
+      ? getPageAudiocallWords(parseFloat(difficultyLevel), page)
+      : getAllAudiocallWords(parseFloat(difficultyLevel));
     words.then((words) => setWords(words)).finally(() => setLoading(false));
   }, []);
 
-  const checkAnswer = (answer: boolean) => {
-    const rightAnswer = wordsList[index].translate === wordsList[index].rightTranslate;
-    if (answer === rightAnswer) {
-      handleScore(score + 10);
-      handleRightAnswer();
-    } else {
-      handleScore(score);
-    }
-    const nextIndex = page ? getRandomIndex(20) : getRandomIndex(120);
-    setIndex(nextIndex);
-  };
+  const [w1, w2, w3, w4, w5]: string[] = mixArray(wordsList[index].translate);
+  const audio = new Audio(wordsList[index].audio);
+  console.log(wordsList[index]);
+  audio.play();
 
-  const handleUserAnswer = (answer: boolean) => {
-    return () => {
-      handleAnswer();
-      checkAnswer(answer);
-    };
-  };
-
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className={classes.audiocallWrapper}>
       <div className={classes.audiocallContainer}>
         <div className={classes.audiocallLives}>
-          <span className={`${'material-icons'} ${classes.audiocallLive} ${classes.live_1}`}>favorite {/* heart_broken */}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive} ${classes.live_2}`}>favorite {/* heart_broken */}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive} ${classes.live_3}`}>favorite {/* heart_broken */}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive} ${classes.live_4}`}>favorite {/* heart_broken */}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive} ${classes.live_5}`}>favorite {/* heart_broken */}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live1 ? live : brokenLive}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live2 ? live : brokenLive}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live3 ? live : brokenLive}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live4 ? live : brokenLive}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live5 ? live : brokenLive}</span>
         </div>
-        <span className={`${'material-icons'} ${classes.audiocall_sound_btn}`}> volume_up {/* volume_off */}</span>
+        <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}>{isVolumeUp ? 'volume_up' : 'volume_off'}
+        </div>
       </div>
       <div className={classes.audiocallContentWrapper}>
-        <div className={classes.audiocallNull} style={{ display: 'none' }}></div>
-        <div className={classes.audioOpenWord} style={{ display: 'flex' }}>
-          <div className={classes.audioOpenWord_img}></div>
+        <div className={classes.audiocallNull} style={{ display: 'block' }} onClick={() => audio.play()}></div>
+        <div className={classes.audioOpenWord} style={{ display: 'none' }}>
+          <div className={classes.audioOpenWord_img} style={{ backgroundImage: `url(${wordsList[index].image})` }}>
+          </div>
           <div className={classes.audioOpenWord_context}>
-            <span className={classes.audioOpenWord_context_sound}></span>
-            <span className={classes.audioOpenWord_context_value}>girl</span>
+            <span className={classes.audioOpenWord_context_sound} onClick={() => audio.play()}></span>
+            <span className={classes.audioOpenWord_context_value}>{wordsList[index].word}</span>
           </div>
         </div>
         <ol className={classes.audioList}>
-          <li className={classes.audioList_item}>девочка</li>
-          <li className={`${classes.audioList_item}`}>мука</li>
-          <li className={`${classes.audioList_item}`}>значить</li>
-          <li className={`${classes.audioList_item}`}>пушка</li>
-          <li className={`${classes.audioList_item}`}>квартира</li>
+          <li className={classes.audioList_item}>{w1}</li>
+          <li className={`${classes.audioList_item}`}>{w2}</li>
+          <li className={`${classes.audioList_item}`}>{w3}</li>
+          <li className={`${classes.audioList_item}`}>{w4}</li>
+          <li className={`${classes.audioList_item}`}>{w5}</li>
         </ol>
         <button className={`${classes.audiocallBtn} ${classes.missWordBtn}`}> Не знаю</button>
         <button className={`${'material-icons'} ${classes.audiocallBtn} ${classes.nextWordBtn}`} style={{ display: 'none' }}> east</button>
@@ -91,93 +84,3 @@ const AudioGame: FC<ISprintGameProps> = ({
 };
 
 export default AudioGame;
-
-/* import CountdownTimer from '../../../components/CountdownTimer/CountdownTime';
-import React, { FC, useEffect, useState } from 'react';
-import classes from './sprintGame.module.scss';
-import { TSprintGameWord } from '../../../@types/words';
-import { getAllSprintWords, getPageSprintWords } from '../../../apiHelpers/words/wordsController';
-import ISprintGameProps from '../../../interfaces/sprintGame';
-import getRandomIndex from '../../../utils/getRandomIndex';
-
-const SprintGame: FC<ISprintGameProps> = ({
-  difficultyLevel,
-  score,
-  page,
-  handleFinishGame,
-  handleScore,
-  handleAnswer,
-  handleRightAnswer,
-}) => {
-  const [wordsList, setWords] = useState<TSprintGameWord[] | void>([
-    {
-      id: '',
-      word: '',
-      translate: '',
-      rightTranslate: '',
-    },
-  ]);
-  const [index, setIndex] = useState<number>(0);
-
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const words: Promise<TSprintGameWord[] | void> = page
-      ? getPageSprintWords(parseFloat(difficultyLevel), page)
-      : getAllSprintWords(parseFloat(difficultyLevel));
-    words.then((words) => setWords(words)).finally(() => setLoading(false));
-  }, []);
-
-  const checkAnswer = (answer: boolean) => {
-    const rightAnswer = wordsList[index].translate === wordsList[index].rightTranslate;
-    if (answer === rightAnswer) {
-      handleScore(score + 10);
-      handleRightAnswer();
-    } else {
-      handleScore(score);
-    }
-    const nextIndex = page ? getRandomIndex(20) : getRandomIndex(120);
-    setIndex(nextIndex);
-  };
-
-  const handleUserAnswer = (answer: boolean) => {
-    return () => {
-      handleAnswer();
-      checkAnswer(answer);
-    };
-  };
-
-  if (loading) return <h2>Loading...</h2>;
-
-  return (
-    <div className={classes.container}>
-      <h5>Score: {score}</h5>
-      <h5>
-        {wordsList[index].word} это {wordsList[index].translate} ?
-      </h5>
-      <div className={classes.buttonsContainer}>
-        <button
-          onClick={handleUserAnswer(true)}
-          className={`${classes.button} ${classes.button_correct}`}
-        >
-          Верно
-        </button>
-        <button
-          onClick={handleUserAnswer(false)}
-          className={`${classes.button} ${classes.button_incorrect}`}
-        >
-          Неверно
-        </button>
-      </div>
-      <CountdownTimer
-        time={30}
-        cb={(intervalId) => {
-          clearInterval(intervalId);
-          handleFinishGame(true);
-        }}
-      />
-    </div>
-  );
-};
-
-export default SprintGame; */
