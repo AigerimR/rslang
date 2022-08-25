@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import classes from './authorizationBtn.module.scss';
 import { Link } from 'react-router-dom';
 import CommonContext from '../../Context/Context';
+import logoutIcon from '../../../assets/svg/logout.svg';
 
 // const AuthorizationBtn = () => {
 //   return (
@@ -21,14 +22,15 @@ const AuthorizationBtn = () => {
     localStorage.clear();
   }
   return (
-        userLogged ? 
-              (<div>
-                <Link to="/authorization" onClick={handleLogOut}><button>LOG OUT</button></Link>
-              </div>) : (
+        userLogged ? (
+              <div>
+                <Link to="/authorization" onClick={handleLogOut}><button className={classes.logout_btn}></button></Link>
+              </div>
+              ) : (
               <div>
                 <Link to="/authorization"><button className={classes.enter_btn}></button></Link>
               </div>
-            )
+              )
       // <CommonContext.Consumer>
       //   {({userLogged})=>{
       //     if(userLogged === true){

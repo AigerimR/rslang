@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classes from './menu.module.scss';
 import { Link } from 'react-router-dom';
+import CommonContext from '../../Context/Context';
 
 const Menu = () => {
   const [menuActive, setMenuActive] = useState(false);
+
+  const { userLogged, setUserLogged } = useContext(CommonContext);
+
   return (
     <div className={classes.menu_container}>
       <nav className={classes.menu}>
@@ -23,10 +27,12 @@ const Menu = () => {
           <li className={classes.menu_item}>
             <Link to="/sprint-game" className={classes.menu_link} onClick={() => setMenuActive(false)}>Спринт</Link>
           </li>
-          <li className={classes.menu_item}>
+          <li className={userLogged ? classes.menu_item : classes.menu_none}>
+          {/* <li className={classes.menu_item}> */}
             <Link to="/complex-words" className={classes.menu_link} onClick={() => setMenuActive(false)}>Сложные слова</Link>
           </li>
-          <li className={classes.menu__item}>
+          <li className={userLogged ? classes.menu_item : classes.menu_none}>
+          {/* <li className={classes.menu__item}> */}
             <Link to="/statistics" className={classes.menu_link} onClick={() => setMenuActive(false)}>Статистика</Link>
           </li>
         </ul>
