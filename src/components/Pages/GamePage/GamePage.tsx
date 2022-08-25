@@ -1,17 +1,29 @@
 import { IGamesPageProps } from '../../../@types/gamesPage';
-import React, { FC, PropsWithChildren, useState } from 'react';
+import React, { FC, PropsWithChildren, useState, useEffect } from 'react';
 import classes from './gamePage.module.scss';
 import DifficultyLevels from '../../../components/DifficultyLevels/DifficultyLevels';
 import Modal from '../../../components/Modal/Modal';
 import Game from '../../../components/Games/Game/Game';
 
-const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, gameDescription, ruleDescription, game }) => {
+const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({
+  title,
+  gameDescription,
+  ruleDescription,
+  game,
+}) => {
   const [isGameStart, setIsGameStart] = useState<boolean>(false);
   const [difficultyLevel, setDifficultyLevel] = useState<string>('');
 
+  useEffect(() => {
+    setDifficultyLevel('');
+  }, [game]);
+
   const startGame = () => setIsGameStart(true);
 
-  const stopGame = () => setIsGameStart(false);
+  const stopGame = () => {
+    setDifficultyLevel('');
+    setIsGameStart(false);
+  };
 
   return (
     <main className={classes.page}>
@@ -22,8 +34,12 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({ title, gameDescripti
             <p className={classes.gameInfo}>{gameDescription}</p>
             <p className={classes.gameRule}>{ruleDescription}</p>
             <p className={classes.gameLevelName}>Уровень сложности</p>
-            <DifficultyLevels setLevel={setDifficultyLevel} />
-            <button className={classes.gameStart} onClick={startGame} disabled={difficultyLevel === ''}>
+            <DifficultyLevels setLevel={setDifficultyLevel} difficultyLevel={difficultyLevel} />
+            <button
+              className={classes.gameStart}
+              onClick={startGame}
+              disabled={difficultyLevel === ''}
+            >
               Начать
             </button>
           </div>
