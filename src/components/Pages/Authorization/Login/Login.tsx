@@ -1,53 +1,57 @@
 import React, { useEffect, useRef, useState } from 'react';
-import classes from "./authorization.module.scss"
-import { Avatar, Box, Button, colors, TextField } from '@mui/material';
-import avatarIcon from '../../../assets/svg/enter.svg';
+import { Navigate } from 'react-router-dom';
+import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
+import { EStatusCode } from '../../../../enums/serverStatusCode';
+import tickIcon from '../../../../assets/svg/tick.svg';
+
+
+import classes from "./login.module.scss"
+import { Box, Button, colors, TextField } from '@mui/material';
 import { green, grey } from '@mui/material/colors';
 
 const Login: React.FC = () => {
-  const userRef = useRef();
-  const errorRef = useRef();
 
-  const [name, setName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [loggedIn, setLoggedIn] = useState<string>("");
+
+  const [password, setPassword] = useState<string>("");
+
+  const [success, setSuccess] = useState<Boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    console.log(name);
+  useEffect(() => {setErrorMessage('')}, [email, password]);
+  useEffect(() => {<Navigate to="/" />}, [ success ]);
+
+  const handleSubmit = async(e) =>{
+    e.preventDefault();
+    loginUser({"email": email, "password": password} ).then(resp=> {
+      if(resp === "Неверно указан пароль или email") {setErrorMessage('Неверно указан пароль или email')}
+      else{
+        setSuccess(true); 
+        localStorage.setItem('userId', resp.userID);
+        localStorage.setItem('token', resp.token);
+        localStorage.setItem('refreshToken', resp.refreshToken);
+        localStorage.setItem('userId', resp.userID);
+        localStorage.setItem('name', resp.name);
+      }
+    })
   }
   
-  // useEffect(() => {userRef.current.focus()}, []);
-  useEffect(() => {setErrorMessage('')}, [password, email, name]);
+  if(success) {return <Navigate to="/" />}
 
   return (
     <>
-      {/* <p ref={errorRef}>{errorMessage}</p> */}
-
+      <p className={classes.err}>{errorMessage}</p>
       <Box
         component="form"
         sx={{
           '& .MuiTextField-root': { mb: 1, mt: 1, width: '100%' },
         }}
-        noValidate
         autoComplete="off"
-      >
-        <div>
-      {/* <LoginBtnBtn className={classes.auth_avatar}/> */}
-        </div>
-        {/* <Avatar>H</Avatar> */}
-
-      {/* <img src={avatarIcon} alt="" className={classes.auth_avatar}/> */}
-      {/* <TextField required id="outlined-required" label="имя" value={name} onChange={handleNameChange}/> */}
-      <TextField required id="outlined-required" label="email" />
-      <TextField required id="outlined-basic" label="пароль" variant="outlined" />
-      {/* '#00abcd' */}
-      {/* <TextField required id="outlined-basic" label="подтвердите пароль" variant="outlined" /> */}
-      <Button variant="contained" sx={{width: '100%'}}>Войти</Button>
-      {/* <Button variant="contained" sx={{width: '100%', backgroundColor:'#00abcd'}}>Войти</Button> */}
-      {/* <button>Войти</button> */}
+        onSubmit={handleSubmit}
+      > 
+      <TextField id="email"  label="email" value={email} onChange={(e) => {setEmail(e.target.value);}}/>
+      <TextField id="password" label="пароль" value={password} onChange={(e) => {setPassword(e.target.value);}}/>
+      <Button type="submit" variant="contained" sx={{width: '100%', mt: '20px', mb: '20px'}} disabled = {(!email || !password) ? true : false}>Войти</Button>
       </Box>
     </>
   );

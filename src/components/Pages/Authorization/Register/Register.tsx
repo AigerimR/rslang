@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import classes from "./register.module.scss"
-import { Avatar, Box, Button, TextField } from '@mui/material';
-import avatarIcon from '../../../assets/svg/enter.svg';
+import { Box, Button, TextField } from '@mui/material';
 import tickIcon from '../../../../assets/svg/tick.svg';
 import { grey } from '@mui/material/colors';
 import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
@@ -13,8 +12,8 @@ const Register: React.FC = () => {
   const PASSWORD_CHECK = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
   const EMAIL_CHECK = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
-  const userRef = useRef();
-  const errorRef = useRef();
+  // const userRef = useRef();
+  // const errorRef = useRef();
 
   const [name, setName] = useState<string>("");
   const [nameValid, setNameValid] = useState<boolean>(false);

@@ -1,6 +1,6 @@
 import { getWord } from './apiHelpers/words/wordsController';
 import { createUser, getUserToken, loginUser } from './apiHelpers/users/usersController';
-import React, { FC } from 'react';
+import React, { createContext, FC } from 'react';
 import './styles/index.scss';
 import classes from './app.module.scss';
 import Header from './components/Header/Header';
@@ -29,6 +29,11 @@ const App: FC = () => {
 
   // {id: '6306587b26895d00166717e8', email: 'h@mail.ru'}
   // getUserToken('6306587b26895d00166717e8').then((word) => console.log(word));
+
+  const CommonContext = createContext({
+    userLogged: false,
+    toggleContext: (userLogged) => {userLogged === !userLogged},
+  });
   
   return (
     <div className={classes.wrapper} >

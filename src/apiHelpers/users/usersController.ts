@@ -57,19 +57,38 @@ export const createUser = async (user) => {
 // email: "hello@user.com"
 // }
 
+//IS WORKING
+// export const loginUser = async (user) => {
+//   // loginUser({ "email": "hello@user.com", "password": "Gfhjkm_123" });
+
+//   const rawResponse = await fetch(`${BASE_URL}/signin`, {
+//     method: 'POST',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(user)
+//   });
+//   const content = await rawResponse.json();
+
+//   return(content);
+// };
 
 export const loginUser = async (user) => {
   // loginUser({ "email": "hello@user.com", "password": "Gfhjkm_123" });
 
-  const rawResponse = await fetch(`${BASE_URL}/signin`, {
+  const content = await fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
-  });
-  const content = await rawResponse.json();
+  }).then((response) =>
+        response.status === EStatusCode.Ok ? response.json() : "Неверно указан пароль или email",
+      )
+      .catch((repsonse) => console.log(repsonse));
+  // const content = await rawResponse.json();
 
   return(content);
 };
