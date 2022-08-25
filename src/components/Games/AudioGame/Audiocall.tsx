@@ -3,8 +3,6 @@ import classes from './audiocall.module.scss';
 import { TAudiocallWord } from '../../../@types/words';
 import { getAllAudiocallWords, getPageAudiocallWords } from '../../../apiHelpers/words/wordsController';
 import ISprintGameProps from '../../../interfaces/sprintGame';
-import getRandomIndex from '../../../utils/getRandomIndex';
-import mixArray from '../../../utils/mixArray';
 
 const AudioGame: FC<ISprintGameProps> = ({
   difficultyLevel,
@@ -27,10 +25,10 @@ const AudioGame: FC<ISprintGameProps> = ({
   ]);
   const [index, setIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const [isVolumeUp, setVolumeUp] = useState<boolean>(true);
+  const [isAnswerSelected, setAnswerSelected] = useState<boolean>(false);
   const [live, brokenLive]: string[] = ['favorite', 'heart_broken'];
-  let [live1, live2, live3, live4, live5]: boolean[] = new Array(5).fill(true);
-  let isVolumeUp: boolean = true;
+  const hearts = new Array(5).fill(live);
 
   useEffect(() => {
     const words: Promise<TAudiocallWord[] | void> = page
@@ -39,29 +37,30 @@ const AudioGame: FC<ISprintGameProps> = ({
     words.then((words) => setWords(words)).finally(() => setLoading(false));
   }, []);
 
-  const [w1, w2, w3, w4, w5]: string[] = mixArray(wordsList[index].translate);
   const audio = new Audio(wordsList[index].audio);
-  console.log(wordsList[index]);
-  audio.play();
+  const [w0, w1, w2, w3, w4]: string[] = wordsList[index].translate;
+
+  const checkAnswer = (n: number) => {
+    console.log([w0, w1, w2, w3, w4][n] === wordsList[index].rightTranslate);
+  }
 
   if (loading) return <p>Loading...</p>;
-
   return (
     <div className={classes.audiocallWrapper}>
       <div className={classes.audiocallContainer}>
         <div className={classes.audiocallLives}>
-          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live1 ? live : brokenLive}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live2 ? live : brokenLive}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live3 ? live : brokenLive}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live4 ? live : brokenLive}</span>
-          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{live5 ? live : brokenLive}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[0]}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[1]}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[2]}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[3]}</span>
+          <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[4]}</span>
         </div>
         <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}>{isVolumeUp ? 'volume_up' : 'volume_off'}
         </div>
       </div>
       <div className={classes.audiocallContentWrapper}>
-        <div className={classes.audiocallNull} style={{ display: 'block' }} onClick={() => audio.play()}></div>
-        <div className={classes.audioOpenWord} style={{ display: 'none' }}>
+        <div className={classes.audiocallNull} style={isAnswerSelected ? { display: 'none' } : { display: 'block' }} onClick={() => audio.play()}></div>
+        <div className={classes.audioOpenWord} style={isAnswerSelected ? { display: 'flex' } : { display: 'none' }}>
           <div className={classes.audioOpenWord_img} style={{ backgroundImage: `url(${wordsList[index].image})` }}>
           </div>
           <div className={classes.audioOpenWord_context}>
@@ -70,11 +69,11 @@ const AudioGame: FC<ISprintGameProps> = ({
           </div>
         </div>
         <ol className={classes.audioList}>
-          <li className={classes.audioList_item}>{w1}</li>
-          <li className={`${classes.audioList_item}`}>{w2}</li>
-          <li className={`${classes.audioList_item}`}>{w3}</li>
-          <li className={`${classes.audioList_item}`}>{w4}</li>
-          <li className={`${classes.audioList_item}`}>{w5}</li>
+          <li className={classes.audioList_item} onClick={() => checkAnswer(0)}>{w0}</li>
+          <li className={classes.audioList_item} onClick={() => checkAnswer(1)}>{w1}</li>
+          <li className={classes.audioList_item} onClick={() => checkAnswer(2)}>{w2}</li>
+          <li className={classes.audioList_item} onClick={() => checkAnswer(3)}>{w3}</li>
+          <li className={classes.audioList_item} onClick={() => checkAnswer(4)}>{w4}</li>
         </ol>
         <button className={`${classes.audiocallBtn} ${classes.missWordBtn}`}> Не знаю</button>
         <button className={`${'material-icons'} ${classes.audiocallBtn} ${classes.nextWordBtn}`} style={{ display: 'none' }}> east</button>

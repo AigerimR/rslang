@@ -67,16 +67,18 @@ export const getAllSprintWords = (group: number): Promise<TSprintGameWord[] | vo
 export const getPageAudiocallWords = (group: number, page: number): Promise<TAudiocallWord[]> => {
   return getWords(group, page).then((words) => {
     const audiocallWords: TAudiocallWord[] = words.map(() => {
-      const index = getRandomIndex(120);
+      const index = getRandomIndex(20);
       const word = words[index];
-      const wordsList: string[] = [word.wordTranslate];
+      const wordsList: string[] = [];
+      const wordPos = getRandomIndex(4);
       for (let n = 0; n < 4; n += 1) {
-        const i = getRandomIndex(120);
+        const i = getRandomIndex(20);
         if (i !== index) {
           const randomWord = words[i].wordTranslate;
           wordsList.push(randomWord);
         }
       }
+      wordsList.splice(wordPos, 0, word.wordTranslate);
       const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList);
       return audiocallWord;
     });
@@ -96,7 +98,8 @@ export const getAllAudiocallWords = (group: number): Promise<TAudiocallWord[] | 
       const audiocallWords: TAudiocallWord[] = words.map(() => {
         const index = getRandomIndex(120);
         const word = words[index];
-        const wordsList: string[] = [word.wordTranslate];
+        const wordsList: string[] = [];
+        const wordPos = getRandomIndex(4);
         for (let n = 0; n < 4; n += 1) {
           const i = getRandomIndex(120);
           if (i !== index) {
@@ -104,6 +107,7 @@ export const getAllAudiocallWords = (group: number): Promise<TAudiocallWord[] | 
             wordsList.push(randomWord);
           }
         }
+        wordsList.splice(wordPos, 0, word.wordTranslate);
         const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList);
         return audiocallWord;
       });
