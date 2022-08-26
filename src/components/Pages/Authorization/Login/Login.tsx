@@ -40,20 +40,7 @@ const Login: React.FC = () => {
     })
   }
 
-  // if(success) {return <Navigate to="/" />}
   if(success) { return <Navigate to="/" />}
-  // if(success) {return (
-  //   <CommonContext.Consumer>
-  //       {({userLogged, toggleUserLogged})=>{
-  //         toggleUserLogged(userLogged);
-  //         console.log(userLogged);
-          
-  //         return(
-  //           <Navigate to="/" />
-  //         )
-  //       }}
-  //   </CommonContext.Consumer>
-  // )}
 
   return (
     <>
@@ -68,7 +55,8 @@ const Login: React.FC = () => {
       > 
       <TextField id="email"  label="email" value={email} onChange={(e) => {setEmail(e.target.value);}}/>
       <TextField id="password" label="пароль" value={password} onChange={(e) => {setPassword(e.target.value);}}/>
-      <Button type="submit" variant="contained" sx={{width: '100%', mt: '20px', mb: '20px'}} disabled = {(!email || !password) ? true : false}>Войти</Button>
+      {/* <Button type="submit" variant="contained" sx={{width: '100%', mt: '20px', mb: '20px'}} disabled = {(!email || !password) ? true : false}>Войти</Button> */}
+      <Button type="submit" variant="contained" sx={{width: '100%', mt: '20px', mb: '20px', backgroundColor: "#ffc300", "&:hover":{backgroundColor: "#f6cf57"} }} disabled = {(!email || !password) ? true : false}>Войти</Button>
       </Box>
     </>
   );
