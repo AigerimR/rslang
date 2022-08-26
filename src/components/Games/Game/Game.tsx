@@ -13,11 +13,23 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   const [accuracy, setAccuracy] = useState<number>(0);
   const [answersCount, setAnswersCount] = useState<number>(0);
   const [rightAnswersCount, setRightAnswersCount] = useState<number>(0);
+  const [correctAnswerList, setCorrectAnswer] = useState<string[]>([]);
+  const [wrongAnswerList, setWrongAnswer] = useState<string[]>([]);
 
   useEffect(() => {
     const updatedAccuracy = rightAnswersCount / answersCount;
     setAccuracy(updatedAccuracy);
   }, [answersCount, rightAnswersCount]);
+
+  const memoziedHandleCorrectAnswersList = useCallback((word: string) => {
+    const copy = Object.assign([], correctAnswerList);
+    setCorrectAnswer(() => [...copy, word]);
+  }, [correctAnswerList]);
+
+  const memoziedHandleWrongAnswersList = useCallback((word: string) => {
+    const copy = Object.assign([], wrongAnswerList);
+    setWrongAnswer(() => [...copy, word]);
+  }, [wrongAnswerList]);
 
   const memoziedHandleAnswer = useCallback(() => {
     setAnswersCount((prevAnswersCount) => prevAnswersCount + 1);
@@ -59,6 +71,10 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
         handleScore={memoziedHandleScore}
         handleAnswer={memoziedHandleAnswer}
         handleRightAnswer={memoziedHandleRightAnswer}
+        handleCorrectAnswersList={memoziedHandleCorrectAnswersList}
+        handleWrongAnswersList={memoziedHandleWrongAnswersList}
+        correctAnswerList={correctAnswerList}
+        wrongAnswerList={wrongAnswerList}
       />
     ),
   };
