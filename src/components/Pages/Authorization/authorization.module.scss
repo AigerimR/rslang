@@ -2,10 +2,7 @@
 
 .auth{
   &_main{
-    // background-color: $color-mentol-green;
-    // background-color:$color-moonstone-blue;
-    // background: linear-gradient(to right, white 0% white 70% blue 70% blue 100%);
-    background: linear-gradient(70deg, $color-moonstone-blue 45%, $color-mentol-green 55%);
+    background: linear-gradient(70deg, $color-mentol-green 35%, $color-moonstone-blue 55%);
     height: 80vh;
     display: flex;
     align-items: center;  
@@ -17,9 +14,7 @@
     padding: 50px 40px;
     display: grid;
     grid-template-columns: 1fr;
-    background-color: $color-mentol-green;
-
-    // background-color:$color-moonstone-blue;
+    background-color: white;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
@@ -33,7 +28,6 @@
     text-align: center;
   }
   &_img{
-    // width: 100%;
     margin-top: 50px;
   }
 }
@@ -49,8 +43,7 @@
     }
   }
   &_active{
-    border-bottom: 2px solid $color-dark-lime-green;
+    border-bottom: 2px solid $color-moonstone-blue;
   }
-
 }
 

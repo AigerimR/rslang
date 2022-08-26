@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import classes from "./register.module.scss"
 import { Box, Button, TextField } from '@mui/material';
@@ -51,6 +51,8 @@ const Register: React.FC = () => {
   useEffect(() => {setErrorMessage('')}, [name, email, password, passwordMatch ]);
   useEffect(() => {<Navigate to="/" />}, [ success ]);
 
+  const { userLogged, setUserLogged } = useContext(CommonContext);
+
   const handleSubmit = async(e) =>{
     e.preventDefault();
     // console.log(name, email, password);
@@ -65,6 +67,7 @@ const Register: React.FC = () => {
           localStorage.setItem('refreshToken', resp.refreshToken);
           localStorage.setItem('userId', resp.userID);
           localStorage.setItem('name', resp.name);
+          setUserLogged(true);
         })
        return user}
       else if (res?.status === EStatusCode.ExistingUser) {setErrorMessage('Такой пользователь уже существует')}
@@ -72,21 +75,12 @@ const Register: React.FC = () => {
     });
   }
   if(success) {return (
-    // <CommonContext.Consumer {({userLogged, toggleContext}) => toggleContext(userLogged)}>
       <Navigate to="/" />
-    // </CommonContext.Consumer>
-
   )}
-
-  // const getData = async (id: string): Promise<void> => {
-  //   const res = await getWord(id);
-  //   setData(res);
-  // }
 
   return (
     <>
       <p className={classes.err}>{errorMessage}</p>
-   
 
       <Box
         component="form"
@@ -96,9 +90,6 @@ const Register: React.FC = () => {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-      {/* <RegisterBtnBtn className={classes.auth_avatar}/> */}
-        {/* <Avatar>H</Avatar> */}
-      {/* <img src={avatarIcon} alt="" className={classes.auth_avatar}/> */}      
       <TextField 
         id="name" 
         label={<p>имя <svg className={nameValid ? classes.approved : classes.offscreen}>
@@ -135,10 +126,8 @@ const Register: React.FC = () => {
         onChange={(e) => {setPasswordMatch(e.target.value);}}
          />
       <p className = { (passwordMatch && !passwordMatchValid) ? classes.instractions : classes.offscreen}>Пароль не совпадает</p>
-      <Button type="submit" variant="contained" sx={{width: '100%', mt: '20px', mb: '20px'}} disabled = {(!nameValid || !emailValid || !passwordValid || !passwordMatchValid) ? true : false}>Зарегистрироваться</Button>
+      <Button type="submit" variant="contained" sx={{width: '100%', mt: '20px', mb: '20px', backgroundColor: "#7bbbc6", "&:hover":{backgroundColor: "#9cd2b4"}}} disabled = {(!nameValid || !emailValid || !passwordValid || !passwordMatchValid) ? true : false}>Зарегистрироваться</Button>
       </Box>
-
-     
     </>
   );
 }
