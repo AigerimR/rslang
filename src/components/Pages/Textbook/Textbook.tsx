@@ -40,9 +40,10 @@ const Textbook: React.FC = () => {
           <Paginationmui updatePage={updatePage} />
         </div>
         {/* <Link to="/complex-words" className={userLogged ? classes.item_show : classes.item_none}> */}
-        <Link to="/complex-words">
+        <Link to="/dictionary">
+        {/* <Link to="/complex-words"> */}
           <button className={classes.game_words}>
-            Сложные слова
+            Словарь
             <svg className={classes.btn_icon}>
                 <use href={`${starIcon}#star`} />
             </svg>

@@ -15,10 +15,11 @@ import MainPage from './components/Pages/MainPage/MainPage';
 import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
 import AudioGame from './components/Games/AudioGame/AudioGame';
 import SprintGame from './components/Games/SprintGame/SprintGame';
-import ComplexWords from './components/Pages/ComplexWords/ComplexWords';
+import ComplexWords from './components/Pages/Dictionary/ComplexWords/ComplexWords';
 import Textbook from './components/Pages/Textbook/Textbook';
 import Authorization from './components/Pages/Authorization/Authorization';
 import CommonContext from './components/Context/Context';
+import Dictionary from './components/Pages/Dictionary/Dictionary';
 
 
 const App: FC = () => {
@@ -40,6 +41,7 @@ const App: FC = () => {
               <Route path="/audio-game" element={<AudioGame />} />
               <Route path="/sprint-game" element={<SprintGame />} />
               <Route path="/complex-words" element={<ComplexWords />} />
+              <Route path="/dictionary" element={<Dictionary />} />
               <Route path="/statistics" element={<StatisticsPage />} />
               <Route path="/authorization" element={<Authorization />} />
             </Routes>
