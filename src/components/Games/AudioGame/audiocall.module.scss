@@ -123,6 +123,10 @@
   }
 }
 
+input {
+  display: none;
+}
+
 .audioList {
   display: flex;
   gap: 20px 48px;
@@ -130,6 +134,7 @@
   justify-content: center;
   padding: 5%;
   font-size: 1.5rem;
+  border: none;
 
   &_item {
     position: relative;
@@ -155,6 +160,30 @@
 
     &:hover::after {
       width: 100%;
+    }
+  }
+
+  &:disabled &_item {
+    cursor: auto;
+
+    &:hover {
+      color: inherit;
+    }
+
+    &:hover::after {
+      width: 0;
+    }
+  }
+
+  &:disabled .correctWord {
+    &:hover {
+      color: $color-june-bud;
+    }
+  }
+
+  &:disabled .wrongWord {
+    &:hover {
+      color: $color-moonstone-blue;
     }
   }
 }

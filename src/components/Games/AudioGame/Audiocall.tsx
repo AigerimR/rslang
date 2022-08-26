@@ -37,6 +37,7 @@ const AudioGame: FC<IAudiocallProps> = ({
   const [livesCount, setCount] = useState<number>(0);
   const [missSetBtn, nextSetBtn] = ['Не знаю', 'Следующая']
   const [nextButton, setNextButton] = useState<string>(missSetBtn);
+  const [isDisabled, setDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     const words: Promise<TAudiocallWord[] | void> = page
@@ -69,7 +70,9 @@ const AudioGame: FC<IAudiocallProps> = ({
   const brokeHeart = (count: number) => {
     hearts.splice(count, 1, brokenLive);
     setBrokenLive(hearts)
-    if (livesCount > 4) handleFinishGame(true);
+    if (livesCount > 4) {
+      handleFinishGame(true);
+    }
   }
 
   const checkAnswer = (answer: string, word: string) => {
@@ -85,15 +88,16 @@ const AudioGame: FC<IAudiocallProps> = ({
     }
     setNextButton(nextSetBtn);
     setAnswerSelected(true);
+    setDisabled(true);
   }
 
   const handleUserAnswer = (answer: string) => {
-    setAnswerSelected(true);
     handleAnswer();
     checkAnswer(answer, wordsList[index].rightTranslate);
   }
 
   const nextPage = () => {
+
     if (isAnswerSelected === false) {
       setAnswerSelected(true);
       setNewClasse(wordsList[index].rightTranslate, wordsList[index].rightTranslate, true);
@@ -103,11 +107,12 @@ const AudioGame: FC<IAudiocallProps> = ({
     }
     if (nextButton === nextSetBtn) {
       setAnswerSelected(false);
+      setDisabled(false);
       setClassName(new Array(5).fill(classes.audioList_item));
       setNextButton(missSetBtn);
       setIndex(index + 1);
       const audio = new Audio(wordsList[index + 1].audio);
-      audio.play();
+      if (livesCount < 5) { audio.play(); }
     }
     if (livesCount > 4) {
       handleFinishGame(true);
@@ -138,13 +143,28 @@ const AudioGame: FC<IAudiocallProps> = ({
             <span className={classes.audioOpenWord_context_value}>{wordsList[index].word}</span>
           </div>
         </div>
-        <ol className={classes.audioList}>
-          <li className={items[0]} onClick={() => { handleUserAnswer(w0) }}>{w0}</li>
-          <li className={items[1]} onClick={() => { handleUserAnswer(w1) }}>{w1}</li>
-          <li className={items[2]} onClick={() => { handleUserAnswer(w2) }}>{w2}</li>
-          <li className={items[3]} onClick={() => { handleUserAnswer(w3) }}>{w3}</li>
-          <li className={items[4]} onClick={() => { handleUserAnswer(w4) }}>{w4}</li>
-        </ol>
+        <fieldset disabled={isDisabled ? true : false} className={classes.audioList}>
+          <label className={items[0]} onChange={() => { handleUserAnswer(w0) }}>
+            <input checked={isDisabled ? true : false} type="radio" id="w0" name="w0" value={w0}></input>
+            {w0}
+          </label>
+          <label className={items[1]} onChange={() => { handleUserAnswer(w1) }}>
+            <input checked={isDisabled ? true : false} type="radio" id="w1" name="w1" value={w1}></input>
+            {w1}
+          </label>
+          <label className={items[2]} onChange={() => { handleUserAnswer(w2) }}>
+            <input checked={isDisabled ? true : false} type="radio" id="w2" name="w2" value={w2}></input>
+            {w2}
+          </label >
+          <label className={items[3]} onChange={() => { handleUserAnswer(w3) }}>
+            <input checked={isDisabled ? true : false} type="radio" id="w3" name="w3" value={w3}></input>
+            {w3}
+          </label>
+          <label className={items[4]} onChange={() => { handleUserAnswer(w4) }}>
+            <input checked={isDisabled ? true : false} type="radio" id="w4" name="w4" value={w4}></input>
+            {w4}
+          </label>
+        </fieldset>
         <button className={classes.audiocallBtn} onClick={() => { nextPage() }}> {nextButton}</button>
       </div>
     </div>
