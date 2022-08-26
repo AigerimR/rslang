@@ -38,6 +38,7 @@ const AudioGame: FC<IAudiocallProps> = ({
   const [missSetBtn, nextSetBtn] = ['Не знаю', 'Следующая']
   const [nextButton, setNextButton] = useState<string>(missSetBtn);
   const [isDisabled, setDisabled] = useState<boolean>(false);
+  const [correctAnswerCount, setCorrectAnswerCount] = useState<number>(0);
 
   useEffect(() => {
     const words: Promise<TAudiocallWord[] | void> = page
@@ -77,10 +78,13 @@ const AudioGame: FC<IAudiocallProps> = ({
 
   const checkAnswer = (answer: string, word: string) => {
     if (answer === word) {
+      handleScore(score + 10);
+      setCorrectAnswerCount(correctAnswerCount + 1);
       handleRightAnswer();
       handleCorrectAnswersList(answer);
       setNewClasse(answer, word, true);
     } else {
+      handleScore(score);
       handleWrongAnswersList(answer);
       setCount(livesCount + 1);
       brokeHeart(livesCount);
@@ -97,9 +101,9 @@ const AudioGame: FC<IAudiocallProps> = ({
   }
 
   const nextPage = () => {
-
     if (isAnswerSelected === false) {
       setAnswerSelected(true);
+      setDisabled(true);
       setNewClasse(wordsList[index].rightTranslate, wordsList[index].rightTranslate, true);
       brokeHeart(livesCount);
       setCount(livesCount + 1);
@@ -112,9 +116,9 @@ const AudioGame: FC<IAudiocallProps> = ({
       setNextButton(missSetBtn);
       setIndex(index + 1);
       const audio = new Audio(wordsList[index + 1].audio);
-      if (livesCount < 5) { audio.play(); }
+      if (livesCount < 5 && correctAnswerCount < 10) { audio.play(); }
     }
-    if (livesCount > 4) {
+    if (livesCount > 4 || correctAnswerCount > 9) {
       handleFinishGame(true);
     }
   }
@@ -166,6 +170,9 @@ const AudioGame: FC<IAudiocallProps> = ({
           </label>
         </fieldset>
         <button className={classes.audiocallBtn} onClick={() => { nextPage() }}> {nextButton}</button>
+        <div className={classes.correctAnswerTotal}>
+          <div className={classes.correctAnswerPercent} style={{ width: `${correctAnswerCount}0%` }}></div>
+        </div>
       </div>
     </div>
   );
