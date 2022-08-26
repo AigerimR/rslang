@@ -1,5 +1,5 @@
 import { TWord } from "../../../@types/words";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
 
 import { getWord } from "../../../apiHelpers/words/wordsController";
@@ -8,6 +8,7 @@ import plusIcon from '../../../assets/svg/plus.svg';
 import tickIcon from '../../../assets/svg/tick.svg';
 import crossIcon from '../../../assets/svg/cross.svg';
 import playIcon from '../../../assets/svg/play.svg';
+import CommonContext from "../../Context/Context";
 
 
 const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
@@ -20,6 +21,9 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   let [modalIsOpen, setModalIsOpen] = useState<Boolean>(false);
 
   useEffect(()=>{getData(id)}, []);
+
+  const { userLogged, setUserLogged } = useContext(CommonContext);
+
 
   const getData = async (id: string): Promise<void> => {
     const res = await getWord(id);
@@ -50,40 +54,38 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
     </div>
   }
   return (<>
-    <Modal isOpen = {modalIsOpen} className={classes.Modal} onRequestClose = {()=> setModalIsOpen(false)}>
-   
-      <div>
-        <div className={classes.card_header}>
-          <div>
-            <h3 className={classes.card_word}>{data.word}</h3>
-            <p className={classes.card_transcript}>{data.transcription}</p>
-            <h4 className={classes.card_trans}>{data.wordTranslate}</h4>
+    <Modal isOpen = {modalIsOpen} className={classes.Modal} onRequestClose = {()=> setModalIsOpen(false)}>   
+      <div className={classes.innerContent}>
+        <div>
+          <div className={classes.card_header}>
+            <div>
+              <h2 className={classes.card_word}>{data.word}</h2>
+              <p className={classes.card_transcript}>{data.transcription}</p>
+              <h3 className={classes.card_trans}>{data.wordTranslate}</h3>
+            </div>
+            <button className={classes.btn_round} onClick={handleAudio}>
+              { btnSoundOn ? playOnIcon : playOffIcon }
+            </button>
           </div>
-          <button className={classes.btn_round} onClick={handleAudio}>
-            { btnSoundOn ? playOnIcon : playOffIcon }
-          </button>
+          <h4>Значение</h4>
+          <div className={classes.innerContent_text}>
+            <h3 dangerouslySetInnerHTML={{ __html: data.textMeaning }}></h3>
+            <p>{data.textMeaningTranslate}</p>
+          </div>
+          <h4>Пример</h4>
+          <div className={classes.innerContent_text}>
+            <h3 dangerouslySetInnerHTML={{ __html: data.textExample }}></h3>
+            <p>{data.textExampleTranslate}</p>
+          </div>
         </div>
-        <div className={classes.innerContent}>
+        <div>
           <img src={`${BASE_URL}/${data.image}`} alt="img" className={classes.card_img}/>
-          <div>
-            <h4>Значение</h4>
-            <div className={classes.innerContent_text}>
-              <h3 dangerouslySetInnerHTML={{ __html: data.textMeaning }}></h3>
-              <p>{data.textMeaningTranslate}</p>
-            </div>
-            <h4>Пример</h4>
-            <div className={classes.innerContent_text}>
-              <h3 dangerouslySetInnerHTML={{ __html: data.textExample }}></h3>
-              <p>{data.textExampleTranslate}</p>
-            </div>
-          </div>
-          
-        </div>
-        <div className={classes.card_action}>
+          {/* <div className={userLogged ? classes.card_action : classes.card_none}> */}
+          <div className={classes.card_action}>
             <button className={classes.btn_normal}>
-              <svg className={classes.btn_icon} fill='$color-charm-pink'>
+              {/* <svg className={classes.btn_icon} fill='$color-charm-pink'>
                 <use href={`${plusIcon}#plus`} />
-              </svg>
+              </svg> */}
               В сложные
               {/* icon for toggling */}
               {/* <svg className={classes.btn_icon} fill='$color-charm-pink'>
@@ -91,15 +93,15 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
               </svg> */}
             </button>
             <button className={classes.btn_normal}>
-              <svg className={classes.btn_icon} fill='$color-charm-pink'>
+              {/* <svg className={classes.btn_icon} fill='$color-charm-pink'>
                 <use href={`${crossIcon}#cross`} />
-              </svg>
+              </svg> */}
               Удалить
             </button>
           </div>
-      </div>
-    {/* </div> */}
-     </Modal>
+        </div>
+      </div> 
+    </Modal>
  
     <div className={classes.card_small} key={id} style={{ backgroundColor: `${unitColor}` }} onClick = {() => setModalIsOpen(true)}>
       <div>

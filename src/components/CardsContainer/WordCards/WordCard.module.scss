@@ -35,37 +35,17 @@
 }
 
 .card{
-  // position: relative;
-  // background-color: $color-white;
-  // width: 310px;
-  // width: 100%;
-  // height: 100%;
-  // height: 70px;
-  // margin: 5px;
-  // text-align: center;
-  // padding: 6px 30px;
-  // overflow: hidden;
-  // font-size: 20px;
-  // transition: 0.2s all;
-  // color: $color-raisin-black;
-  // font-size: 1.1rem;
-  // font-weight: 600;
-  // line-height: 150%;
-  // border-radius: 5px;
-  // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  &_none{
+    display: none;
+  }
 
-  // &:hover{
-  //   height: 100%;
-  //   grid-row: span 6;
-  // } 
-
-  &_header,
-  &_action{
+  &_header{
     display: flex;
-    // justify-content: space-between;
     column-gap: 40px;
     align-items: center;
     margin-bottom: 10px;
+    width: 240px;
+    justify-content: space-between;
   }
 
   &_word{
@@ -83,15 +63,16 @@
   &_img{
     width: 240px;
     height: 180px;
-    border-radius: 20px;
+    border-radius: 5px;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 
 .innerContent {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   column-gap: 40px;
-  margin-bottom: 20px;
   h3{
     margin: 10px 0 5px 0;
   }
@@ -127,17 +108,20 @@
  }
 
  &_normal{
-  width: 120px;
+  width: 240px;
   height: 40px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  column-gap: 2px;
+  margin: 10px 0;
+  border-radius: 5px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  background-color: $color-moonstone-blue;
+  // column-gap: 40px;
   text-transform: uppercase;
   border: none;
   &:hover{
     cursor: pointer;
+    background-color:  $color-mentol-green;
     } 
  }
 
@@ -162,13 +146,12 @@
 
 .Modal{
   height: 400px;
+  width: 600px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: absolute;
-  top: 200px;
-  left: 260px;
-  right: 260px;
+  top: 25%;
+  left: calc(50vw - 300px);
   background-color: papayawhip;
-  padding: 6px 30px;
-
+  padding: 30px;
 }
