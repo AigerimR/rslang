@@ -13,11 +13,7 @@ const CardsContainer: React.FC<{data:TWord[], unitColor:string}> = (props) => {
 
   return(
     <>
-    {/* <div > */}
-        {/* <Modal isOpen = {true} className={classes.Modal}><h2>AIKA</h2></Modal> */}
-        {/* </div> */}
-      <div className={classes.cards_container}>
-        
+      <div className={classes.cards_container}>     
         {wordCard}
       </div>
       </>

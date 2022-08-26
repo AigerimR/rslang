@@ -51,8 +51,6 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   }
   return (<>
     <Modal isOpen = {modalIsOpen} className={classes.Modal} onRequestClose = {()=> setModalIsOpen(false)}>
-      {/* <button onClick={() => setModalIsOpen(false)}>close modal</button> */}
-      {/* <div className={classes.card}> */}
    
       <div>
         <div className={classes.card_header}>
