@@ -1,13 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
-import { EStatusCode } from '../../../../enums/serverStatusCode';
-import tickIcon from '../../../../assets/svg/tick.svg';
-
+import { loginUser } from '../../../../apiHelpers/users/usersController';
 
 import classes from "./login.module.scss"
-import { Box, Button, colors, TextField } from '@mui/material';
-import { green, grey } from '@mui/material/colors';
+import { Box, Button, TextField } from '@mui/material';
 import CommonContext from '../../../Context/Context';
 
 const Login: React.FC = () => {
@@ -18,9 +14,6 @@ const Login: React.FC = () => {
 
   const [success, setSuccess] = useState<Boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-
-  useEffect(() => {setErrorMessage('')}, [email, password]);
-  useEffect(() => {<Navigate to="/" />}, [ success ]);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
 

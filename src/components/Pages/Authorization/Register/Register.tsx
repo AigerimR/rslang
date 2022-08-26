@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import classes from "./register.module.scss"
 import { Box, Button, TextField } from '@mui/material';
 import tickIcon from '../../../../assets/svg/tick.svg';
-import { grey } from '@mui/material/colors';
 import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
 import { EStatusCode } from '../../../../enums/serverStatusCode';
 import CommonContext from '../../../Context/Context';
@@ -12,9 +11,6 @@ const Register: React.FC = () => {
   const USER_CHECK = /^[a-zA-Z][a-zA-Z0-9-_]{2,23}$/;
   const PASSWORD_CHECK = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
   const EMAIL_CHECK = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-
-  // const userRef = useRef();
-  // const errorRef = useRef();
 
   const [name, setName] = useState<string>("");
   const [nameValid, setNameValid] = useState<boolean>(false);
@@ -47,9 +43,6 @@ const Register: React.FC = () => {
     const match = password === passwordMatch;
     setPasswordMatchValid(match);
   }, [password, passwordMatch]);
-
-  useEffect(() => {setErrorMessage('')}, [name, email, password, passwordMatch ]);
-  useEffect(() => {<Navigate to="/" />}, [ success ]);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
 

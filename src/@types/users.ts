@@ -1,5 +1,9 @@
 export type TUser = {
-    // name:	string;
+    name:	string;
+    email:	string;
+    password:	string;
+}
+export type TUserLogIn = {
     email:	string;
     password:	string;
 }

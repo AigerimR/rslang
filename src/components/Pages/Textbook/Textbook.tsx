@@ -39,8 +39,8 @@ const Textbook: React.FC = () => {
           <Units updateUnit={updateUnit}/>
           <Paginationmui updatePage={updatePage} />
         </div>
-        {/* <Link to="/complex-words" className={userLogged ? classes.item_show : classes.item_none}> */}
-        <Link to="/dictionary">
+        <Link to="/dictionary" className={userLogged ? classes.item_show : classes.item_none}>
+        {/* <Link to="/dictionary"> */}
         {/* <Link to="/complex-words"> */}
           <button className={classes.game_words}>
             Словарь

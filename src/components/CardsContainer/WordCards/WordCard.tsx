@@ -4,9 +4,6 @@ import Modal from "react-modal";
 
 import { getWord } from "../../../apiHelpers/words/wordsController";
 import classes from "./WordCard.module.scss"
-import plusIcon from '../../../assets/svg/plus.svg';
-import tickIcon from '../../../assets/svg/tick.svg';
-import crossIcon from '../../../assets/svg/cross.svg';
 import playIcon from '../../../assets/svg/play.svg';
 import CommonContext from "../../Context/Context";
 
@@ -80,22 +77,12 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
         </div>
         <div>
           <img src={`${BASE_URL}/${data.image}`} alt="img" className={classes.card_img}/>
-          {/* <div className={userLogged ? classes.card_action : classes.card_none}> */}
-          <div className={classes.card_action}>
+          <div className={userLogged ? classes.card_action : classes.card_none}>
+          {/* <div className={classes.card_action}> */}
             <button className={classes.btn_normal}>
-              {/* <svg className={classes.btn_icon} fill='$color-charm-pink'>
-                <use href={`${plusIcon}#plus`} />
-              </svg> */}
               В сложные
-              {/* icon for toggling */}
-              {/* <svg className={classes.btn_icon} fill='$color-charm-pink'>
-                <use href={`${tickIcon}#tick`} />
-              </svg> */}
             </button>
             <button className={classes.btn_normal}>
-              {/* <svg className={classes.btn_icon} fill='$color-charm-pink'>
-                <use href={`${crossIcon}#cross`} />
-              </svg> */}
               Удалить
             </button>
           </div>
