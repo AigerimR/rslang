@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import classes from './gameStatistics.scss'
 
-const GameStatistics: FC<{ score: number; accuracy: number }> = ({ score, accuracy }) => {
+const GameStatistics: FC<{ score: number; accuracy: number; correctAnswerList: string[]; wrongAnswerList: string[] }> = ({ score, accuracy, correctAnswerList, wrongAnswerList }) => {
   const beautifyAccuracy = (accuracy: number): string => {
     const beautifullAccuracy = Math.floor(accuracy * 100);
     if (Number.isNaN(beautifullAccuracy)) return '0%';

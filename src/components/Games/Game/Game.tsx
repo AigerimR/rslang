@@ -22,12 +22,12 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   }, [answersCount, rightAnswersCount]);
 
   const memoziedHandleCorrectAnswersList = useCallback((word: string) => {
-    const copy = Object.assign([], correctAnswerList);
+    const copy = JSON.parse(JSON.stringify(correctAnswerList));
     setCorrectAnswer(() => [...copy, word]);
   }, [correctAnswerList]);
 
   const memoziedHandleWrongAnswersList = useCallback((word: string) => {
-    const copy = Object.assign([], wrongAnswerList);
+    const copy = JSON.parse(JSON.stringify(wrongAnswerList));
     setWrongAnswer(() => [...copy, word]);
   }, [wrongAnswerList]);
 
@@ -73,15 +73,14 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
         handleRightAnswer={memoziedHandleRightAnswer}
         handleCorrectAnswersList={memoziedHandleCorrectAnswersList}
         handleWrongAnswersList={memoziedHandleWrongAnswersList}
-        correctAnswerList={correctAnswerList}
-        wrongAnswerList={wrongAnswerList}
-      />
+        correctAnswerList={[]}
+        wrongAnswerList={[]}      />
     ),
   };
 
   const Game: ReactNode = games[game];
 
-  if (isGameFinished) return <GameStatistics score={score} accuracy={accuracy} />;
+  if (isGameFinished) return <GameStatistics score={score} accuracy={accuracy} correctAnswerList={correctAnswerList} wrongAnswerList={wrongAnswerList} />;
 
   return <>{Game}</>;
 };

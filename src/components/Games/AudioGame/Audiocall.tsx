@@ -13,9 +13,7 @@ const AudioGame: FC<IAudiocallProps> = ({
   handleAnswer,
   handleRightAnswer,
   handleCorrectAnswersList,
-  handleWrongAnswersList,
-  correctAnswerList,
-  wrongAnswerList,
+  handleWrongAnswersList
 }) => {
   const [wordsList, setWords] = useState<TAudiocallWord[] | void>([
     {
@@ -102,6 +100,8 @@ const AudioGame: FC<IAudiocallProps> = ({
 
   const nextPage = () => {
     if (isAnswerSelected === false) {
+      handleScore(score);
+      handleWrongAnswersList(wordsList[index].rightTranslate);
       setAnswerSelected(true);
       setDisabled(true);
       setNewClasse(wordsList[index].rightTranslate, wordsList[index].rightTranslate, true);
