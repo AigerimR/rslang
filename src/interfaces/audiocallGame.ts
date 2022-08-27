@@ -6,10 +6,14 @@ interface IAudiocallProps extends IGame {
   score: number;
   handleAnswer: () => void;
   handleRightAnswer: () => void;
-  handleCorrectAnswersList: (word: string) => void;
-  handleWrongAnswersList: (word: string) => void;
-  correctAnswerList: string[];
-  wrongAnswerList: string[];
+  handleCorrectAnswersListRus: (word: string) => void;
+  handleWrongAnswersListRus: (word: string) => void;
+  handleCorrectAnswersListEng: (word: string) => void;
+  handleWrongAnswersListEng: (word: string) => void;
+  correctAnswerListRus: string[];
+  wrongAnswerListRus: string[];
+  correctAnswerListEng: string[];
+  wrongAnswerListEng: string[];
 }
 
 export default IAudiocallProps;

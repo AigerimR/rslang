@@ -12,8 +12,10 @@ const AudioGame: FC<IAudiocallProps> = ({
   handleScore,
   handleAnswer,
   handleRightAnswer,
-  handleCorrectAnswersList,
-  handleWrongAnswersList
+  handleCorrectAnswersListRus,
+  handleWrongAnswersListRus,
+  handleCorrectAnswersListEng,
+  handleWrongAnswersListEng,
 }) => {
   const [wordsList, setWords] = useState<TAudiocallWord[] | void>([
     {
@@ -54,14 +56,24 @@ const AudioGame: FC<IAudiocallProps> = ({
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) { correctIndex = i; }
       });
-      const newClass = items.map((item, i) => i === correctIndex ? item = `${classes.audioList_item} ${classes.correctWord}` : item);
+      const newClass = items.map(
+        (item, i) => i === correctIndex
+          ? item = `${classes.audioList_item} ${classes.correctWord}`
+          : item
+      );
       setClassName(newClass);
     } else {
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) { correctIndex = i; }
         if (w === answer) { wrongIndex = i; }
       });
-      const newClass = items.map((item, i) => i === correctIndex ? item = `${classes.audioList_item} ${classes.correctWord}` : i === wrongIndex ? item = `${classes.audioList_item} ${classes.wrongWord}` : item);
+      const newClass = items.map(
+        (item, i) => i === correctIndex
+          ? item = `${classes.audioList_item} ${classes.correctWord}`
+          : i === wrongIndex
+            ? item = `${classes.audioList_item} ${classes.wrongWord}`
+            : item
+      );
       setClassName(newClass);
     }
   }
@@ -79,11 +91,13 @@ const AudioGame: FC<IAudiocallProps> = ({
       handleScore(score + 10);
       setCorrectAnswerCount(correctAnswerCount + 1);
       handleRightAnswer();
-      handleCorrectAnswersList(answer);
+      handleCorrectAnswersListRus(wordsList[index].rightTranslate);
+      handleCorrectAnswersListEng(wordsList[index].word);
       setNewClasse(answer, word, true);
     } else {
       handleScore(score);
-      handleWrongAnswersList(answer);
+      handleWrongAnswersListRus(answer);
+      handleWrongAnswersListEng(answer);
       setCount(livesCount + 1);
       brokeHeart(livesCount);
       setNewClasse(answer, word, false);
@@ -100,8 +114,10 @@ const AudioGame: FC<IAudiocallProps> = ({
 
   const nextPage = () => {
     if (isAnswerSelected === false) {
+      handleAnswer();
       handleScore(score);
-      handleWrongAnswersList(wordsList[index].rightTranslate);
+      handleWrongAnswersListRus(wordsList[index].word);
+      handleWrongAnswersListEng(wordsList[index].word);
       setAnswerSelected(true);
       setDisabled(true);
       setNewClasse(wordsList[index].rightTranslate, wordsList[index].rightTranslate, true);
@@ -138,40 +154,47 @@ const AudioGame: FC<IAudiocallProps> = ({
         </div>
       </div>
       <div className={classes.audiocallContentWrapper}>
-        <div className={classes.audiocallNull} style={isAnswerSelected ? { display: 'none' } : { display: 'block' }} onClick={() => audio.play()}></div>
-        <div className={classes.audioOpenWord} style={isAnswerSelected ? { display: 'flex' } : { display: 'none' }}>
-          <div className={classes.audioOpenWord_img} style={{ backgroundImage: `url(${wordsList[index].image})` }}>
+        <div className={classes.audiocallNull}
+          style={isAnswerSelected ? { display: 'none' } : { display: 'block' }}
+          onClick={() => audio.play()}></div>
+        <div className={classes.audioOpenWord}
+          style={isAnswerSelected ? { display: 'flex' } : { display: 'none' }}>
+          <div className={classes.audioOpenWord_img}
+            style={{ backgroundImage: `url(${wordsList[index].image})` }}>
           </div>
           <div className={classes.audioOpenWord_context}>
-            <span className={classes.audioOpenWord_context_sound} onClick={() => audio.play()}></span>
+            <span className={classes.audioOpenWord_context_sound}
+              onClick={() => audio.play()}></span>
             <span className={classes.audioOpenWord_context_value}>{wordsList[index].word}</span>
           </div>
         </div>
-        <fieldset disabled={isDisabled ? true : false} className={classes.audioList}>
+        <fieldset disabled={isDisabled} className={classes.audioList}>
           <label className={items[0]} onChange={() => { handleUserAnswer(w0) }}>
-            <input checked={isDisabled ? true : false} type="radio" id="w0" name="w0" value={w0}></input>
+            <input checked={isDisabled} type="radio" id="w0" name="w0" value={w0}></input>
             {w0}
           </label>
           <label className={items[1]} onChange={() => { handleUserAnswer(w1) }}>
-            <input checked={isDisabled ? true : false} type="radio" id="w1" name="w1" value={w1}></input>
+            <input checked={isDisabled} type="radio" id="w1" name="w1" value={w1}></input>
             {w1}
           </label>
           <label className={items[2]} onChange={() => { handleUserAnswer(w2) }}>
-            <input checked={isDisabled ? true : false} type="radio" id="w2" name="w2" value={w2}></input>
+            <input checked={isDisabled} type="radio" id="w2" name="w2" value={w2}></input>
             {w2}
           </label >
           <label className={items[3]} onChange={() => { handleUserAnswer(w3) }}>
-            <input checked={isDisabled ? true : false} type="radio" id="w3" name="w3" value={w3}></input>
+            <input checked={isDisabled} type="radio" id="w3" name="w3" value={w3}></input>
             {w3}
           </label>
           <label className={items[4]} onChange={() => { handleUserAnswer(w4) }}>
-            <input checked={isDisabled ? true : false} type="radio" id="w4" name="w4" value={w4}></input>
+            <input checked={isDisabled} type="radio" id="w4" name="w4" value={w4}></input>
             {w4}
           </label>
         </fieldset>
-        <button className={classes.audiocallBtn} onClick={() => { nextPage() }}> {nextButton}</button>
+        <button className={classes.audiocallBtn}
+          onClick={() => { nextPage() }}> {nextButton}</button>
         <div className={classes.correctAnswerTotal}>
-          <div className={classes.correctAnswerPercent} style={{ width: `${correctAnswerCount}0%` }}></div>
+          <div className={classes.correctAnswerPercent}
+            style={{ width: `${correctAnswerCount}0%` }}></div>
         </div>
       </div>
     </div>
