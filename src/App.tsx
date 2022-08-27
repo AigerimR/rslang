@@ -1,5 +1,5 @@
 import { getWord } from './apiHelpers/words/wordsController';
-import { createUser, getUserToken, loginUser } from './apiHelpers/users/usersController';
+import { createUser, loginUser, createUserWord } from './apiHelpers/users/usersController';
 import React, { createContext, FC, useState } from 'react';
 import './styles/index.scss';
 import classes from './app.module.scss';
@@ -24,10 +24,14 @@ import Dictionary from './components/Pages/Dictionary/Dictionary';
 
 const App: FC = () => {
   // getWord('5e9f5ee35eb9e72bc21af4a0').then((word) => console.log(word));
+//   createUserWord({
+//   userId:       localStorage.getItem('userId'),
+//   wordId: "5e9f5ee35eb9e72bc21af716",
+//   word: { "difficulty": "hard", "optional": {} },
+//   token: localStorage.getItem('token')
+
+// });
   const [userLogged, setUserLogged] = useState<boolean>(false);
-  // function setUserLogged() {
-    
-  // }
     
   return (
     <CommonContext.Provider value={{userLogged, setUserLogged}}>

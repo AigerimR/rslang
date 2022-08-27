@@ -16,10 +16,10 @@ const Paginationmui: React.FC< {updatePage: (x: number) => void} > = (props) => 
      updatePage(page)
   }, [page]);
 
-  //Using Materil Ui Library
+  // Using Materil Ui Library
   return (
     <Stack spacing={2}>
-      <Pagination count={30} page={page+1} onChange={handleChange} sx = {{margin: "20px auto"}}/>
+      <Pagination count={30} page={page+1} onChange={handleChange} sx = {{margin: '20px auto'}}/>
     </Stack>
   );
 }

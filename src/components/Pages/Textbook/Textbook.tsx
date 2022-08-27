@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { TWord } from "../../../@types/words";
-import { getWords } from "../../../apiHelpers/words/wordsController";
-import Units from "./Units/Units";
+import { TWord } from '../../../@types/words';
+import { getWords } from '../../../apiHelpers/words/wordsController';
+import Units from './Units/Units';
 import Paginationmui from './Pagination/Paginationmui';
-import CardsContainer from "../../CardsContainer/CardsContainer";
-import classes from "./Textbook.module.scss"
+import CardsContainer from '../../CardsContainer/CardsContainer';
+import classes from './Textbook.module.scss'
 import { Link } from 'react-router-dom';
-import starIcon from "../../../assets/svg/star.svg";
+import starIcon from '../../../assets/svg/star.svg';
 import CommonContext from '../../Context/Context';
 
 
@@ -18,7 +18,7 @@ const Textbook: React.FC = () => {
   const [unitColor, setUnitColor] = useState('#bbd66c');
   const updateUnit = (unit:number, unitColor: string): void => { setUnit(unit); setUnitColor(unitColor);};  
 
-  let [data, setData] = useState<TWord[]>();
+  const [data, setData] = useState<TWord[]>();
   const getData = async () => {
     const res = await getWords(unit, page);
     setData(res);

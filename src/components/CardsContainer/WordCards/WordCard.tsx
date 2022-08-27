@@ -1,21 +1,22 @@
-import { TWord } from "../../../@types/words";
-import React, { useContext, useEffect, useState } from "react";
-import Modal from "react-modal";
+import { TWord } from '../../../@types/words';
+import React, { useContext, useEffect, useState } from 'react';
+import Modal from 'react-modal';
 
-import { getWord } from "../../../apiHelpers/words/wordsController";
-import classes from "./WordCard.module.scss"
+import { getWord } from '../../../apiHelpers/words/wordsController';
+import classes from './WordCard.module.scss'
 import playIcon from '../../../assets/svg/play.svg';
-import CommonContext from "../../Context/Context";
+import CommonContext from '../../Context/Context';
+import { createUserWord } from '../../../apiHelpers/users/usersController';
 
 
 const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
-  let id = props.id;
-  let unitColor = props.unitColor;  
+  const id = props.id;
+  const unitColor = props.unitColor;  
   
-  let [btnSoundOn, setSoundBtn] = useState<Boolean>(true);
-  let [data, setData] = useState<TWord>();
-  let [modalIsOpen, setModalIsOpen] = useState<Boolean>(false);
+  const [btnSoundOn, setSoundBtn] = useState<boolean>(true);
+  const [data, setData] = useState<TWord>();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   useEffect(()=>{getData(id)}, []);
 
@@ -28,13 +29,13 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   }
 
   const handleAudio = (e: React.MouseEvent<HTMLButtonElement>):void => {
-    let btn = e.currentTarget;
+    const btn = e.currentTarget;
     if (btn.disabled === true) return;
     else {
      setSoundBtn(false);
-      let audio1 = new Audio (`${BASE_URL}/${data?.audio}`);
-      let audio2 = new Audio (`${BASE_URL}/${data?.audioMeaning}`);
-      let audio3 = new Audio (`${BASE_URL}/${data?.audioExample}`);
+      const audio1 = new Audio (`${BASE_URL}/${data?.audio}`);
+      const audio2 = new Audio (`${BASE_URL}/${data?.audioMeaning}`);
+      const audio3 = new Audio (`${BASE_URL}/${data?.audioExample}`);
       btn.disabled = true;
       audio1.play();
       audio1.addEventListener('ended', () => audio2.play());
@@ -46,12 +47,33 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
  const playOnIcon = <svg className={classes.btn_icon} fill='black'><use href={`${playIcon}#play`} /></svg>;
  const playOffIcon = <svg className={classes.btn_icon} fill='grey'> <use href={`${playIcon}#play`} /></svg>;
 
+  const addToComplexWords = (wordId: string) =>{
+    console.log(typeof localStorage.getItem('token'));
+    
+      createUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {} },
+        token: localStorage.getItem('token')
+      });
+  }
+  const addToLearnedWords = (wordId: string) =>{
+    console.log(typeof localStorage.getItem('token'));
+    
+      createUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'weak', 'optional': {} },
+        token: localStorage.getItem('token')
+      });
+  }
+
   if(data === undefined){
     return  <div>
     </div>
   }
   return (<>
-    <Modal isOpen = {modalIsOpen} className={classes.Modal} onRequestClose = {()=> setModalIsOpen(false)}>   
+    <Modal ariaHideApp={false} isOpen = {modalIsOpen} className={classes.Modal} onRequestClose = {()=> setModalIsOpen(false)}>   
       <div className={classes.innerContent}>
         <div>
           <div className={classes.card_header}>
@@ -79,10 +101,10 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
           <img src={`${BASE_URL}/${data.image}`} alt="img" className={classes.card_img}/>
           <div className={userLogged ? classes.card_action : classes.card_none}>
           {/* <div className={classes.card_action}> */}
-            <button className={classes.btn_normal}>
+            <button className={classes.btn_normal} onClick = {()=>addToComplexWords(data!.id)}>
               В сложные
             </button>
-            <button className={classes.btn_normal}>
+            <button className={classes.btn_normal} onClick = {()=>addToLearnedWords(data!.id)}>
               Удалить
             </button>
           </div>

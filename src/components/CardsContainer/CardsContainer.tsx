@@ -1,11 +1,11 @@
-import React from "react";
-import Modal from "react-modal";
-import { TWord } from "../../@types/words";
-import WordCard from "./WordCards/WordCard";
-import classes from "./CardsContainer.module.scss"
+import React from 'react';
+import Modal from 'react-modal';
+import { TWord } from '../../@types/words';
+import WordCard from './WordCards/WordCard';
+import classes from './CardsContainer.module.scss'
 
 const CardsContainer: React.FC<{data:TWord[], unitColor:string}> = (props) => {
-  let wordCard = props.data?.map(el=>{
+  const wordCard = props.data?.map(el=>{
     return (
         <WordCard id={el.id} key={el.id} unitColor = {props.unitColor}/>
     );
