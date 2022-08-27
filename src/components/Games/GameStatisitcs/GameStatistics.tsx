@@ -5,7 +5,7 @@ const GameStatistics: FC<{ score: number; accuracy: number }> = ({ score, accura
   const beautifyAccuracy = (accuracy: number): string => {
     const beautifullAccuracy = Math.floor(accuracy * 100);
     if (Number.isNaN(beautifullAccuracy)) return '0%';
-    return `${beautifullAccuracy} %`;
+    return `${beautifullAccuracy}%`;
   };
 
   const resultGrade = {
@@ -25,8 +25,8 @@ const GameStatistics: FC<{ score: number; accuracy: number }> = ({ score, accura
   return (
     <section className={classes.statisticWrapper}>
       <div className={classes.statisticBtns}>
-        <button className={classes.statisticBtn} onClick={() => setIsResultPage(true)}>Результат</button>
-        <button className={classes.statisticBtn} onClick={() => setIsResultPage(false)}>Слова</button>
+        <button className={classes.statisticBtnResult} style={isResultPage ? { backgroundColor: '#0f4c5c' } : { backgroundColor: '#231f20' }} onClick={() => setIsResultPage(true)}>Результат</button>
+        <button className={classes.statisticBtnWords} style={isResultPage ? { backgroundColor: '#231f20' } : { backgroundColor: '#0f4c5c' }} onClick={() => setIsResultPage(false)}>Слова</button>
       </div>
       <h3 className={classes.statisticСomment}>{resultСomment.low}</h3>
       <div className={classes.statisticPages}>
@@ -38,7 +38,7 @@ const GameStatistics: FC<{ score: number; accuracy: number }> = ({ score, accura
           </div>
           <div className={classes.statisticAccuracyWrapper}>
             <div className={classes.statisticAccuracyContainer}>
-              <div className={classes.statisticAccuracyCover} style={{ height: '30%' }}></div>
+              <div className={classes.statisticAccuracyCover} style={{ height: `calc(100% - ${beautifyAccuracy(accuracy)})` }}></div>
               <div className={classes.statisticAccuracyCoverShadow}></div>
               <div className={classes.statisticAccuracyResult}>
                 <div className={classes.statisticAccuracyInner}>
@@ -51,7 +51,7 @@ const GameStatistics: FC<{ score: number; accuracy: number }> = ({ score, accura
         <div className={classes.statisticWordsPage} style={isResultPage ? { display: 'none' } : { display: 'block' }}>
           <ul className={classes.statisticWrongList}>
             <p className={classes.statisticWrongList_title}>
-              <span>Ошибок: </span>
+              <span>Не знаю: </span>
               <span className={classes.statisticWrongList_count}>{score}</span>
             </p>
             <li className={classes.statisticList_item}>
