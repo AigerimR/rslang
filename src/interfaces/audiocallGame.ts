@@ -1,4 +1,5 @@
 import IGame from './game';
+import { TAudiocallWord } from '../@types/words';
 
 interface IAudiocallProps extends IGame {
   difficultyLevel: string;
@@ -6,14 +7,10 @@ interface IAudiocallProps extends IGame {
   score: number;
   handleAnswer: () => void;
   handleRightAnswer: () => void;
-  handleCorrectAnswersListRus: (word: string) => void;
-  handleWrongAnswersListRus: (word: string) => void;
-  handleCorrectAnswersListEng: (word: string) => void;
-  handleWrongAnswersListEng: (word: string) => void;
-  correctAnswerListRus: string[];
-  wrongAnswerListRus: string[];
-  correctAnswerListEng: string[];
-  wrongAnswerListEng: string[];
+  handleCorrectAnswersList: (word: TAudiocallWord) => void;
+  handleWrongAnswersList: (word: TAudiocallWord) => void;
+  correctAnswerList: TAudiocallWord[];
+  wrongAnswerList: TAudiocallWord[];
 }
 
 export default IAudiocallProps;

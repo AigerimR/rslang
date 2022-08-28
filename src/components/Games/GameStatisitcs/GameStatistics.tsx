@@ -1,12 +1,14 @@
 import { IСomment } from '../../../@types/gamesPage';
 import React, { FC, useState } from 'react';
 import classes from './gameStatistics.scss'
+import { TAudiocallWord } from '../../../@types/words';
 
 const GameStatistics: FC<{
   score: number;
   accuracy: number;
-  answerArray: string[][];
-}> = ({ score, accuracy, answerArray }) => {
+  correctAnswerList: TAudiocallWord[];
+  wrongAnswerList: TAudiocallWord[];
+}> = ({ score, accuracy, correctAnswerList, wrongAnswerList }) => {
   const beautifyAccuracy = (accuracy: number): number => {
     const beautifyAccuracy = Math.floor(accuracy * 100);
     if (Number.isNaN(beautifyAccuracy)) return 0;
@@ -36,9 +38,6 @@ const GameStatistics: FC<{
       break;
   }
 
-  const correctList = [['', 'patient', 'пациент'], ['', 'worse', 'хуже']];
-  const wrongList = [['', 'smell', 'запах'], ['', 'shake', 'трясти'], ['', 'spread', 'распространение']];
-
   return (
     <section className={classes.statisticWrapper}>
       <div className={classes.statisticBtns}>
@@ -55,8 +54,8 @@ const GameStatistics: FC<{
           style={isResultPage ? { display: 'block' } : { display: 'none' }}>
           <div className={classes.statisticScoreContainer}>
             <p className={classes.statisticScore}> Счёт: +{score}</p>
-            <p className={classes.statisticScoreWords}> Изучено слов: {correctList.length} </p>
-            <p className={classes.statisticScoreWords}> На изучении слов: {wrongList.length} </p>
+            <p className={classes.statisticScoreWords}> Изучено слов: {correctAnswerList.length} </p>
+            <p className={classes.statisticScoreWords}> На изучении слов: {wrongAnswerList.length} </p>
           </div>
           <div className={classes.statisticAccuracyWrapper}>
             <div className={classes.statisticAccuracyContainer}>
@@ -76,16 +75,16 @@ const GameStatistics: FC<{
           <ul className={classes.statisticWrongList}>
             <p className={classes.statisticWrongList_title}>
               <span>Не знаю: </span>
-              <span>{wrongList.length}</span>
+              <span>{wrongAnswerList.length}</span>
             </p>
-            {wrongList.map((word) => {
+            {wrongAnswerList.map((word) => {
               return (
                 <li>
                   <div className={classes.statisticList_word}>
-                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word[0]).play() }}></div>
-                    <span className={classes.statisticList_word_eng}>{word[1]}</span>
+                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word.audio).play() }}></div>
+                    <span className={classes.statisticList_word_eng}>{word.rightTranslate}</span>
                     <span>&#8212;</span>
-                    <span className={classes.statisticList_word_rus}>{word[2]}</span>
+                    <span className={classes.statisticList_word_rus}>{word.word}</span>
                   </div>
                 </li>
               );
@@ -94,16 +93,16 @@ const GameStatistics: FC<{
           <ul className={classes.statisticCorrectList}>
             <p className={classes.statisticCorrectList_title}>
               <span>Знаю: </span>
-              <span>{correctList.length}</span>
+              <span>{correctAnswerList.length}</span>
             </p>
-            {correctList.map((word) => {
+            {correctAnswerList.map((word) => {
               return (
                 <li>
                   <div className={classes.statisticList_word}>
-                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word[0]).play() }}></div>
-                    <span className={classes.statisticList_word_eng}>{word[1]}</span>
+                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word.audio).play() }}></div>
+                    <span className={classes.statisticList_word_eng}>{word.rightTranslate}</span>
                     <span>&#8212;</span>
-                    <span className={classes.statisticList_word_rus}>{word[2]}</span>
+                    <span className={classes.statisticList_word_rus}>{word.word}</span>
                   </div>
                 </li>
               );

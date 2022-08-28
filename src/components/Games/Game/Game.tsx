@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import GameStatistics from '../GameStatisitcs/GameStatistics';
 import SprintGame from '../SprintGame/SprintGame';
 import AudiocGame from '../AudioGame/Audiocall';
+import { TAudiocallWord } from '../../../@types/words';
 
 const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   difficultyLevel,
@@ -13,35 +14,23 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   const [accuracy, setAccuracy] = useState<number>(0);
   const [answersCount, setAnswersCount] = useState<number>(0);
   const [rightAnswersCount, setRightAnswersCount] = useState<number>(0);
-  const [correctAnswerListRus, setCorrectAnswerRus] = useState<string[]>([]);
-  const [wrongAnswerListRus, setWrongAnswerRus] = useState<string[]>([]);
-  const [correctAnswerListEng, setCorrectAnswerEng] = useState<string[]>([]);
-  const [wrongAnswerListEng, setWrongAnswerEng] = useState<string[]>([]);
+  const [correctAnswerList, setCorrectAnswer] = useState<TAudiocallWord[]>([]);
+  const [wrongAnswerList, setWrongAnswer] = useState<TAudiocallWord[]>([]);
 
   useEffect(() => {
     const updatedAccuracy = rightAnswersCount / answersCount;
     setAccuracy(updatedAccuracy);
   }, [answersCount, rightAnswersCount]);
 
-  const memoziedHandleCorrectAnswersListRus = useCallback((word: string) => {
-    const copy = JSON.parse(JSON.stringify(correctAnswerListRus));
-    setCorrectAnswerRus(() => [...copy, word]);
-  }, [correctAnswerListRus]);
+  const memoziedHandleCorrectAnswersList = useCallback((word: TAudiocallWord) => {
+    const copy = JSON.parse(JSON.stringify(correctAnswerList));
+    setCorrectAnswer(() => [...copy, word]);
+  }, [correctAnswerList]);
 
-  const memoziedHandleWrongAnswersListRus = useCallback((word: string) => {
-    const copy = JSON.parse(JSON.stringify(wrongAnswerListRus));
-    setWrongAnswerRus(() => [...copy, word]);
-  }, [wrongAnswerListRus]);
-
-  const memoziedHandleCorrectAnswersListEng = useCallback((word: string) => {
-    const copy = JSON.parse(JSON.stringify(correctAnswerListEng));
-    setCorrectAnswerEng(() => [...copy, word]);
-  }, [correctAnswerListEng]);
-
-  const memoziedHandleWrongAnswersListEng = useCallback((word: string) => {
-    const copy = JSON.parse(JSON.stringify(wrongAnswerListEng));
-    setWrongAnswerEng(() => [...copy, word]);
-  }, [wrongAnswerListEng]);
+  const memoziedHandleWrongAnswersList = useCallback((word: TAudiocallWord) => {
+    const copy = JSON.parse(JSON.stringify(wrongAnswerList));
+    setWrongAnswer(() => [...copy, word]);
+  }, [wrongAnswerList]);
 
   const memoziedHandleAnswer = useCallback(() => {
     setAnswersCount((prevAnswersCount) => prevAnswersCount + 1);
@@ -83,23 +72,17 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
         handleScore={memoziedHandleScore}
         handleAnswer={memoziedHandleAnswer}
         handleRightAnswer={memoziedHandleRightAnswer}
-        handleCorrectAnswersListRus={memoziedHandleCorrectAnswersListRus}
-        handleWrongAnswersListRus={memoziedHandleWrongAnswersListRus}
-        handleCorrectAnswersListEng={memoziedHandleCorrectAnswersListEng}
-        handleWrongAnswersListEng={memoziedHandleWrongAnswersListEng}
-        correctAnswerListRus={[]}
-        wrongAnswerListRus={[]}
-        correctAnswerListEng={[]}
-        wrongAnswerListEng={[]}
+        handleCorrectAnswersList={memoziedHandleCorrectAnswersList}
+        handleWrongAnswersList={memoziedHandleWrongAnswersList}
+        correctAnswerList={[]}
+        wrongAnswerList={[]}
       />
     ),
   };
 
-  const answerArray = [correctAnswerListRus, correctAnswerListEng, wrongAnswerListRus, wrongAnswerListEng];
-
   const Game: ReactNode = games[game];
 
-  if (isGameFinished) return <GameStatistics score={score} accuracy={accuracy} answerArray={answerArray}/>;
+  if (isGameFinished) return <GameStatistics score={score} accuracy={accuracy} correctAnswerList={correctAnswerList} wrongAnswerList={wrongAnswerList} />;
 
   return <>{Game}</>;
 };

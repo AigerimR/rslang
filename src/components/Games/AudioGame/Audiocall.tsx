@@ -12,10 +12,8 @@ const AudioGame: FC<IAudiocallProps> = ({
   handleScore,
   handleAnswer,
   handleRightAnswer,
-  handleCorrectAnswersListRus,
-  handleWrongAnswersListRus,
-  handleCorrectAnswersListEng,
-  handleWrongAnswersListEng,
+  handleCorrectAnswersList,
+  handleWrongAnswersList,
 }) => {
   const [wordsList, setWords] = useState<TAudiocallWord[] | void>([
     {
@@ -48,7 +46,7 @@ const AudioGame: FC<IAudiocallProps> = ({
       new Audio(words[0].audio).play();
       setWords(words)
     })
-    .finally(() => setLoading(false))
+      .finally(() => setLoading(false))
   }, []);
 
   const audio = new Audio(wordsList[index].audio);
@@ -95,13 +93,11 @@ const AudioGame: FC<IAudiocallProps> = ({
       handleScore(score + 10);
       setCorrectAnswerCount(correctAnswerCount + 1);
       handleRightAnswer();
-      handleCorrectAnswersListRus(wordsList[index].rightTranslate);
-      handleCorrectAnswersListEng(wordsList[index].word);
+      handleCorrectAnswersList(wordsList[index]);
       setNewClasse(answer, word, true);
     } else {
       handleScore(score);
-      handleWrongAnswersListRus(answer);
-      handleWrongAnswersListEng(answer);
+      handleWrongAnswersList(wordsList[index]);
       setCount(livesCount + 1);
       brokeHeart(livesCount);
       setNewClasse(answer, word, false);
@@ -120,8 +116,7 @@ const AudioGame: FC<IAudiocallProps> = ({
     if (isAnswerSelected === false) {
       handleAnswer();
       handleScore(score);
-      handleWrongAnswersListRus(wordsList[index].word);
-      handleWrongAnswersListEng(wordsList[index].word);
+      handleWrongAnswersList(wordsList[index]);
       setAnswerSelected(true);
       setDisabled(true);
       setNewClasse(wordsList[index].rightTranslate, wordsList[index].rightTranslate, true);
