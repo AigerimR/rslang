@@ -2,7 +2,7 @@ import React, { FC, ReactNode, useCallback, useEffect, useState } from 'react';
 import GameStatistics from '../GameStatisitcs/GameStatistics';
 import SprintGame from '../SprintGame/SprintGame';
 import AudiocGame from '../AudioGame/Audiocall';
-import { TAudiocallWord } from '../../../@types/words';
+import { TGameWord } from '../../../@types/words';
 
 const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   difficultyLevel,
@@ -14,20 +14,20 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
   const [accuracy, setAccuracy] = useState<number>(0);
   const [answersCount, setAnswersCount] = useState<number>(0);
   const [rightAnswersCount, setRightAnswersCount] = useState<number>(0);
-  const [correctAnswerList, setCorrectAnswer] = useState<TAudiocallWord[]>([]);
-  const [wrongAnswerList, setWrongAnswer] = useState<TAudiocallWord[]>([]);
+  const [correctAnswerList, setCorrectAnswer] = useState<TGameWord[]>([]);
+  const [wrongAnswerList, setWrongAnswer] = useState<TGameWord[]>([]);
 
   useEffect(() => {
     const updatedAccuracy = rightAnswersCount / answersCount;
     setAccuracy(updatedAccuracy);
   }, [answersCount, rightAnswersCount]);
 
-  const memoziedHandleCorrectAnswersList = useCallback((word: TAudiocallWord) => {
+  const memoziedHandleCorrectAnswersList = useCallback((word: TGameWord) => {
     const copy = JSON.parse(JSON.stringify(correctAnswerList));
     setCorrectAnswer(() => [...copy, word]);
   }, [correctAnswerList]);
 
-  const memoziedHandleWrongAnswersList = useCallback((word: TAudiocallWord) => {
+  const memoziedHandleWrongAnswersList = useCallback((word: TGameWord) => {
     const copy = JSON.parse(JSON.stringify(wrongAnswerList));
     setWrongAnswer(() => [...copy, word]);
   }, [wrongAnswerList]);

@@ -1,13 +1,13 @@
 import { IСomment } from '../../../@types/gamesPage';
 import React, { FC, useState } from 'react';
 import classes from './gameStatistics.scss'
-import { TAudiocallWord } from '../../../@types/words';
+import { TAudiocallWord, TGameWord } from '../../../@types/words';
 
 const GameStatistics: FC<{
   score: number;
   accuracy: number;
-  correctAnswerList: TAudiocallWord[];
-  wrongAnswerList: TAudiocallWord[];
+  correctAnswerList: TGameWord[];
+  wrongAnswerList: TGameWord[];
 }> = ({ score, accuracy, correctAnswerList, wrongAnswerList }) => {
   const beautifyAccuracy = (accuracy: number): number => {
     const beautifyAccuracy = Math.floor(accuracy * 100);
@@ -82,7 +82,7 @@ const GameStatistics: FC<{
                 <li>
                   <div className={classes.statisticList_word}>
                     <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word.audio).play() }}></div>
-                    <span className={classes.statisticList_word_eng}>{word.rightTranslate}</span>
+                    <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
                     <span>&#8212;</span>
                     <span className={classes.statisticList_word_rus}>{word.word}</span>
                   </div>
@@ -100,7 +100,7 @@ const GameStatistics: FC<{
                 <li>
                   <div className={classes.statisticList_word}>
                     <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word.audio).play() }}></div>
-                    <span className={classes.statisticList_word_eng}>{word.rightTranslate}</span>
+                    <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
                     <span>&#8212;</span>
                     <span className={classes.statisticList_word_rus}>{word.word}</span>
                   </div>

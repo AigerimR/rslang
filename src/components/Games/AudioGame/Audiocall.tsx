@@ -95,7 +95,8 @@ const AudioGame: FC<IAudiocallProps> = ({
     if (answer === word) {
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) {
-          handleCorrectAnswersList(wordsList[index].gameList[i]);
+          const result: TGameWord = wordsList[index].gameList[i];
+          handleCorrectAnswersList(result);
         }
       });
       handleScore(score + 10);
@@ -105,7 +106,8 @@ const AudioGame: FC<IAudiocallProps> = ({
     } else {
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) {
-          handleWrongAnswersList(wordsList[index].gameList[i]);
+          const result: TGameWord = wordsList[index].gameList[i];
+          handleWrongAnswersList(result);
         }
       });
       handleScore(score);
@@ -126,8 +128,9 @@ const AudioGame: FC<IAudiocallProps> = ({
   const nextPage = () => {
     if (isAnswerSelected === false) {
       [w0, w1, w2, w3, w4].forEach((w, i) => {
-        if (w === wordsList[index]) {
-          handleWrongAnswersList(wordsList[index].gameList[i]);
+        if (w === wordsList[index].gameList[i].wordTranslate) {
+          const result: TGameWord = wordsList[index].gameList[i];
+          handleWrongAnswersList(result);
         }
       });
       handleAnswer();
