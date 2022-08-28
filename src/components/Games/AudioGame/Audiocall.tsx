@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import classes from './audiocall.module.scss';
-import { TAudiocallWord } from '../../../@types/words';
+import { TAudiocallWord, TGameWord } from '../../../@types/words';
 import { getAllAudiocallWords, getPageAudiocallWords } from '../../../apiHelpers/words/wordsController';
 import IAudiocallProps from '../../../interfaces/audiocallGame';
 
@@ -22,9 +22,11 @@ const AudioGame: FC<IAudiocallProps> = ({
       image: '',
       audio: '',
       rightTranslate: '',
-      translate: [],
+      gameList: [],
+      total: 0,
     },
   ]);
+
   let [index, setIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [isVolumeUp, setVolumeUp] = useState<boolean>(true);
@@ -50,7 +52,8 @@ const AudioGame: FC<IAudiocallProps> = ({
   }, []);
 
   const audio = new Audio(wordsList[index].audio);
-  const [w0, w1, w2, w3, w4]: string[] = wordsList[index].translate;
+  const firstList: TGameWord[] = wordsList[index].gameList;
+  const [w0, w1, w2, w3, w4]: string[] = firstList.map(e => e.wordTranslate);
 
   const setNewClasse = (answer: string, word: string, status: boolean) => {
     let correctIndex, wrongIndex: number;
@@ -90,14 +93,22 @@ const AudioGame: FC<IAudiocallProps> = ({
 
   const checkAnswer = (answer: string, word: string) => {
     if (answer === word) {
+      [w0, w1, w2, w3, w4].forEach((w, i) => {
+        if (w === word) {
+          handleCorrectAnswersList(wordsList[index].gameList[i]);
+        }
+      });
       handleScore(score + 10);
       setCorrectAnswerCount(correctAnswerCount + 1);
       handleRightAnswer();
-      handleCorrectAnswersList(wordsList[index]);
       setNewClasse(answer, word, true);
     } else {
+      [w0, w1, w2, w3, w4].forEach((w, i) => {
+        if (w === word) {
+          handleWrongAnswersList(wordsList[index].gameList[i]);
+        }
+      });
       handleScore(score);
-      handleWrongAnswersList(wordsList[index]);
       setCount(livesCount + 1);
       brokeHeart(livesCount);
       setNewClasse(answer, word, false);
@@ -114,9 +125,13 @@ const AudioGame: FC<IAudiocallProps> = ({
 
   const nextPage = () => {
     if (isAnswerSelected === false) {
+      [w0, w1, w2, w3, w4].forEach((w, i) => {
+        if (w === wordsList[index]) {
+          handleWrongAnswersList(wordsList[index].gameList[i]);
+        }
+      });
       handleAnswer();
       handleScore(score);
-      handleWrongAnswersList(wordsList[index]);
       setAnswerSelected(true);
       setDisabled(true);
       setNewClasse(wordsList[index].rightTranslate, wordsList[index].rightTranslate, true);

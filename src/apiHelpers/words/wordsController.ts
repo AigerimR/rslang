@@ -1,5 +1,5 @@
 import { EStatusCode } from './../../enums/serverStatusCode';
-import { TWord, TSprintGameWord, TAudiocallWord } from './../../@types/words';
+import { TWord, TSprintGameWord, TAudiocallWord, TGameWord } from './../../@types/words';
 import axios, { AxiosResponse } from 'axios';
 import getRandomIndex from '../../utils/getRandomIndex';
 import getSprintWord from './utils/getSprintWord';
@@ -69,17 +69,30 @@ export const getPageAudiocallWords = (group: number, page: number): Promise<TAud
     const audiocallWords: TAudiocallWord[] = words.map(() => {
       const index = getRandomIndex(20);
       const word = words[index];
-      const wordsList: string[] = [];
+      const wordsList: TGameWord[] = [];
       const wordPos = getRandomIndex(4);
       for (let n = 0; n < 4; n += 1) {
         const i = getRandomIndex(20);
         if (i !== index) {
-          const randomWord = words[i].wordTranslate;
+          const randomWord = {
+            id: words[i].id,
+            word: words[i].word,
+            image: words[i].image,
+            audio: words[i].audio,
+            wordTranslate: words[i].wordTranslate,
+          }
           wordsList.push(randomWord);
         }
       }
-      wordsList.splice(wordPos, 0, word.wordTranslate);
-      const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList);
+      const newWord = {
+        id: words[index].id,
+        word: words[index].word,
+        image: words[index].image,
+        audio: words[index].audio,
+        wordTranslate: words[index].wordTranslate,
+      }
+      wordsList.splice(wordPos, 0, newWord);
+      const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList, words.length);
       return audiocallWord;
     });
     return audiocallWords;
@@ -98,17 +111,30 @@ export const getAllAudiocallWords = (group: number): Promise<TAudiocallWord[] | 
       const audiocallWords: TAudiocallWord[] = words.map(() => {
         const index = getRandomIndex(120);
         const word = words[index];
-        const wordsList: string[] = [];
+        const wordsList: TGameWord[] = [];
         const wordPos = getRandomIndex(4);
         for (let n = 0; n < 4; n += 1) {
-          const i = getRandomIndex(120);
+          const i = getRandomIndex(20);
           if (i !== index) {
-            const randomWord = words[i].wordTranslate;
+            const randomWord = {
+              id: words[i].id,
+              word: words[i].word,
+              image: words[i].image,
+              audio: words[i].audio,
+              wordTranslate: words[i].wordTranslate,
+            }
             wordsList.push(randomWord);
           }
         }
-        wordsList.splice(wordPos, 0, word.wordTranslate);
-        const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList);
+        const newWord = {
+          id: words[index].id,
+          word: words[index].word,
+          image: words[index].image,
+          audio: words[index].audio,
+          wordTranslate: words[index].wordTranslate,
+        }
+        wordsList.splice(wordPos, 0, newWord);
+        const audiocallWord: TAudiocallWord = setAudiocallWord(word, wordsList, words.length);
         return audiocallWord;
       });
       return audiocallWords;
