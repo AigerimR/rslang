@@ -70,10 +70,11 @@ export const getPageAudiocallWords = (group: number, page: number): Promise<TAud
       const index = getRandomIndex(20);
       const word = words[index];
       const wordsList: TGameWord[] = [];
+      const wordsStrList: string[] = [words[index].wordTranslate];
       const wordPos = getRandomIndex(4);
-      for (let n = 0; n < 4; n += 1) {
+      while (wordsStrList.length < 6) {
         const i = getRandomIndex(20);
-        if (i !== index) {
+        if (wordsStrList.includes(words[i].wordTranslate) === false) {
           const randomWord = {
             id: words[i].id,
             word: words[i].word,
@@ -81,6 +82,7 @@ export const getPageAudiocallWords = (group: number, page: number): Promise<TAud
             audio: words[i].audio,
             wordTranslate: words[i].wordTranslate,
           }
+          wordsStrList.push(randomWord.wordTranslate);
           wordsList.push(randomWord);
         }
       }
@@ -112,10 +114,11 @@ export const getAllAudiocallWords = (group: number): Promise<TAudiocallWord[] | 
         const index = getRandomIndex(120);
         const word = words[index];
         const wordsList: TGameWord[] = [];
+        const wordsStrList: string[] = [words[index].wordTranslate];
         const wordPos = getRandomIndex(4);
-        for (let n = 0; n < 4; n += 1) {
-          const i = getRandomIndex(20);
-          if (i !== index) {
+        while (wordsStrList.length < 6) {
+          const i = getRandomIndex(120);
+          if (wordsStrList.includes(words[i].wordTranslate) === false) {
             const randomWord = {
               id: words[i].id,
               word: words[i].word,
@@ -123,6 +126,7 @@ export const getAllAudiocallWords = (group: number): Promise<TAudiocallWord[] | 
               audio: words[i].audio,
               wordTranslate: words[i].wordTranslate,
             }
+            wordsStrList.push(randomWord.wordTranslate);
             wordsList.push(randomWord);
           }
         }

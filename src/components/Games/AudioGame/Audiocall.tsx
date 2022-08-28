@@ -39,6 +39,8 @@ const AudioGame: FC<IAudiocallProps> = ({
   const [nextButton, setNextButton] = useState<string>(missSetBtn);
   const [isDisabled, setDisabled] = useState<boolean>(false);
   const [correctAnswerCount, setCorrectAnswerCount] = useState<number>(0);
+  const [correctGameList, setCorrectGameList] = useState<TGameWord[]>([]);
+  const [wrongGameList, setWrongGameList] = useState<TGameWord[]>([]);
 
   useEffect(() => {
     const words: Promise<TAudiocallWord[] | void> = page
@@ -96,7 +98,11 @@ const AudioGame: FC<IAudiocallProps> = ({
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) {
           const result: TGameWord = wordsList[index].gameList[i];
-          handleCorrectAnswersList(result);
+          if (correctGameList.includes(result) === false) {
+            correctGameList.push(result);
+            setCorrectGameList(correctGameList);
+            handleCorrectAnswersList(result);
+          }
         }
       });
       handleScore(score + 10);
@@ -107,7 +113,11 @@ const AudioGame: FC<IAudiocallProps> = ({
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) {
           const result: TGameWord = wordsList[index].gameList[i];
-          handleWrongAnswersList(result);
+          if (wrongGameList.includes(result) === false) {
+            wrongGameList.push(result);
+            setWrongGameList(wrongGameList);
+            handleWrongAnswersList(result);
+          }
         }
       });
       handleScore(score);
@@ -115,6 +125,7 @@ const AudioGame: FC<IAudiocallProps> = ({
       brokeHeart(livesCount);
       setNewClasse(answer, word, false);
     }
+    const list = JSON.parse(JSON.stringify(wordsList));
     setNextButton(nextSetBtn);
     setAnswerSelected(true);
     setDisabled(true);
@@ -130,7 +141,11 @@ const AudioGame: FC<IAudiocallProps> = ({
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === wordsList[index].gameList[i].wordTranslate) {
           const result: TGameWord = wordsList[index].gameList[i];
-          handleWrongAnswersList(result);
+          if (wrongGameList.includes(result) === false) {
+            wrongGameList.push(result);
+            setWrongGameList(wrongGameList);
+            handleWrongAnswersList(result);
+          }
         }
       });
       handleAnswer();
