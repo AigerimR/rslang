@@ -3,6 +3,8 @@ import classes from './audiocall.module.scss';
 import { TAudiocallWord, TGameWord } from '../../../@types/words';
 import { getAllAudiocallWords, getPageAudiocallWords } from '../../../apiHelpers/words/wordsController';
 import IAudiocallProps from '../../../interfaces/audiocallGame';
+import correctSound from '../../../assets/sounds/correctAnswer.mp3';
+import wrongSound from '../../../assets/sounds/wrongAnswer.mp3';
 
 const AudioGame: FC<IAudiocallProps> = ({
   difficultyLevel,
@@ -97,6 +99,7 @@ const AudioGame: FC<IAudiocallProps> = ({
     if (answer === word) {
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) {
+          if (isVolumeUp) { new Audio(correctSound).play(); }
           const result: TGameWord = wordsList[index].gameList[i];
           if (correctGameList.includes(result) === false) {
             correctGameList.push(result);
@@ -110,6 +113,7 @@ const AudioGame: FC<IAudiocallProps> = ({
       handleRightAnswer();
       setNewClasse(answer, word, true);
     } else {
+      if (isVolumeUp) { new Audio(wrongSound).play(); }
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === word) {
           const result: TGameWord = wordsList[index].gameList[i];
@@ -138,6 +142,7 @@ const AudioGame: FC<IAudiocallProps> = ({
 
   const nextPage = () => {
     if (isAnswerSelected === false) {
+      if (isVolumeUp) { new Audio(wrongSound).play(); }
       [w0, w1, w2, w3, w4].forEach((w, i) => {
         if (w === wordsList[index].gameList[i].wordTranslate) {
           const result: TGameWord = wordsList[index].gameList[i];
@@ -182,7 +187,8 @@ const AudioGame: FC<IAudiocallProps> = ({
           <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[3]}</span>
           <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[4]}</span>
         </div>
-        <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}>{isVolumeUp ? 'volume_up' : 'volume_off'}
+        <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}
+          onClick={() => isVolumeUp ? setVolumeUp(false) : setVolumeUp(true)}>{isVolumeUp ? 'volume_up' : 'volume_off'}
         </div>
       </div>
       <div className={classes.audiocallContentWrapper}>
