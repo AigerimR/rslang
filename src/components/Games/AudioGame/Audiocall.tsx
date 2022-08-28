@@ -44,7 +44,11 @@ const AudioGame: FC<IAudiocallProps> = ({
     const words: Promise<TAudiocallWord[] | void> = page
       ? getPageAudiocallWords(parseFloat(difficultyLevel), page)
       : getAllAudiocallWords(parseFloat(difficultyLevel));
-    words.then((words) => setWords(words)).finally(() => setLoading(false))
+    words.then((words) => {
+      new Audio(words[0].audio).play();
+      setWords(words)
+    })
+    .finally(() => setLoading(false))
   }, []);
 
   const audio = new Audio(wordsList[index].audio);
