@@ -1,7 +1,8 @@
 import { IСomment } from '../../../@types/gamesPage';
 import React, { FC, useState } from 'react';
 import classes from './gameStatistics.scss'
-import { TAudiocallWord, TGameWord } from '../../../@types/words';
+import { TGameWord } from '../../../@types/words';
+const URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 
 const GameStatistics: FC<{
   score: number;
@@ -81,7 +82,7 @@ const GameStatistics: FC<{
               return (
                 <li>
                   <div className={classes.statisticList_word}>
-                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word.audio).play() }}></div>
+                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(`${URL}/${word.audio}`).play() }}></div>
                     <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
                     <span>&#8212;</span>
                     <span className={classes.statisticList_word_rus}>{word.word}</span>
@@ -99,7 +100,7 @@ const GameStatistics: FC<{
               return (
                 <li>
                   <div className={classes.statisticList_word}>
-                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(word.audio).play() }}></div>
+                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(`${URL}/${word.audio}`).play() }}></div>
                     <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
                     <span>&#8212;</span>
                     <span className={classes.statisticList_word_rus}>{word.word}</span>
