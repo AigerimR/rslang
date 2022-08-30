@@ -39,3 +39,9 @@ export type TAudiocallWord = {
   gameList: TGameWord[];
   total: number;
 };
+
+export type TWordUser = {
+  difficulty: string;
+  id: string;
+  wordId: string;
+};

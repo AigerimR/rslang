@@ -1,0 +1,157 @@
+@import '../../../app.module.scss';
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.card_small{
+  background-color: $color-white;
+  width: 310px;
+  height: 70px;
+  margin: 5px;
+  text-align: center;
+  padding: 6px 30px;
+  overflow: hidden;
+  font-size: 20px;
+  transition: 0.2s all;
+  color: $color-raisin-black;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 150%;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  &_word{
+    margin: 0;
+  }
+
+  &_transcript{
+    margin: 0;
+  }
+  &:hover{
+    cursor: pointer;
+  } 
+}
+
+.card{
+  &_none{
+    display: none;
+  }
+
+  &_header{
+    display: flex;
+    column-gap: 40px;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 240px;
+    justify-content: space-between;
+  }
+
+  &_word{
+    margin: 0;
+  }
+
+  &_trans{
+    margin: 0;
+  }
+
+  &_transcript{
+    margin: 0;
+  }
+
+  &_img{
+    width: 240px;
+    height: 180px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.innerContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  h3{
+    margin: 10px 0 5px 0;
+  }
+
+  h4{
+    text-decoration: underline;
+    margin-top: 10px;
+  }
+
+  p{
+    font-size: 15px;
+  }
+
+  &_text{
+    padding-left: 10px;
+  }
+}
+
+.btn{
+ &_round{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  &:hover{
+    cursor: pointer;
+    background-color: $color-gainsboro;
+    } 
+ }
+
+ &_normal{
+  width: 240px;
+  height: 40px;
+  margin: 10px 0;
+  border-radius: 5px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  background-color: $color-moonstone-blue;
+  // column-gap: 40px;
+  text-transform: uppercase;
+  border: none;
+  &:hover{
+    cursor: pointer;
+    background-color:  $color-mentol-green;
+    } 
+ }
+
+ &_expand{
+  position: absolute;
+  top: 20px;
+  right: 10px;
+ }
+
+ &_icon{
+  width: 20px;
+  height: 20px;
+ }
+}
+
+.innerContent{
+  text-align: left;
+  font-size: small;
+}
+
+
+
+.Modal{
+  height: 400px;
+  width: 600px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: absolute;
+  top: 25%;
+  left: calc(50vw - 300px);
+  background-color: papayawhip;
+  padding: 30px;
+}

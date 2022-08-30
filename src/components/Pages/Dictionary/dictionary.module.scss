@@ -1,0 +1,10 @@
+@import '../../../app.module.scss';
+
+.dictionary{
+  &_main{
+    background: linear-gradient(70deg, $color-mentol-green 35%, $color-moonstone-blue 55%);
+    height: 80vh;
+    text-align: center;
+    padding: 30px;
+  }
+}

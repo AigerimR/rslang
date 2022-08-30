@@ -1,0 +1,49 @@
+@import '../../../app.module.scss';
+
+.auth{
+  &_main{
+    background: linear-gradient(70deg, $color-mentol-green 35%, $color-moonstone-blue 55%);
+    height: 80vh;
+    display: flex;
+    align-items: center;  
+    justify-content: center;
+    column-gap: 50px;
+  }
+  &_container{
+    width: 400px;
+    padding: 50px 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  &_header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  &_side{
+    color: $color-old-mauve;
+    font-family: 'Neucha', cursive;
+    text-align: center;
+  }
+  &_img{
+    margin-top: 50px;
+  }
+}
+.btn{
+  &_link{
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 5px;
+    &:hover{
+      cursor: pointer;
+      scale: 1.1;
+    }
+  }
+  &_active{
+    border-bottom: 2px solid $color-moonstone-blue;
+  }
+}
+
