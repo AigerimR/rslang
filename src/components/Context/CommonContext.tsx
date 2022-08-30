@@ -1,4 +1,4 @@
-import React, { createContext, FC } from 'react';
+import { createContext } from 'react';
 
 const CommonContext = createContext({
   userLogged: false,

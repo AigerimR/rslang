@@ -5,11 +5,14 @@ import Modal from 'react-modal';
 import { getWord } from '../../../apiHelpers/words/wordsController';
 import classes from './WordCard.module.scss'
 import playIcon from '../../../assets/svg/play.svg';
-import CommonContext from '../../Context/Context';
-import { createUserWord } from '../../../apiHelpers/users/usersController';
+import starIcon from '../../../assets/svg/star.svg';
+import CommonContext from '../../Context/CommonContext';
+import { createUserWord, deleteUserWord, getUserComplexWords } from '../../../apiHelpers/users/usersController';
+import ComplexWordsContext from '../../Context/ComplexWordsContext';
 
 
-const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
+const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:boolean}> = (props) => {
+// const WordCard: React.FC<{id: string, unitColor:string, wordIsComplex:boolean}> = (props) => {
   const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
   const id = props.id;
   const unitColor = props.unitColor;  
@@ -17,11 +20,15 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
   const [btnSoundOn, setSoundBtn] = useState<boolean>(true);
   const [data, setData] = useState<TWord>();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-
-  useEffect(()=>{getData(id)}, []);
+  const [wordIsComplex, setWordIsComplex] = useState<boolean>(false);
+  const [deleteWord, setDeleteWord] = useState<boolean>(false);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
 
+
+  useEffect(()=>{getData(id)}, []);
+  useEffect(()=>{setWordIsComplex(complexWords.filter(word => word.id === id).length > 0 ? true : false)}, [complexWords]);
 
   const getData = async (id: string): Promise<void> => {
     const res = await getWord(id);
@@ -48,17 +55,31 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
  const playOffIcon = <svg className={classes.btn_icon} fill='grey'> <use href={`${playIcon}#play`} /></svg>;
 
   const addToComplexWords = (wordId: string) =>{
-    console.log(typeof localStorage.getItem('token'));
-    
-      createUserWord({
-        userId: localStorage.getItem('userId'),
-        wordId: wordId,
-        word: { 'difficulty': 'hard', 'optional': {} },
-        token: localStorage.getItem('token')
-      });
+    setWordIsComplex(true);    
+    createUserWord({
+      userId: localStorage.getItem('userId'),
+      wordId: wordId,
+      word: { 'difficulty': 'hard', 'optional': {} },
+      token: localStorage.getItem('token')
+    });
+    complexWords.push(data!);
+    setComplexWords(complexWords);    
   }
+
+  const removeFromComplexWords = ( wordId: string) =>{
+    setWordIsComplex(false);
+    deleteUserWord({
+      userId: localStorage.getItem('userId'),
+      wordId: wordId,
+      word: { 'difficulty': 'hard', 'optional': {} },
+      token: localStorage.getItem('token')
+    });
+    complexWords.splice(complexWords.findIndex(el => el.id === wordId),1);
+    setComplexWords(complexWords);
+    if(props.inComplexComponent === true){setDeleteWord(true)    }
+}
+
   const addToLearnedWords = (wordId: string) =>{
-    console.log(typeof localStorage.getItem('token'));
     
       createUserWord({
         userId: localStorage.getItem('userId'),
@@ -68,11 +89,16 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
       });
   }
 
+
   if(data === undefined){
     return  <div>
     </div>
   }
-  return (<>
+  return (
+    
+    <>
+    {!deleteWord ? 
+    <>
     <Modal ariaHideApp={false} isOpen = {modalIsOpen} className={classes.Modal} onRequestClose = {()=> setModalIsOpen(false)}>   
       <div className={classes.innerContent}>
         <div>
@@ -100,10 +126,13 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
         <div>
           <img src={`${BASE_URL}/${data.image}`} alt="img" className={classes.card_img}/>
           <div className={userLogged ? classes.card_action : classes.card_none}>
-          {/* <div className={classes.card_action}> */}
-            <button className={classes.btn_normal} onClick = {()=>addToComplexWords(data!.id)}>
-              В сложные
-            </button>
+            {wordIsComplex ? 
+              <button className={classes.btn_normal} onClick = {(e)=>removeFromComplexWords(data!.id)}>
+                Вернуть из сложных
+              </button> : <button className={classes.btn_normal} onClick = {()=>addToComplexWords(data!.id)}>
+                В сложные
+              </button>}
+      
             <button className={classes.btn_normal} onClick = {()=>addToLearnedWords(data!.id)}>
               Удалить
             </button>
@@ -111,13 +140,24 @@ const WordCard: React.FC<{id: string, unitColor:string}> = (props) => {
         </div>
       </div> 
     </Modal>
- 
+              
     <div className={classes.card_small} key={id} style={{ backgroundColor: `${unitColor}` }} onClick = {() => setModalIsOpen(true)}>
-      <div>
-        <h3 className={classes.card_small_word}>{data.word}</h3>
-        <p className={classes.card_small_transcript}>{data.transcription}</p>
+      <div className={classes.card_small_header}>
+        {wordIsComplex ? 
+          <p className={classes.card_small_sign}>
+            <svg className={classes.btn_icon}>
+              <use href={`${starIcon}#star`} />
+            </svg>
+          </p> : <p className={classes.card_small_sign}></p>}
+        <div>
+          <h3 className={classes.card_small_word}>{data.word}</h3>
+          <p className={classes.card_small_transcript}>{data.transcription}</p>
+        </div>
       </div>
     </div>
+    </>
+    :
+    <></>}
     </>
   );
 }

@@ -7,7 +7,9 @@ import CardsContainer from '../../CardsContainer/CardsContainer';
 import classes from './Textbook.module.scss'
 import { Link } from 'react-router-dom';
 import starIcon from '../../../assets/svg/star.svg';
-import CommonContext from '../../Context/Context';
+import CommonContext from '../../Context/CommonContext';
+import ComplexWordsContext from '../../Context/ComplexWordsContext';
+import { getUserComplexWords } from '../../../apiHelpers/users/usersController';
 
 
 const Textbook: React.FC = () => {

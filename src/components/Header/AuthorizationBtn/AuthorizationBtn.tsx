@@ -1,7 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import classes from './authorizationBtn.module.scss';
 import { Link } from 'react-router-dom';
-import CommonContext from '../../Context/Context';
+import CommonContext from '../../Context/CommonContext';
+import { getUserComplexWords } from '../../../apiHelpers/users/usersController';
+import ComplexWordsContext from '../../Context/ComplexWordsContext';
 
 const AuthorizationBtn = () => {
   const { userLogged, setUserLogged } = useContext(CommonContext);
@@ -9,6 +11,19 @@ const AuthorizationBtn = () => {
     setUserLogged(false);
     localStorage.clear();
   }
+
+  const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
+  console.log(complexWords);
+
+  const getComplexWords = async (): Promise<void> => {
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    const res = await getUserComplexWords(userId, token);
+    setComplexWords(res);
+  }
+  useEffect(()=>{userLogged ? getComplexWords() : setComplexWords([])}, [userLogged]);
+  
   return (
     userLogged ? (
       <div>

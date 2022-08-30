@@ -1,6 +1,6 @@
 import { getWord } from './apiHelpers/words/wordsController';
-import { createUser, loginUser, createUserWord } from './apiHelpers/users/usersController';
-import React, { createContext, FC, useState } from 'react';
+import { createUser, loginUser, createUserWord, getUserComplexWords } from './apiHelpers/users/usersController';
+import React, { createContext, FC, useContext, useEffect, useState } from 'react';
 import './styles/index.scss';
 import classes from './app.module.scss';
 import Header from './components/Header/Header';
@@ -11,25 +11,21 @@ import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
 import ComplexWords from './components/Pages/Dictionary/ComplexWords/ComplexWords';
 import Textbook from './components/Pages/Textbook/Textbook';
 import Authorization from './components/Pages/Authorization/Authorization';
-import CommonContext from './components/Context/Context';
+import CommonContext from './components/Context/CommonContext';
+import ComplexWordsContext from './components/Context/ComplexWordsContext';
 import Dictionary from './components/Pages/Dictionary/Dictionary';
 import GamePage from './components/Pages/GamePage/GamePage';
+import { TWord } from './@types/words';
 
 const App: FC = () => {
-// getWord('5e9f5ee35eb9e72bc21af4a0').then((word) => console.log(word));
-//   createUserWord({
-//   userId:       localStorage.getItem('userId'),
-//   wordId: "5e9f5ee35eb9e72bc21af716",
-//   word: { "difficulty": "hard", "optional": {} },
-//   token: localStorage.getItem('token')
+  // getWord('5e9f5ee35eb9e72bc21af4a0').then((word) => console.log(word));
+  const [userLogged, setUserLogged] = useState<boolean>((localStorage.getItem('userId') === null) ? false : true);
+  const [complexWords, setComplexWords] = useState<TWord[]>([]);
 
-// });
-  const [userLogged, setUserLogged] = useState<boolean>(false);
-    
   return (
     <CommonContext.Provider value={{userLogged, setUserLogged}}>
-    {/* <CommonContext.Provider value={{userLogged: false, toggleUserLogged: (userLogged: boolean) => {return userLogged = !userLogged}}}> */}
-      <div className={classes.wrapper} >
+       <ComplexWordsContext.Provider value={{ complexWords, setComplexWords}}>
+             <div className={classes.wrapper} >
         <Router>
           <Header />
             <Routes>
@@ -65,6 +61,7 @@ const App: FC = () => {
           <Footer />
         </Router>
       </div >
+       </ComplexWordsContext.Provider>
     </CommonContext.Provider>
   )
 };
