@@ -1,0 +1,30 @@
+@import '../../../../app.module.scss';
+
+.instractions{
+  display: block;
+  color: $color-old-mauve;
+  font-size: 12px;
+}
+
+.offscreen{
+  display: none;
+}
+
+.approved{
+  fill: $color-dark-lime-green;
+  width: 10px;
+  height: 10px;
+}
+
+.input_div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+}
+
+.err{
+  padding: 15px 0;
+  color: $color-venetian-red;
+  text-align: center;
+}

@@ -14,3 +14,9 @@ export type TWord = {
   textMeaningTranslate: string;
   wordTranslate: string;
 };
+
+export type TWordUser = {
+  difficulty: string;
+  id: string;
+  wordId: string;
+}
