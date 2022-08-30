@@ -4,10 +4,11 @@ import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
 
 const Paginationmui: React.FC< {updatePage: (x: number) => void} > = (props) => {
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(localStorage.getItem('page') === null ? 0 : +localStorage.getItem('page')!);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number): void => {
     setPage(value-1);
+    // localStorage.setItem('page', `${value-1}`);
   };
 
   const {updatePage} = props;

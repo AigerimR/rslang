@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import classes from './Units.module.scss'
 
 const Units: React.FC <{updateUnit: (unit: number, unitColor: string) => void}>  = (props) => {
-  const [unit, setUnit] = useState(0);
-  const [unitColor, setUnitColor] = useState('#bbd66c');
+  const [unit, setUnit] = useState(localStorage.getItem('unit') === null ? 0 : +localStorage.getItem('unit')!);
+  const [unitColor, setUnitColor] = useState(localStorage.getItem('unitColor') === null ? '#bbd66c' :  localStorage.getItem('unitColor')!);
   
   const handleChange = (e: React.MouseEvent<HTMLElement>): void => {
     setUnit(+(e.target as HTMLDivElement).id);
