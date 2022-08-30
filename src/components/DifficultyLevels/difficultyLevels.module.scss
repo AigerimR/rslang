@@ -1,0 +1,64 @@
+@import '../../app.module.scss';
+
+.list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.radio {
+  display: none;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  color: $color-black;
+  font-family: 'Neucha', cursive;
+  font-size: 1.8rem;
+  font-weight: 700;
+  border: solid 1px $color-quincy;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+}
+
+.label__checked {
+  transform: scale(1.2);
+}
+
+li {
+  &:nth-child(1) .label {
+    background-color: $color-light-lime-green;
+  }
+
+  &:nth-child(2) .label {
+    background-color: $color-dark-lime-green;
+  }
+
+  &:nth-child(3) .label {
+    color: $color-black;
+    background-color: $color-pikachu-yellow;
+  }
+
+  &:nth-child(4) .label {
+    color: $color-black;
+    background-color: $color-sandy-brown;
+  }
+
+  &:nth-child(5) .label {
+    background-color: $color-mentol-green;
+  }
+
+  &:nth-child(6) .label {
+    background-color: $color-turquoise-surf;
+  }
+
+  .label:hover {
+    transform: scale(1.2);
+  }
+}

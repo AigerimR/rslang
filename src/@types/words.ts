@@ -15,8 +15,33 @@ export type TWord = {
   wordTranslate: string;
 };
 
+export type TSprintGameWord = {
+  id: string;
+  word: string;
+  translate: string;
+  rightTranslate: string;
+};
+
+export type TGameWord = {
+  id: string;
+  word: string;
+  image: string;
+  audio: string;
+  wordTranslate: string;
+};
+
+export type TAudiocallWord = {
+  id: string;
+  word: string;
+  image: string;
+  audio: string;
+  rightTranslate: string;
+  gameList: TGameWord[];
+  total: number;
+};
+
 export type TWordUser = {
   difficulty: string;
   id: string;
   wordId: string;
-}
+};

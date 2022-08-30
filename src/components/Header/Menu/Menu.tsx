@@ -5,7 +5,8 @@ import CommonContext from '../../Context/Context';
 
 const Menu = () => {
   const [menuActive, setMenuActive] = useState(false);
-
+  const body = document.body;
+  menuActive ? body.style.overflow = 'hidden' : body.style.overflow = 'auto';
   const { userLogged, setUserLogged } = useContext(CommonContext);
 
   return (
@@ -16,7 +17,7 @@ const Menu = () => {
           <span></span>
           <span></span>
         </div>
-        <div className={classes.menu_shadow} style={menuActive ? { display: 'block' } : { display: 'none' }}></div>
+        <div className={classes.menu_shadow} style={menuActive ? { display: 'block' } : { display: 'none' }} onClick={() => setMenuActive(false)}></div>
         <ul className={menuActive ? `${classes.menu_list} ${classes.menu_active}` : classes.menu_list}>
           <li className={classes.menu_item}>
             <Link to="/textbook" className={classes.menu_link} onClick={() => setMenuActive(false)}>Учебник</Link>
