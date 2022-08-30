@@ -134,7 +134,7 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
               </button>}
       
             <button className={classes.btn_normal} onClick = {()=>addToLearnedWords(data!.id)}>
-              Удалить
+              В изученные
             </button>
           </div>
         </div>

@@ -104,3 +104,13 @@ export const getUserComplexWords = async (userId, token) => {
   });
   return  Promise.all(allHardWordsData).then(val=> {return val});
 }
+
+export const getUserLearnedWords = async (userId, token) => {
+  const allLearnedWords = await getAllUserWords({ userId, token }).then(
+        (words)=>{return words.filter(word => word.difficulty === "weak");});      
+       
+  const allLearnedWordsData:[Promise<TWord>] = allLearnedWords.map(async (word) => { 
+    return  await getWord(word.wordId);
+  });
+  return  Promise.all(allLearnedWordsData).then(val=> {return val});
+}

@@ -13,7 +13,7 @@ const AuthorizationBtn = () => {
   }
 
   const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
-  console.log(complexWords);
+  // console.log(complexWords);
 
   const getComplexWords = async (): Promise<void> => {
     const userId = localStorage.getItem("userId");

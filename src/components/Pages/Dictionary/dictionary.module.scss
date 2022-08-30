@@ -6,5 +6,31 @@
     height: 80vh;
     text-align: center;
     padding: 30px;
+
+    h2{
+      color: $color-old-mauve;
+      font-family: 'Neucha', cursive;
+    }
+  }
+}
+
+.btn{
+  &_link{
+    margin: 10px 15px;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 5px;
+    font-family: 'Comfortaa', cursive;
+    color: $color-old-mauve; 
+    &:hover{
+      cursor: pointer;
+      scale: 1.1;
+    }
+  }
+  &_active{
+    border-bottom: 2px solid $color-dark-chocolate;
+    // color: $color-pikachu-yellow;
+    scale: 1.1;
   }
 }
