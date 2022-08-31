@@ -67,6 +67,20 @@ export const createUserWord = async ({ userId, wordId, word, token }) => {
 
   // console.log(content);
 };
+export const deleteUserWord = async ({ userId, wordId, word, token }) => {
+  return await fetch(`${BASE_URL}/users/${userId}/words/${wordId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(word)
+  });
+  // const content = await rawResponse.json();
+
+  // console.log(content);
+};
 
 export const getAllUserWords = async ({ userId, token }) => {
   const rawResponse = await fetch(`${BASE_URL}/users/${userId}/words`, {
@@ -89,4 +103,14 @@ export const getUserComplexWords = async (userId, token) => {
     return  await getWord(word.wordId);
   });
   return  Promise.all(allHardWordsData).then(val=> {return val});
+}
+
+export const getUserLearnedWords = async (userId, token) => {
+  const allLearnedWords = await getAllUserWords({ userId, token }).then(
+        (words)=>{return words.filter(word => word.difficulty === "weak");});      
+       
+  const allLearnedWordsData:[Promise<TWord>] = allLearnedWords.map(async (word) => { 
+    return  await getWord(word.wordId);
+  });
+  return  Promise.all(allLearnedWordsData).then(val=> {return val});
 }

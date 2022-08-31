@@ -29,6 +29,14 @@
   &_transcript{
     margin: 0;
   }
+  &_header{
+    position: relative;
+  }
+  &_sign{
+    position: absolute;
+    top: 15px;
+    right: 10px;  
+  }
   &:hover{
     cursor: pointer;
   } 
@@ -41,11 +49,10 @@
 
   &_header{
     display: flex;
-    column-gap: 40px;
+    column-gap: 20px;
     align-items: center;
     margin-bottom: 10px;
     width: 240px;
-    justify-content: space-between;
   }
 
   &_word{
@@ -71,7 +78,7 @@
 
 .innerContent {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   column-gap: 40px;
   h3{
     margin: 10px 0 5px 0;
@@ -146,12 +153,12 @@
 
 .Modal{
   height: 400px;
-  width: 600px;
+  width: 800px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   position: absolute;
   top: 25%;
-  left: calc(50vw - 300px);
+  left: calc(50vw - 400px);
   background-color: papayawhip;
   padding: 30px;
 }

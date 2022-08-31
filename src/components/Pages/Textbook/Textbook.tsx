@@ -7,16 +7,18 @@ import CardsContainer from '../../CardsContainer/CardsContainer';
 import classes from './Textbook.module.scss'
 import { Link } from 'react-router-dom';
 import starIcon from '../../../assets/svg/star.svg';
-import CommonContext from '../../Context/Context';
+import CommonContext from '../../Context/CommonContext';
+import ComplexWordsContext from '../../Context/ComplexWordsContext';
+import { getUserComplexWords } from '../../../apiHelpers/users/usersController';
 
 
 const Textbook: React.FC = () => {
-  const [page, setPage] = useState<number>(0);
-  const updatePage = (page:number): void => { setPage(page);};
+  const [page, setPage] = useState<number>(localStorage.getItem('page') === null ? 0 : +localStorage.getItem('page')!);
+  const updatePage = (page:number): void => { setPage(page); localStorage.setItem('page', `${page}`)};
 
-  const [unit, setUnit] = useState(0);
-  const [unitColor, setUnitColor] = useState('#bbd66c');
-  const updateUnit = (unit:number, unitColor: string): void => { setUnit(unit); setUnitColor(unitColor);};  
+  const [unit, setUnit] = useState(localStorage.getItem('unit') === null ? 0 : +localStorage.getItem('unit')!);
+  const [unitColor, setUnitColor] = useState( localStorage.getItem('unitColor') === null ? '#bbd66c' :  localStorage.getItem('unitColor')!);
+  const updateUnit = (unit:number, unitColor: string): void => { setUnit(unit); setUnitColor(unitColor); localStorage.setItem('unitColor', `${unitColor}`), localStorage.setItem('unit', `${unit}`);  };  
 
   const [data, setData] = useState<TWord[]>();
   const getData = async () => {
@@ -25,6 +27,7 @@ const Textbook: React.FC = () => {
   }
 
   useEffect(()=>{getData()}, [page, unit]);
+  // useEffect(()=>{ localStorage.setItem('page', `${page}`) }, [page]);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
   

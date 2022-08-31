@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import classes from './menu.module.scss';
 import { Link } from 'react-router-dom';
-import CommonContext from '../../Context/Context';
+import CommonContext from '../../Context/CommonContext';
 
 const Menu = () => {
   const [menuActive, setMenuActive] = useState(false);
