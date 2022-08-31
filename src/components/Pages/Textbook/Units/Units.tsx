@@ -6,9 +6,11 @@ const Units: React.FC <{updateUnit: (unit: number, unitColor: string) => void}> 
   const [unitColor, setUnitColor] = useState(localStorage.getItem('unitColor') === null ? '#bbd66c' :  localStorage.getItem('unitColor')!);
   
   const handleChange = (e: React.MouseEvent<HTMLElement>): void => {
-    setUnit(+(e.target as HTMLDivElement).id);
-    const cardColor = window.getComputedStyle((e.target as HTMLDivElement), null).getPropertyValue('background-color');
-    setUnitColor(cardColor);
+    if (e.target instanceof HTMLButtonElement){
+      setUnit(+(e.target as HTMLButtonElement).id);
+      const cardColor = window.getComputedStyle((e.target as HTMLButtonElement), null).getPropertyValue('background-color');
+      setUnitColor(cardColor);
+    }
   }
 
   const {updateUnit} = props;
