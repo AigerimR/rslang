@@ -13,6 +13,9 @@ import { getUserComplexWords } from '../../../apiHelpers/users/usersController';
 
 
 const Textbook: React.FC = () => {
+
+  const [loading, setLoading] = useState<boolean>(true);
+
   const [page, setPage] = useState<number>(localStorage.getItem('page') === null ? 0 : +localStorage.getItem('page')!);
   const updatePage = (page:number): void => { setPage(page); localStorage.setItem('page', `${page}`)};
 
@@ -22,7 +25,7 @@ const Textbook: React.FC = () => {
 
   const [data, setData] = useState<TWord[]>();
   const getData = async () => {
-    const res = await getWords(unit, page);
+    const res = await getWords(unit, page).finally(()=>setLoading(false));
     setData(res);
   }
 
@@ -30,7 +33,7 @@ const Textbook: React.FC = () => {
   // useEffect(()=>{ localStorage.setItem('page', `${page}`) }, [page]);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
-  
+  if(loading) return <h2>Loading...</h2>
   return(
     <div className={classes.textbook}>
       <div className={classes.textbook_header}>

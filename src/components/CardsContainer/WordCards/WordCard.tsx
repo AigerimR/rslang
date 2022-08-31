@@ -7,7 +7,7 @@ import classes from './WordCard.module.scss'
 import playIcon from '../../../assets/svg/play.svg';
 import starIcon from '../../../assets/svg/star.svg';
 import CommonContext from '../../Context/CommonContext';
-import { createUserWord, deleteUserWord, getUserComplexWords } from '../../../apiHelpers/users/usersController';
+import { createUserWord, deleteUserWord, getUserComplexWords, updateUserWord } from '../../../apiHelpers/users/usersController';
 import ComplexWordsContext from '../../Context/ComplexWordsContext';
 import LearnedWordsContext from '../../Context/LearnedWordsContext';
 
@@ -60,11 +60,11 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
  const playOffIcon = <svg className={classes.btn_icon} fill='grey'> <use href={`${playIcon}#play`} /></svg>;
 
   const addToComplexWords = (wordId: string) =>{
-    setWordIsComplex(true);    
+    setWordIsComplex(true);
     createUserWord({
       userId: localStorage.getItem('userId'),
       wordId: wordId,
-      word: { 'difficulty': 'hard', 'optional': {} },
+      word: { 'difficulty': 'hard', 'optional': {'complex': 'true'} },
       token: localStorage.getItem('token')
     });
     complexWords.push(data!);
@@ -73,12 +73,22 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
 
   const removeFromComplexWords = ( wordId: string) =>{
     setWordIsComplex(false);
-    deleteUserWord({
-      userId: localStorage.getItem('userId'),
-      wordId: wordId,
-      word: { 'difficulty': 'hard', 'optional': {} },
-      token: localStorage.getItem('token')
-    });
+    if(wordIsLearned){
+      updateUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {'complex': 'false','learned': 'true'} },
+        token: localStorage.getItem('token')
+      });
+    }else{
+      deleteUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {'complex': 'true'} },
+        token: localStorage.getItem('token')
+      });
+    }
+   
     complexWords.splice(complexWords.findIndex(el => el.id === wordId),1);
     setComplexWords(complexWords);
     if(props.inComplexComponent === true){setDeleteWord(true)    }
@@ -86,12 +96,21 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
 
   const addToLearnedWords = (wordId: string) =>{
     setWordIsLearned(true);
-    createUserWord({
-      userId: localStorage.getItem('userId'),
-      wordId: wordId,
-      word: { 'difficulty': '', 'optional': {learned: true} },
-      token: localStorage.getItem('token')
-    });
+    if(wordIsComplex){
+      updateUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {'complex': 'true','learned': 'true'} },
+        token: localStorage.getItem('token')
+      });
+    }else{
+      createUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {'learned': 'true'} },
+        token: localStorage.getItem('token')
+      });
+    }
     learnedWords.push(data!);
     setLearnedWords(learnedWords);
   }
@@ -136,7 +155,7 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
             {wordIsComplex ? 
               <button className={classes.btn_normal} onClick = {(e)=>removeFromComplexWords(data!.id)}>
                 Вернуть из сложных
-              </button> : <button className={classes.btn_normal} onClick = {()=>addToComplexWords(data!.id)}>
+              </button> : <button className={classes.btn_normal} disabled = {wordIsLearned ? true : false} onClick = {()=>addToComplexWords(data!.id)}>
                 В сложные
               </button>}
       
