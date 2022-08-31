@@ -93,7 +93,7 @@ export const updateUserWord = async ({ userId, wordId, word, token }) => {
   });
   const content = await rawResponse.json();
 
-  console.log(content);
+  // console.log(content);
 };
 
 export const getAllUserWords = async ({ userId, token }) => {
