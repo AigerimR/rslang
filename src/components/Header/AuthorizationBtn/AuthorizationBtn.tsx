@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import classes from './authorizationBtn.module.scss';
 import { Link } from 'react-router-dom';
 import CommonContext from '../../Context/CommonContext';
-import { getUserComplexWords } from '../../../apiHelpers/users/usersController';
+import { getUserComplexWords, getUserLearnedWords } from '../../../apiHelpers/users/usersController';
 import ComplexWordsContext from '../../Context/ComplexWordsContext';
+import LearnedWordsContext from '../../Context/LearnedWordsContext';
 
 const AuthorizationBtn = () => {
   const { userLogged, setUserLogged } = useContext(CommonContext);
@@ -13,6 +14,7 @@ const AuthorizationBtn = () => {
   }
 
   const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
+  const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
   // console.log(complexWords);
 
   const getComplexWords = async (): Promise<void> => {
@@ -23,6 +25,20 @@ const AuthorizationBtn = () => {
     setComplexWords(res);
   }
   useEffect(()=>{userLogged ? getComplexWords() : setComplexWords([])}, [userLogged]);
+
+
+  const getLearnedWords = async (): Promise<void> => {
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    const res = await getUserLearnedWords(userId, token);
+    setLearnedWords(res);
+    // console.log(res);
+    
+  }
+  console.log(learnedWords);
+  
+  useEffect(()=>{userLogged ? getLearnedWords() : setLearnedWords([])}, [userLogged]);
   
   return (
     userLogged ? (

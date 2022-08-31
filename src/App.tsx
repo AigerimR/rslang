@@ -16,51 +16,55 @@ import ComplexWordsContext from './components/Context/ComplexWordsContext';
 import Dictionary from './components/Pages/Dictionary/Dictionary';
 import GamePage from './components/Pages/GamePage/GamePage';
 import { TWord } from './@types/words';
+import LearnedWordsContext from './components/Context/LearnedWordsContext';
 
 const App: FC = () => {
   // getWord('5e9f5ee35eb9e72bc21af4a0').then((word) => console.log(word));
   const [userLogged, setUserLogged] = useState<boolean>((localStorage.getItem('userId') === null) ? false : true);
   const [complexWords, setComplexWords] = useState<TWord[]>([]);
+  const [learnedWords, setLearnedWords] = useState<TWord[]>([]);
 
   return (
     <CommonContext.Provider value={{userLogged, setUserLogged}}>
        <ComplexWordsContext.Provider value={{ complexWords, setComplexWords}}>
-             <div className={classes.wrapper} >
-        <Router>
-          <Header />
-            <Routes>
-              <Route path='/' element={<MainPage />} />
-              <Route path='/textbook' element={<Textbook />} />
-              <Route
-                path='/audio-game'
-                element={
-                  <GamePage
-                    title='Аудиовызов'
-                    gameDescription='Тренировка улучшает восприятие на слух'
-                    ruleDescription='В этой игре нужно выбрать перевод услышанного слова.'
-                    game='audiocall'
+        <LearnedWordsContext.Provider value={{ learnedWords, setLearnedWords}}>
+          <div className={classes.wrapper} >
+            <Router>
+              <Header />
+                <Routes>
+                  <Route path='/' element={<MainPage />} />
+                  <Route path='/textbook' element={<Textbook />} />
+                  <Route
+                    path='/audio-game'
+                    element={
+                      <GamePage
+                        title='Аудиовызов'
+                        gameDescription='Тренировка улучшает восприятие на слух'
+                        ruleDescription='В этой игре нужно выбрать перевод услышанного слова.'
+                        game='audiocall'
+                      />
+                    }
                   />
-                }
-              />
-              <Route
-                path='/sprint-game'
-                element={
-                  <GamePage
-                    title='Спринт'
-                    gameDescription='Спринт - это игра на скорость'
-                    ruleDescription='Даны слово на английском и его перевод, отметь правильно ли указан перевод для слова и набери как можно больше баллов.'
-                    game='sprint'
+                  <Route
+                    path='/sprint-game'
+                    element={
+                      <GamePage
+                        title='Спринт'
+                        gameDescription='Спринт - это игра на скорость'
+                        ruleDescription='Даны слово на английском и его перевод, отметь правильно ли указан перевод для слова и набери как можно больше баллов.'
+                        game='sprint'
+                      />
+                    }
                   />
-                }
-              />
-              <Route path='/complex-words' element={<ComplexWords />} />
-              <Route path='/dictionary' element={<Dictionary />} />
-              <Route path='/statistics' element={<StatisticsPage />} />
-              <Route path='/authorization' element={<Authorization />} />
-            </Routes>
-          <Footer />
-        </Router>
-      </div >
+                  <Route path='/complex-words' element={<ComplexWords />} />
+                  <Route path='/dictionary' element={<Dictionary />} />
+                  <Route path='/statistics' element={<StatisticsPage />} />
+                  <Route path='/authorization' element={<Authorization />} />
+                </Routes>
+              <Footer />
+            </Router>
+          </div >
+        </LearnedWordsContext.Provider>
        </ComplexWordsContext.Provider>
     </CommonContext.Provider>
   )
