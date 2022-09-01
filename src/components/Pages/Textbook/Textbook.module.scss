@@ -61,3 +61,13 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 1180px) {
+  .game_words{
+    width: 120px;
+    height: 120px;
+    left: calc(100vw/2 + 100px);
+    top: 278px;
+    background-color: $color-mentol-green;
+  }
+}

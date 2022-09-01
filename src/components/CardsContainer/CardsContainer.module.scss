@@ -94,49 +94,21 @@
 }
 
 @media screen and (max-width: 1180px) {
-  // .textbook_games{
-  //   position:relative;
-
-  //   // position: relative;
-  //   // top: 0px;
-  //   width: 350px;
-  
-  // }
+  .textbook_games{
+    position: static;
+    width: 350px;
+    margin: 10px auto;
+  }
 
   .game{
     &_sprint,
     &_audio{
-      position: absolute;
-      background-color: #E9EBBE;
-      font-family: 'Neucha', cursive;
-      width: 120px;
-      height: 120px;
-      margin-top: 10px;
-      text-align: center;
-      padding-right: 2px;
-      padding-top: 2px;
-      border-radius: 50%;
-      color: $color-venetian-red;
-      border: none;
-      font-size: 20px;
-      transition: transform 0.2s;
-      &:hover{
-        cursor: pointer;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        transform: scale(1.1);
-      } 
-    }
-  
-    &_sprint{
-      right: -20px;
-      top: 20px;
-      background-color: $color-sandy-brown;
+      position: static;
+      margin: 0 20px 0 0;
     }
   
     &_audio{
-      left: 100px;
-      top: -15px;
-      background-color: $color-golden-poppy;
+      margin-right: 90px;
     }
   }
 
