@@ -38,10 +38,7 @@ const Textbook: React.FC = () => {
   return(
     <div className={classes.textbook}>
       <div className={classes.textbook_header}>
-        <div className={classes.textbook_games}>
-          <Link to="/sprint-game"><button className={classes.game_sprint}>Спринт</button></Link>
-          <Link to="/audio-game"><button className={classes.game_audio}>Аудиовызов</button></Link>
-        </div>
+        <div></div>
         <div>
           <Units updateUnit={updateUnit}/>
           <Paginationmui updatePage={updatePage} />
