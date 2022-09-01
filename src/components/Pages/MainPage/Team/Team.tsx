@@ -22,9 +22,20 @@ const Team = () => {
               <img src={grizz} alt='Aigerim avatar' />
             </div>
             <div className={classes.team_card_info}>
-              <p className={classes.team_card_name}>Айгерим Раисова</p>
-              <p className={classes.team_card_status}>Team Lead / Developer</p>
-              <p className={classes.team_card_work}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia quia pariatur sunt nemo repellat ullam, tempore similique repellendus beatae nisi corrupti quis ducimus rem dolorem eius, reiciendis eaque non modi.</p>
+              <div className={classes.team_card_member}>
+                <a className={classes.team_card_member_git} href='https://github.com/AigerimR' target='_blank' rel="noreferrer"></a>
+                <p className={classes.team_card_member_name}>Айгерим Раисова</p>
+              </div>
+              <p className={classes.team_card_status}>Team Lead / Frontend Developer</p>
+              <p className={classes.team_card_work}>
+                Привет!
+              </p>
+              <p className={classes.team_card_work}>
+                Я инженер-энергетик. Сейчас меняю свою карьеру и активно учусь как в школе, так и самостоятельно. Свой выбор остановила на веб-разработке.
+              </p>
+              <p className={classes.team_card_work}>
+                В RSLang создала и оформила учебник, словарь сложных слов, авторизацию пользователей приложения, настроила роутер между страницами.
+              </p>
             </div>
           </div>
           <div className={classes.team_card}>
@@ -32,9 +43,20 @@ const Team = () => {
               <img src={ice} alt='Solomon avatar' />
             </div>
             <div className={classes.team_card_info}>
-              <p className={classes.team_card_name}>Соломон Хан</p>
-              <p className={classes.team_card_status}>Developer</p>
-              <p className={classes.team_card_work}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia quia pariatur sunt nemo repellat ullam, tempore similique repellendus beatae nisi corrupti quis ducimus rem dolorem eius, reiciendis eaque non modi.</p>
+              <div className={classes.team_card_member}>
+                <a className={classes.team_card_member_git} href='https://github.com/solomonya' target='_blank' rel="noreferrer"></a>
+                <p className={classes.team_card_member_name}>Соломон Хан</p>
+              </div>
+              <p className={classes.team_card_status}>Backend / Frontend Developer</p>
+              <p className={classes.team_card_work}>
+                Привет!
+              </p>
+              <p className={classes.team_card_work}>
+                Я студент 3 курса. Учусь по специальности Вычислительная техника и программное обеспечение. Изучая, параллельно с университетскими занятиями, программирование самостоятельно, выбрал для себя frontend.
+              </p>
+              <p className={classes.team_card_work}>
+                В RSLang подключил бэк, сделал все начальные настройки проекта, подключил ESLint, Webpack, Typescript и т.д. Разработал логику игр, написал и оформил игру Спринт.
+              </p>
             </div>
           </div>
           <div className={classes.team_card}>
@@ -42,9 +64,20 @@ const Team = () => {
               <img src={panda} alt='Lazzat avatar' />
             </div>
             <div className={classes.team_card_info}>
-              <p className={classes.team_card_name}>Лаззат Мухаметалинова</p>
-              <p className={classes.team_card_status}>Designer / Developer</p>
-              <p className={classes.team_card_work}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia quia pariatur sunt nemo repellat ullam, tempore similique repellendus beatae nisi corrupti quis ducimus rem dolorem eius, reiciendis eaque non modi.</p>
+              <div className={classes.team_card_member}>
+                <a className={classes.team_card_member_git} href='https://github.com/2248lm' target='_blank' rel="noreferrer"></a>
+                <p className={classes.team_card_member_name}>Лаззат Мухаметалинова</p>
+              </div>
+              <p className={classes.team_card_status}>Designer / Frontend Developer</p>
+              <p className={classes.team_card_work}>
+                Привет!
+              </p>
+              <p className={classes.team_card_work}>
+                Я инженер-технолог нефти и газа. Программированием баловалась еще в школе, моим первым компьютером был ZX Spectrum, а языком Basic. С годами интерес победил и привел меня в IT. Это приложение писали на React, который я в глаза раньше не видела, поэтому параллельно с разработкой еще и учила новый для себя синтаксис.
+              </p>
+              <p className={classes.team_card_work}>
+                В RSLang разработала дизайн и сделала верстку главной страницы, включительно header и footer. Также выполнила дизайн игр, разработала и оформила игру Аудиовызов.
+              </p>
             </div>
           </div>
         </div>

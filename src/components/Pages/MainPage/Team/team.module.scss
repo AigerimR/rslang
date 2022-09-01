@@ -85,9 +85,32 @@
       }
     }
 
-    &_name {
-      font-size: 1.5rem;
-      text-align: right;
+    &_member {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+
+      &_git {
+        display: block;
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        background-image: url('../../../../assets/svg/github.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        font-size: inherit;
+        filter: invert(21%) sepia(15%) saturate(2261%) hue-rotate(274deg) brightness(92%) contrast(89%);
+        cursor: pointer;
+
+        &:hover {
+          filter: invert(43%) sepia(83%) saturate(1511%) hue-rotate(157deg) brightness(97%) contrast(101%);
+        }
+      }
+
+      &_name {
+        font-size: 1.5rem;
+      }
     }
 
     &_status {
