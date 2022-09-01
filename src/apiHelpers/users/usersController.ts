@@ -111,7 +111,9 @@ export const getAllUserWords = async ({ userId, token }) => {
 
 export const getUserComplexWords = async (userId, token) => {
   const allHardWords = await getAllUserWords({ userId, token }).then(
-        (words)=>{return words.filter(word => word.difficulty === "hard").filter(word => word.optional?.complex === 'true');});
+        (words)=>{return words.filter(word => word.difficulty === "hard")});
+  // const allHardWords = await getAllUserWords({ userId, token }).then(
+  //       (words)=>{return words.filter(word => word.difficulty === "hard").filter(word => word.optional?.complex === 'true');});
        
   const allHardWordsData:[Promise<TWord>] = allHardWords.map(async (word) => { 
     return  await getWord(word.wordId);
@@ -121,8 +123,8 @@ export const getUserComplexWords = async (userId, token) => {
 
 export const getUserLearnedWords = async (userId, token) => {
   const allLearnedWords = await getAllUserWords({ userId, token }).then(
-        (words)=>{return words.filter(word => word.difficulty === "hard").filter(word => word.optional?.learned === 'true');});      
-       
+        (words)=>{return words.filter(word => word.difficulty === "weak").filter(word => word.optional?.learned === 'true');});
+        
   const allLearnedWordsData:[Promise<TWord>] = allLearnedWords.map(async (word) => { 
     return  await getWord(word.wordId);
   });
