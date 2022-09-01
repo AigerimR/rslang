@@ -14,9 +14,7 @@
   position: relative;
 }
 
-.game{
-  &_sprint,
-  &_audio, 
+.game{ 
   &_words{
     position: absolute;
     background-color: #E9EBBE;
@@ -37,18 +35,6 @@
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       transform: scale(1.1);
     } 
-  }
-
-  &_sprint{
-    right: -20px;
-    top: 20px;
-    background-color: $color-sandy-brown;
-  }
-
-  &_audio{
-    left: 100px;
-    top: -15px;
-    background-color: $color-golden-poppy;
   }
   &_words{
     width: 100px;
