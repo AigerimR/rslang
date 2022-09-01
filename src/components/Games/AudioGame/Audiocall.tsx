@@ -54,10 +54,8 @@ const AudioGame: FC<IAudiocallProps> = ({
 
     words
       .then((words) => {
-        setTimeout(() => {
-          new Audio(words[index].audio).play();
-        }, 1000);
         setWords(words);
+        new Audio(words[0].audio).play();
       })
       .finally(() => {
         setLoading(false);

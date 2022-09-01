@@ -1,6 +1,6 @@
 import { IСomment } from '../../../@types/gamesPage';
 import React, { FC, useState } from 'react';
-import classes from './gameStatistics.scss'
+import classes from './gameStatistics.scss';
 import { TGameWord } from '../../../@types/words';
 const URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 
@@ -23,8 +23,8 @@ const GameStatistics: FC<{
   const resultСomment: IСomment = {
     high: [100, 'Поздравляем, отличный результат!'],
     medium: [80, 'Неплохо, но есть над чем поработать!'],
-    low: [40, 'В этот раз не получилость, но продолжай тренироваться!']
-  }
+    low: [40, 'В этот раз не получилость, но продолжай тренироваться!'],
+  };
 
   let comment: string;
   switch (true) {
@@ -42,26 +42,44 @@ const GameStatistics: FC<{
   return (
     <section className={classes.statisticWrapper}>
       <div className={classes.statisticBtns}>
-        <button className={classes.statisticBtnResult}
+        <button
+          className={classes.statisticBtnResult}
           style={isResultPage ? { backgroundColor: '#0f4c5c' } : { backgroundColor: '#231f20' }}
-          onClick={() => setIsResultPage(true)}>Результат</button>
-        <button className={classes.statisticBtnWords}
+          onClick={() => setIsResultPage(true)}
+        >
+          Результат
+        </button>
+        <button
+          className={classes.statisticBtnWords}
           style={isResultPage ? { backgroundColor: '#231f20' } : { backgroundColor: '#0f4c5c' }}
-          onClick={() => setIsResultPage(false)}>Слова</button>
+          onClick={() => setIsResultPage(false)}
+        >
+          Слова
+        </button>
       </div>
       <h3 className={classes.statisticСomment}>{comment}</h3>
       <div className={classes.statisticPages}>
-        <div className={classes.statisticResultPage}
-          style={isResultPage ? { display: 'block' } : { display: 'none' }}>
+        <div
+          className={classes.statisticResultPage}
+          style={isResultPage ? { display: 'block' } : { display: 'none' }}
+        >
           <div className={classes.statisticScoreContainer}>
             <p className={classes.statisticScore}> Счёт: +{score}</p>
-            <p className={classes.statisticScoreWords}> Изучено слов: {correctAnswerList.length} </p>
-            <p className={classes.statisticScoreWords}> На изучении слов: {wrongAnswerList.length} </p>
+            <p className={classes.statisticScoreWords}>
+              {' '}
+              Изучено слов: {correctAnswerList.length}{' '}
+            </p>
+            <p className={classes.statisticScoreWords}>
+              {' '}
+              На изучении слов: {wrongAnswerList.length}{' '}
+            </p>
           </div>
           <div className={classes.statisticAccuracyWrapper}>
             <div className={classes.statisticAccuracyContainer}>
-              <div className={classes.statisticAccuracyCover}
-                style={{ height: `calc(100% - ${stringAccuracy})` }}></div>
+              <div
+                className={classes.statisticAccuracyCover}
+                style={{ height: `calc(100% - ${stringAccuracy})` }}
+              ></div>
               <div className={classes.statisticAccuracyCoverShadow}></div>
               <div className={classes.statisticAccuracyResult}>
                 <div className={classes.statisticAccuracyInner}>
@@ -71,8 +89,10 @@ const GameStatistics: FC<{
             </div>
           </div>
         </div>
-        <div className={classes.statisticWordsPage}
-          style={isResultPage ? { display: 'none' } : { display: 'block' }}>
+        <div
+          className={classes.statisticWordsPage}
+          style={isResultPage ? { display: 'none' } : { display: 'block' }}
+        >
           <ul className={classes.statisticWrongList}>
             <p className={classes.statisticWrongList_title}>
               <span>Не знаю: </span>
@@ -80,9 +100,14 @@ const GameStatistics: FC<{
             </p>
             {wrongAnswerList.map((word) => {
               return (
-                <li>
+                <li key={word.id}>
                   <div className={classes.statisticList_word}>
-                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(`${URL}/${word.audio}`).play() }}></div>
+                    <div
+                      className={classes.statisticList_word_sound}
+                      onClick={() => {
+                        new Audio(`${URL}/${word.audio}`).play();
+                      }}
+                    ></div>
                     <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
                     <span>&#8212;</span>
                     <span className={classes.statisticList_word_rus}>{word.word}</span>
@@ -98,9 +123,14 @@ const GameStatistics: FC<{
             </p>
             {correctAnswerList.map((word) => {
               return (
-                <li>
+                <li key={word.id}>
                   <div className={classes.statisticList_word}>
-                    <div className={classes.statisticList_word_sound} onClick={() => { new Audio(`${URL}/${word.audio}`).play() }}></div>
+                    <div
+                      className={classes.statisticList_word_sound}
+                      onClick={() => {
+                        new Audio(`${URL}/${word.audio}`).play();
+                      }}
+                    ></div>
                     <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
                     <span>&#8212;</span>
                     <span className={classes.statisticList_word_rus}>{word.word}</span>
