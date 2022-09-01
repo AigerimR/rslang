@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { getUserComplexWords, getUserLearnedWords } from './apiHelpers/users/usersController';
+import { deleteUserWord, getAllUserWords, getUserComplexWords, getUserLearnedWords } from './apiHelpers/users/usersController';
 import './styles/index.scss';
 import classes from './app.module.scss';
 import Header from './components/Header/Header';

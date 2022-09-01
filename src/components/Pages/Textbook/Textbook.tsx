@@ -8,14 +8,10 @@ import classes from './Textbook.module.scss'
 import { Link } from 'react-router-dom';
 import starIcon from '../../../assets/svg/star.svg';
 import CommonContext from '../../Context/CommonContext';
-import ComplexWordsContext from '../../Context/ComplexWordsContext';
-import { getUserComplexWords } from '../../../apiHelpers/users/usersController';
-
 
 const Textbook: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
-  // const [pageIsLearned, setPageIsLearned] = useState<boolean>(false);
 
   const [page, setPage] = useState<number>(localStorage.getItem('page') === null ? 0 : +localStorage.getItem('page')!);
   const updatePage = (page:number): void => { setPage(page); localStorage.setItem('page', `${page}`)};
@@ -31,7 +27,6 @@ const Textbook: React.FC = () => {
   }
 
   useEffect(()=>{getData()}, [page, unit]);
-  // useEffect(()=>{ localStorage.setItem('page', `${page}`) }, [page]);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
   if(loading) return <h2>Loading...</h2>
@@ -44,8 +39,6 @@ const Textbook: React.FC = () => {
           <Paginationmui updatePage={updatePage} />
         </div>
         <Link to="/dictionary" className={userLogged ? classes.item_show : classes.item_none}>
-        {/* <Link to="/dictionary"> */}
-        {/* <Link to="/complex-words"> */}
           <button className={classes.game_words}>
             Словарь
             <svg className={classes.btn_icon}>
