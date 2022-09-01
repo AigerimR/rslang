@@ -6,18 +6,6 @@ import LearnedWordsContext from '../Context/LearnedWordsContext';
 
 const CardsContainer: React.FC<{data:TWord[], unitColor:string, inComplexComponent?:boolean, inTextbook?:boolean}> = (props) => {
   const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
-  const [allAreLearned, setAllAreLearned] = useState<boolean>(false);
-
-// console.log(   );
-// const checkData = () => {
-//   console.log(learnedWords);
-  
-//   setAllAreLearned(props.data?.every(word => learnedWords.filter(el=> el.id === word.id).length>0));
-// };
-// useEffect(()=>{checkData()}, [learnedWords]);
-useEffect(()=>{console.log(learnedWords);
-}, [learnedWords]);
-
   
   const wordCard = props.data?.map(el=>{    
     return (
@@ -29,8 +17,7 @@ useEffect(()=>{console.log(learnedWords);
   return(
     <div className={classes.main}>
       {/* if it is a textbook and all the words on the page are learned */}
-      {/* {(props.inTextbook && allAreLearned) ?  */}
-       {(props.inTextbook && props.data?.every(word => learnedWords.filter(el=> el.id === word.id).length>0)) ? 
+      {(props.inTextbook && props.data?.every(word => learnedWords.filter(el=> el.id === word.id).length>0)) ? 
         <h2>ALL WORDS ARE LEARNED</h2> : 
         <div className={classes.cards_container}> 
           {wordCard}

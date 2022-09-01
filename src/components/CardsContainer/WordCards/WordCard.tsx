@@ -7,7 +7,7 @@ import classes from './WordCard.module.scss'
 import playIcon from '../../../assets/svg/play.svg';
 import starIcon from '../../../assets/svg/star.svg';
 import CommonContext from '../../Context/CommonContext';
-import { createUserWord, deleteUserWord, getUserComplexWords, updateUserWord } from '../../../apiHelpers/users/usersController';
+import { createUserWord, deleteUserWord, getUserComplexWords, getUserLearnedWords, updateUserWord } from '../../../apiHelpers/users/usersController';
 import ComplexWordsContext from '../../Context/ComplexWordsContext';
 import LearnedWordsContext from '../../Context/LearnedWordsContext';
 
@@ -94,7 +94,7 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
     if(props.inComplexComponent === true){setDeleteWord(true)    }
 }
 
-  const addToLearnedWords = (wordId: string) =>{
+  const addToLearnedWords = async(wordId: string) =>{
     setWordIsLearned(true);
     if(wordIsComplex){
       updateUserWord({
@@ -104,15 +104,17 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
         token: localStorage.getItem('token')
       });
     }else{
-      createUserWord({
+      await createUserWord({
         userId: localStorage.getItem('userId'),
         wordId: wordId,
         word: { 'difficulty': 'hard', 'optional': {'learned': 'true'} },
         token: localStorage.getItem('token')
       });
     }
-    learnedWords.push(data!);
-    setLearnedWords(learnedWords);
+    // learnedWords.push(data!);
+    // setLearnedWords(learnedWords);
+    const res = await getUserLearnedWords(localStorage.getItem('userId'), localStorage.getItem('token'));
+    setLearnedWords(res);  
   }
 
 

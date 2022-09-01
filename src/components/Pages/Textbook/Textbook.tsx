@@ -15,6 +15,7 @@ import { getUserComplexWords } from '../../../apiHelpers/users/usersController';
 const Textbook: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
+  // const [pageIsLearned, setPageIsLearned] = useState<boolean>(false);
 
   const [page, setPage] = useState<number>(localStorage.getItem('page') === null ? 0 : +localStorage.getItem('page')!);
   const updatePage = (page:number): void => { setPage(page); localStorage.setItem('page', `${page}`)};
