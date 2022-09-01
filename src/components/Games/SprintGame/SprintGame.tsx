@@ -5,6 +5,8 @@ import { TSprintGameWord } from '../../../@types/words';
 import { getAllSprintWords, getPageSprintWords } from '../../../apiHelpers/words/wordsController';
 import ISprintGameProps from '../../../interfaces/sprintGame';
 import getRandomIndex from '../../../utils/getRandomIndex';
+import correctSound from '../../../assets/sounds/correctAnswer.mp3';
+import wrongSound from '../../../assets/sounds/wrongAnswer.mp3';
 
 const SprintGame: FC<ISprintGameProps> = ({
   difficultyLevel,
@@ -14,6 +16,8 @@ const SprintGame: FC<ISprintGameProps> = ({
   handleScore,
   handleAnswer,
   handleRightAnswer,
+  handleCorrectAnswersList,
+  handleWrongAnswersList,
 }) => {
   const [wordsList, setWords] = useState<TSprintGameWord[] | void>([
     {
@@ -21,6 +25,7 @@ const SprintGame: FC<ISprintGameProps> = ({
       word: '',
       translate: '',
       rightTranslate: '',
+      audio: '',
     },
   ]);
   const [index, setIndex] = useState<number>(0);
@@ -37,10 +42,14 @@ const SprintGame: FC<ISprintGameProps> = ({
   const checkAnswer = (answer: boolean) => {
     const rightAnswer = wordsList[index].translate === wordsList[index].rightTranslate;
     if (answer === rightAnswer) {
+      handleCorrectAnswersList(wordsList[index]);
       handleScore(score + 10);
       handleRightAnswer();
+      new Audio(correctSound).play();
     } else {
       handleScore(score);
+      handleWrongAnswersList(wordsList[index]);
+      new Audio(wrongSound).play();
     }
     const nextIndex = page ? getRandomIndex(20) : getRandomIndex(120);
     setIndex(nextIndex);

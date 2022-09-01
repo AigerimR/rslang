@@ -20,6 +20,7 @@ export type TSprintGameWord = {
   word: string;
   translate: string;
   rightTranslate: string;
+  audio: string;
 };
 
 export type TGameWord = {
