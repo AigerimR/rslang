@@ -9,7 +9,7 @@ import starIcon from '../../../assets/svg/star.svg';
 import CommonContext from '../../Context/CommonContext';
 import { createUserWord, deleteUserWord, getUserComplexWords, getUserLearnedWords, updateUserWord } from '../../../apiHelpers/users/usersController';
 import ComplexWordsContext from '../../Context/ComplexWordsContext';
-import LearnedWordsContext from '../../Context/LearnedWordsContext';
+import { useLearnedWordsContext } from '../../Context/LearnedWordsContext';
 
 
 const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:boolean}> = (props) => {
@@ -27,13 +27,15 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
   const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
-  const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
+  // const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
 
+  // const todoContext = useContext(TodoContext);
+  const LearnedWordsContext  = useLearnedWordsContext();
 
 
   useEffect(()=>{getData(id)}, []);
   useEffect(()=>{setWordIsComplex(complexWords.filter(word => word.id === id).length > 0 ? true : false)}, [complexWords]);
-  useEffect(()=>{setWordIsLearned(learnedWords.filter(word => word.id === id).length > 0 ? true : false)}, [learnedWords]);
+  useEffect(()=>{setWordIsLearned(LearnedWordsContext.learnedWords.filter(word => word.id === id).length > 0 ? true : false)}, []);
 
   const getData = async (id: string): Promise<void> => {
     const res = await getWord(id);
@@ -67,37 +69,21 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
       word: { 'difficulty': 'hard', 'optional': {} },
       token: localStorage.getItem('token')
     });
-    // complexWords.push(data!);
-    // setComplexWords(complexWords);   
+  
     const res = await getUserComplexWords(localStorage.getItem('userId'), localStorage.getItem('token'));
     setComplexWords(res);   
   }
 
   const removeFromComplexWords = async( wordId: string) =>{
     setWordIsComplex(false);
-    // if(wordIsLearned){
-    //   updateUserWord({
-    //     userId: localStorage.getItem('userId'),
-    //     wordId: wordId,
-    //     word: { 'difficulty': 'hard', 'optional': {'complex': 'false','learned': 'true'} },
-    //     token: localStorage.getItem('token')
-    //   });
-    // }else{
-    //   deleteUserWord({
-    //     userId: localStorage.getItem('userId'),
-    //     wordId: wordId,
-    //     word: { 'difficulty': 'hard', 'optional': {'complex': 'true'} },
-    //     token: localStorage.getItem('token')
-    //   });
-    // }
+
       await deleteUserWord({
         userId: localStorage.getItem('userId'),
         wordId: wordId,
         word: { 'difficulty': 'hard', 'optional': {} },
         token: localStorage.getItem('token')
       });
-    // complexWords.splice(complexWords.findIndex(el => el.id === wordId),1);
-    // setComplexWords(complexWords);
+
     const res = await getUserComplexWords(localStorage.getItem('userId'), localStorage.getItem('token'));
     setComplexWords(res); 
     if(props.inComplexComponent === true){setDeleteWord(true)    }
@@ -106,31 +92,12 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
   const addToLearnedWords = async(wordId: string) =>{
     setWordIsLearned(true);
     if(wordIsComplex){
-      await updateUserWord({
-        userId: localStorage.getItem('userId'),
-        wordId: wordId,
-        word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },
-        token: localStorage.getItem('token')
-      });
       setWordIsComplex(false);
-      // complexWords.splice(complexWords.findIndex(el => el.id === wordId),1);
-      // setComplexWords(complexWords);
-      const res = await getUserComplexWords(localStorage.getItem('userId'), localStorage.getItem('token'));
-      setComplexWords(res); 
+      LearnedWordsContext.updateLearnedWord(wordId);
     }else{
-      await createUserWord({
-        userId: localStorage.getItem('userId'),
-        wordId: wordId,
-        word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },
-        token: localStorage.getItem('token')
-      });
-    }
-    // learnedWords.push(data!);
-    // setLearnedWords(learnedWords);
-    const res = await getUserLearnedWords(localStorage.getItem('userId'), localStorage.getItem('token'));
-    setLearnedWords(res);  
+      LearnedWordsContext.addLearnedWord(wordId);
+    } 
   }
-
 
   if(data === undefined){
     return  <div>

@@ -2,13 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import { TWord } from '../../@types/words';
 import WordCard from './WordCards/WordCard';
 import classes from './CardsContainer.module.scss'
-import LearnedWordsContext from '../Context/LearnedWordsContext';
+// import LearnedWordsContext from '../Context/LearnedWordsContext';
 import { Link } from 'react-router-dom';
+import { useLearnedWordsContext } from '../Context/LearnedWordsContext';
 
 
 const CardsContainer: React.FC<{data:TWord[], unitColor:string, inComplexComponent?:boolean, inTextbook?:boolean}> = (props) => {
-  const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
-  const pageIsLearned = props.data?.every(word => learnedWords.filter(el=> el.id === word.id).length>0)? true : false;
+  // const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
+  const LearnedWordsContext  = useLearnedWordsContext();
+
+  const pageIsLearned = props.data?.every(word => LearnedWordsContext.learnedWords.filter(el=> el.id === word.id).length>0)? true : false;
   
   const wordCard = props.data?.map(el=>{    
     return (

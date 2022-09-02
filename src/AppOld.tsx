@@ -15,12 +15,13 @@ import ComplexWordsContext from './components/Context/ComplexWordsContext';
 import Dictionary from './components/Pages/Dictionary/Dictionary';
 import GamePage from './components/Pages/GamePage/GamePage';
 import { TWord } from './@types/words';
-import { LearnedWordsProvider } from './components/Context/LearnedWordsContext';
+import LearnedWordsContext from './components/Context/LearnedWordsContext';
 
 const App: FC = () => {
   // getWord('5e9f5ee35eb9e72bc21af4a0').then((word) => console.log(word));
   const [userLogged, setUserLogged] = useState<boolean>((localStorage.getItem('userId') === null) ? false : true);
   const [complexWords, setComplexWords] = useState<TWord[]>([]);
+  const [learnedWords, setLearnedWords] = useState<TWord[]>([]);
 
   //to set initial context to userwords
   const getComplexWords = async (): Promise<void> => {
@@ -32,12 +33,30 @@ const App: FC = () => {
   }
   useEffect(()=>{userLogged ? getComplexWords() : setComplexWords([])}, [userLogged]);
 
+  const getLearnedWords = async (): Promise<void> => {
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
 
+    const res = await getUserLearnedWords(userId, token);
+    setLearnedWords(res);    
+  }
+  
+  useEffect(()=>{userLogged ? getLearnedWords() : setLearnedWords([])}, [userLogged]);
+
+    // to delete user words
+  // getAllUserWords ({userId: localStorage.getItem("userId"), token: localStorage.getItem("token")  })
+  // .then(
+  //   res=> {
+  //     console.log(res);
+  //     res.forEach(el=>{
+  //   deleteUserWord ({ userId:localStorage.getItem("userId"), wordId: el.wordId, word: { 'difficulty': 'hard', 'optional': {'learned': 'true'} }, token:localStorage.getItem("token") });
+  // }
+  // )});
   
   return (
     <CommonContext.Provider value={{userLogged, setUserLogged}}>
        <ComplexWordsContext.Provider value={{ complexWords, setComplexWords}}>
-        <LearnedWordsProvider>
+        <LearnedWordsContext.Provider value={{ learnedWords, setLearnedWords}}>
           <div className={classes.wrapper} >
             <Router>
               <Header />
@@ -74,7 +93,7 @@ const App: FC = () => {
               <Footer />
             </Router>
           </div >
-        </LearnedWordsProvider>
+        </LearnedWordsContext.Provider>
        </ComplexWordsContext.Provider>
     </CommonContext.Provider>
   )

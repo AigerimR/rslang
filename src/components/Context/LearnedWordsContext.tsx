@@ -1,9 +1,8 @@
-import { getUserComplexWords } from '../../apiHelpers/users/usersController';
+import { createUserWord, getUserComplexWords, getUserLearnedWords, updateUserWord } from '../../apiHelpers/users/usersController';
 import React, { createContext, FC, useContext, useEffect, useState } from 'react';
 import { TWord } from '../../@types/words';
-import CommonContext from './CommonContext';
 
-const LearnedWordsContext = createContext(
+export const LearnedWordsContext = createContext(
   {
     learnedWords: [{ 
     "id": "string",
@@ -20,10 +19,56 @@ const LearnedWordsContext = createContext(
     "wordTranslate": "string",
     "textMeaningTranslate": "string",
     "textExampleTranslate": "string"}],
-    setLearnedWords: (learnedWords)=>{},
+    getLearnedWords: ()=>{},
+    addLearnedWord: (wordId)=>{},
+    updateLearnedWord: (wordId)=>{},
     // LearnedWords: userLearnedWords,
     // setLearnedWords: (LearnedWords)=>{},
-});
+}
+);
+
+function LearnedWordsProvider (props) {
+  
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  const [userLogged, setUserLogged] = useState<boolean>(userId === null ? false : true);
+  const [learnedWords, setLearnedWords] = useState<TWord[]>([]);
+
+  //to set initial values
+  const getLearnedWords = async (): Promise<void> => {
+    const res = await getUserLearnedWords(userId, token);
+    setLearnedWords(res);
+  }
+  userLogged ? getLearnedWords() : setLearnedWords([]);
+
+  function addLearnedWord (wordId: string) {
+    createUserWord({
+      userId: userId,
+      wordId: wordId,
+      word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },
+      token: token
+    });
+    getLearnedWords();  
+  }
+
+  const updateLearnedWord = (wordId) => {
+    updateUserWord({
+      userId: userId,
+      wordId: wordId,
+      word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },
+      token: token
+    });
+    getLearnedWords();  
+  }
+
+  const LearnedWordsData = { learnedWords, addLearnedWord, updateLearnedWord };
+  return <LearnedWordsContext.Provider value={LearnedWordsData} {...props} />;
+}
 
 
-export default LearnedWordsContext;
+function useLearnedWordsContext() {
+  return useContext(LearnedWordsContext);
+}
+
+export { LearnedWordsProvider, useLearnedWordsContext };

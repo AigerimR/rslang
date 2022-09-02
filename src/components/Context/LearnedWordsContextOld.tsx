@@ -3,7 +3,7 @@ import React, { createContext, FC, useContext, useEffect, useState } from 'react
 import { TWord } from '../../@types/words';
 import CommonContext from './CommonContext';
 
-export const LearnedWordsContext = createContext(
+const LearnedWordsContext = createContext(
   {
     learnedWords: [{ 
     "id": "string",
@@ -26,3 +26,4 @@ export const LearnedWordsContext = createContext(
 });
 
 
+export default LearnedWordsContext;
