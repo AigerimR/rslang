@@ -5,13 +5,14 @@
 
   &_wrapper {
     position: relative;
-    min-height: calc(100vh - 180px);
     background-color: $color-light-lime-green;
   }
 
   .container {
     display: flex;
     flex-direction: column;
+    padding-top: 3%;
+    padding-bottom: 3%;
   }
 
   &_сontainer {
@@ -19,12 +20,9 @@
     gap: 32px;
     justify-content: space-between;
     align-items: flex-end;
-    padding-top: 2%;
-    padding-bottom: 3%;
   }
 
   &_title {
-    margin-top: 5%;
     font-family: 'Neucha', cursive;
     font-size: 2rem;
     letter-spacing: 0.1rem;
@@ -60,6 +58,7 @@
     justify-content: flex-end;
     gap: 16px;
     width: 60px;
+    border-bottom: solid 2px$color-black;
   }
 
   &_count {
@@ -112,7 +111,7 @@
   &_content {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 32px;
     align-items: center;
   }
 
@@ -165,6 +164,68 @@
   }
 }
 
+.statistics {
+  &_gamesContainer {
+    background-color: $color-creame;
+    width: 100%;
+    margin-top: 5%;
+    padding: 3% 2%;
+    border-top-left-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+    border-bottom-right-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+    border: dashed 2px $color-black;
+  }
+
+  &_gamesTitle {
+    font-family: 'Neucha', cursive;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &_games {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 3%;
+  }
+
+  &_game {
+    flex: 1;
+    border-top-left-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+    border-bottom-right-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+
+    &:nth-child(1) {
+      background-color: $color-moonstone-blue;
+    }
+
+    &:nth-child(2) {
+      background-color: $color-sandy-brown;
+    }
+  }
+
+  &_gameTitle {
+    font-family: 'Neucha', cursive;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-align: center;
+  }
+
+  &_gameList {
+    margin-top: 20px;
+    padding-left: 32px;
+    padding-right: 16px;
+  }
+
+  &_gameItem {
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 2em;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .statistics_сontainer {
     flex-wrap: wrap;
@@ -188,13 +249,13 @@
   .diagram_cover {
     width: calc(13.75rem + ((1vw - 3.2px) * 13.7931));
   }
+
+  .statistics_games {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 540px) {
-  .statistics_wrapper {
-    min-height: calc(100vh - 220px);
-  }
-
   .statistics_girl {
     width: 90%;
   }
