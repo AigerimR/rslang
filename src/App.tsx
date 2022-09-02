@@ -20,19 +20,6 @@ import { LearnedWordsProvider } from './components/Context/LearnedWordsContext';
 const App: FC = () => {
   // getWord('5e9f5ee35eb9e72bc21af4a0').then((word) => console.log(word));
   const [userLogged, setUserLogged] = useState<boolean>((localStorage.getItem('userId') === null) ? false : true);
-  // const [complexWords, setComplexWords] = useState<TWord[]>([]);
-
-  // //to set initial context to userwords
-  // const getComplexWords = async (): Promise<void> => {
-  //   const userId = localStorage.getItem("userId");
-  //   const token = localStorage.getItem("token");
-
-  //   const res = await getUserComplexWords(userId, token);
-  //   setComplexWords(res);
-  // }
-  // useEffect(()=>{userLogged ? getComplexWords() : setComplexWords([])}, [userLogged]);
-
-
   
   return (
     <CommonContext.Provider value={{userLogged, setUserLogged}}>

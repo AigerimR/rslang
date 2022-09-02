@@ -31,8 +31,8 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
 
 
   useEffect(()=>{getData(id)}, []);
-  useEffect(()=>{setWordIsComplex(ComplexWordsContext.complexWords.filter(word => word.id === id).length > 0 ? true : false)}, [ComplexWordsContext.complexWords]);
-  useEffect(()=>{setWordIsLearned(LearnedWordsContext.learnedWords.filter(word => word.id === id).length > 0 ? true : false)}, [LearnedWordsContext.learnedWords]);
+  useEffect(()=>{setWordIsComplex(ComplexWordsContext.complexWords.filter(word => word.id === id).length > 0 && userLogged ? true : false)}, [ComplexWordsContext.complexWords]);
+  useEffect(()=>{setWordIsLearned(LearnedWordsContext.learnedWords.filter(word => word.id === id).length > 0 && userLogged  ? true : false)}, [LearnedWordsContext.learnedWords]);
 
   const getData = async (id: string): Promise<void> => {
     const res = await getWord(id);

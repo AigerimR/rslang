@@ -29,7 +29,7 @@ const Textbook: React.FC = () => {
   useEffect(()=>{getData()}, [page, unit]);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
-  if(loading) return <h2>Loading...</h2>
+  if(loading) return <h2 className={classes.main}>Loading...</h2>
   return(
     <div className={classes.textbook}>
       <div className={classes.textbook_header}>

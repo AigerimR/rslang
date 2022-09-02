@@ -1,6 +1,7 @@
 import { createUserWord, getUserComplexWords, getUserLearnedWords, updateUserWord } from '../../apiHelpers/users/usersController';
 import React, { createContext, FC, useContext, useEffect, useState } from 'react';
 import { TWord } from '../../@types/words';
+import CommonContext from './CommonContext';
 
 export const LearnedWordsContext = createContext(
   {
@@ -32,7 +33,9 @@ function LearnedWordsProvider (props) {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  const [userLogged, setUserLogged] = useState<boolean>(userId === null ? false : true);
+  // const [userLogged, setUserLogged] = useState<boolean>(userId === null ? false : true);
+  const { userLogged, setUserLogged } = useContext(CommonContext);
+
   const [learnedWords, setLearnedWords] = useState<TWord[]>([]);
 
   //to set initial values
@@ -40,10 +43,11 @@ function LearnedWordsProvider (props) {
     const res = await getUserLearnedWords(userId, token);
     setLearnedWords(res);
   }
-  userLogged ? getLearnedWords() : setLearnedWords([]);
 
-  const addLearnedWord = (wordId: string) => {
-    createUserWord({
+  useEffect(()=>{ userLogged ? getLearnedWords() : setLearnedWords([]) }, [userLogged]);
+
+  const addLearnedWord = async (wordId: string) => {
+    await createUserWord({
       userId: userId,
       wordId: wordId,
       word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },
@@ -52,8 +56,8 @@ function LearnedWordsProvider (props) {
     getLearnedWords();  
   }
 
-  const updateLearnedWord = (wordId) => {
-    updateUserWord({
+  const updateLearnedWord = async (wordId) => {
+    await updateUserWord({
       userId: userId,
       wordId: wordId,
       word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },

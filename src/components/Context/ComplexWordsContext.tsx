@@ -1,6 +1,7 @@
 import { createUserWord, deleteUserWord, getUserComplexWords } from '../../apiHelpers/users/usersController';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { TWord } from '../../@types/words';
+import CommonContext from './CommonContext';
 
 export const ComplexWordsContext = createContext(
   {
@@ -31,7 +32,9 @@ function ComplexWordsProvider (props) {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  const [userLogged, setUserLogged] = useState<boolean>(userId === null ? false : true);
+  // const [userLogged, setUserLogged] = useState<boolean>(userId === null ? false : true);
+  const { userLogged, setUserLogged } = useContext(CommonContext);
+
   const [complexWords, setComplexWords] = useState<TWord[]>([]);
 
   //to set initial values
@@ -41,8 +44,8 @@ function ComplexWordsProvider (props) {
   }
   useEffect(()=>{userLogged ? getComplexWords() : setComplexWords([])}, [userLogged]);
 
-  const addComplexWord = (wordId: string) => {
-    createUserWord({
+  const addComplexWord = async (wordId: string) => {
+    await createUserWord({
       userId: userId,
       wordId: wordId,
       word: { 'difficulty': 'hard', 'optional': {} },
@@ -51,8 +54,8 @@ function ComplexWordsProvider (props) {
     getComplexWords();  
   }
 
-  const deleteComplexWord = (wordId: string) => {
-    deleteUserWord({
+  const deleteComplexWord = async (wordId: string) => {
+    await deleteUserWord({
       userId: userId,
       wordId: wordId,
       word: { 'difficulty': 'hard', 'optional': {} },
