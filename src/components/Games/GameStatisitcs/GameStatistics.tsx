@@ -108,9 +108,9 @@ const GameStatistics: FC<{
                         new Audio(`${URL}/${word.audio}`).play();
                       }}
                     ></div>
-                    <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
+                    <span className={classes.statisticList_word_eng}>{word.word}</span>
                     <span>&#8212;</span>
-                    <span className={classes.statisticList_word_rus}>{word.word}</span>
+                    <span className={classes.statisticList_word_rus}>{word.wordTranslate}</span>
                   </div>
                 </li>
               );
@@ -131,9 +131,9 @@ const GameStatistics: FC<{
                         new Audio(`${URL}/${word.audio}`).play();
                       }}
                     ></div>
-                    <span className={classes.statisticList_word_eng}>{word.wordTranslate}</span>
+                    <span className={classes.statisticList_word_eng}>{word.word}</span>
                     <span>&#8212;</span>
-                    <span className={classes.statisticList_word_rus}>{word.word}</span>
+                    <span className={classes.statisticList_word_rus}>{word.wordTranslate}</span>
                   </div>
                 </li>
               );
