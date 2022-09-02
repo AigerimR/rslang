@@ -8,6 +8,7 @@ import {
 import IAudiocallProps from '../../../interfaces/audiocallGame';
 import correctSound from '../../../assets/sounds/correctAnswer.mp3';
 import wrongSound from '../../../assets/sounds/wrongAnswer.mp3';
+import useKey from './useKey';
 
 const AudioGame: FC<IAudiocallProps> = ({
   difficultyLevel,
@@ -198,6 +199,36 @@ const AudioGame: FC<IAudiocallProps> = ({
       handleFinishGame(true);
     }
   };
+
+  const handleEnter = () => { nextPage(); }
+  useKey('Enter', handleEnter);
+  const handleSpace = () => { audio.play(); }
+  useKey('Space', handleSpace);
+  const handleDigit1 = () => {
+    setDisabled(true);
+    handleUserAnswer(w0);
+  }
+  useKey('Digit1', handleDigit1);
+  const handleDigit2 = () => {
+    setDisabled(true);
+    handleUserAnswer(w1);
+  }
+  useKey('Digit2', handleDigit2);
+  const handleDigit3 = () => {
+    setDisabled(true);
+    handleUserAnswer(w2);
+  }
+  useKey('Digit3', handleDigit3);
+  const handleDigit4 = () => {
+    setDisabled(true);
+    handleUserAnswer(w3);
+  }
+  useKey('Digit4', handleDigit4);
+  const handleDigit5 = () => {
+    setDisabled(true);
+    handleUserAnswer(w4);
+  }
+  useKey('Digit5', handleDigit5);
 
   if (loading) return <p>Loading...</p>;
   return (
