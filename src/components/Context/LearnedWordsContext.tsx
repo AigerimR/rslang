@@ -42,7 +42,7 @@ function LearnedWordsProvider (props) {
   }
   userLogged ? getLearnedWords() : setLearnedWords([]);
 
-  function addLearnedWord (wordId: string) {
+  const addLearnedWord = (wordId: string) => {
     createUserWord({
       userId: userId,
       wordId: wordId,

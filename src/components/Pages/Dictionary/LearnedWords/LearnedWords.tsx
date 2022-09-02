@@ -5,7 +5,7 @@ import Units from '../../Textbook/Units/Units';
 import { TWord, TWordUser } from '../../../../@types/words';
 import { getWord } from '../../../../apiHelpers/words/wordsController';
 import CardsContainer from '../../../CardsContainer/CardsContainer';
-import LearnedWordsContext from '../../../Context/LearnedWordsContext';
+import { useLearnedWordsContext } from '../../../Context/LearnedWordsContext';
 
 const LearnedWords: React.FC = () => {
   const [unit, setUnit] = useState(0);
@@ -15,16 +15,17 @@ const LearnedWords: React.FC = () => {
 
   const updateUnit = (unit:number, unitColor: string): void => { setUnit(unit); setUnitColor(unitColor);};  
 
-  const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
+  // const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
+  const LearnedWordsContext  = useLearnedWordsContext();
 
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
   const getData = () => {
-    const res = learnedWords?.filter((word) => word.group === unit);    
+    const res = LearnedWordsContext.learnedWords?.filter((word) => word.group === unit);    
     setData(res);
   }
-  useEffect(()=>{getData()}, [learnedWords, unit]);
+  useEffect(()=>{getData()}, [ LearnedWordsContext.learnedWords, unit]);
 
   return (
     <div className={classes.learnedW_main}>

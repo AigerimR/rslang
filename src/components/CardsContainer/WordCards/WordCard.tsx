@@ -7,8 +7,7 @@ import classes from './WordCard.module.scss'
 import playIcon from '../../../assets/svg/play.svg';
 import starIcon from '../../../assets/svg/star.svg';
 import CommonContext from '../../Context/CommonContext';
-import { createUserWord, deleteUserWord, getUserComplexWords, getUserLearnedWords, updateUserWord } from '../../../apiHelpers/users/usersController';
-import ComplexWordsContext from '../../Context/ComplexWordsContext';
+import { useComplexWordsContext } from '../../Context/ComplexWordsContext';
 import { useLearnedWordsContext } from '../../Context/LearnedWordsContext';
 
 
@@ -26,16 +25,14 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
   const [deleteWord, setDeleteWord] = useState<boolean>(false);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
-  const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
-  // const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
 
-  // const todoContext = useContext(TodoContext);
   const LearnedWordsContext  = useLearnedWordsContext();
+  const ComplexWordsContext  = useComplexWordsContext();
 
 
   useEffect(()=>{getData(id)}, []);
-  useEffect(()=>{setWordIsComplex(complexWords.filter(word => word.id === id).length > 0 ? true : false)}, [complexWords]);
-  useEffect(()=>{setWordIsLearned(LearnedWordsContext.learnedWords.filter(word => word.id === id).length > 0 ? true : false)}, []);
+  useEffect(()=>{setWordIsComplex(ComplexWordsContext.complexWords.filter(word => word.id === id).length > 0 ? true : false)}, [ComplexWordsContext.complexWords]);
+  useEffect(()=>{setWordIsLearned(LearnedWordsContext.learnedWords.filter(word => word.id === id).length > 0 ? true : false)}, [LearnedWordsContext.learnedWords]);
 
   const getData = async (id: string): Promise<void> => {
     const res = await getWord(id);
@@ -63,30 +60,13 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
 
   const addToComplexWords = async(wordId: string) =>{
     setWordIsComplex(true);
-    await createUserWord({
-      userId: localStorage.getItem('userId'),
-      wordId: wordId,
-      word: { 'difficulty': 'hard', 'optional': {} },
-      token: localStorage.getItem('token')
-    });
-  
-    const res = await getUserComplexWords(localStorage.getItem('userId'), localStorage.getItem('token'));
-    setComplexWords(res);   
+    ComplexWordsContext.addComplexWord(wordId);  
   }
 
   const removeFromComplexWords = async( wordId: string) =>{
     setWordIsComplex(false);
-
-      await deleteUserWord({
-        userId: localStorage.getItem('userId'),
-        wordId: wordId,
-        word: { 'difficulty': 'hard', 'optional': {} },
-        token: localStorage.getItem('token')
-      });
-
-    const res = await getUserComplexWords(localStorage.getItem('userId'), localStorage.getItem('token'));
-    setComplexWords(res); 
-    if(props.inComplexComponent === true){setDeleteWord(true)    }
+    ComplexWordsContext.deleteComplexWord(wordId); 
+    if(props.inComplexComponent === true){setDeleteWord(true)}
 }
 
   const addToLearnedWords = async(wordId: string) =>{
