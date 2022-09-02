@@ -55,7 +55,7 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
   }
 
  const playOnIcon = <svg className={classes.btn_icon} fill='black'><use href={`${playIcon}#play`} /></svg>;
- const playOffIcon = <svg className={classes.btn_icon} fill='grey'> <use href={`${playIcon}#play`} /></svg>;
+ const playOffIcon = <svg className={classes.btn_icon} fill='grey'><use href={`${playIcon}#play`} /></svg>;
 
   const addToComplexWords = async(wordId: string) =>{
     setWordIsComplex(true);

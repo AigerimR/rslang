@@ -54,7 +54,6 @@ const Register: React.FC = () => {
         const user = await res.json(); 
         setSuccess(true); 
         loginUser({'email': email, 'password': password} ).then(resp=> {
-          console.log(resp); 
           localStorage.setItem('userId', resp.userId);
           localStorage.setItem('token', resp.token);
           localStorage.setItem('refreshToken', resp.refreshToken);
