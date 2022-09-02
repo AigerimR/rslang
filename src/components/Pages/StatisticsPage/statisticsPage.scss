@@ -1,0 +1,262 @@
+@import '../../../app.module.scss';
+
+.statistics {
+  position: relative;
+
+  &_wrapper {
+    position: relative;
+    background-color: $color-light-lime-green;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
+
+  &_сontainer {
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &_title {
+    font-family: 'Neucha', cursive;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &_girl {
+    width: 40%;
+  }
+}
+
+.chart_content {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.wordsToday {
+  display: flex;
+  gap: 50px;
+  align-items: flex-end;
+  font-family: 'Comfortaa', cursive;
+
+  &_chartTitle {
+    width: 0;
+    word-wrap: break-word;
+  }
+
+  &_chart {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 16px;
+    width: 60px;
+    border-bottom: solid 2px$color-black;
+  }
+
+  &_count {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    border-radius: 50%;
+  }
+}
+
+.newWordsToday_block {
+  display: block;
+  width: 100%;
+  background-color: $color-turquoise-surf;
+}
+
+.learnedWordsToday_block {
+  display: block;
+  width: 100%;
+  background-color: $color-old-mauve;
+}
+
+.wordsToday_chartTitle,
+.diagram_title {
+  color: $color-dark-chocolate;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.diagram_masked,
+.diagram_shadow {
+  width: calc(13.75rem + ((1vw - 9px) * 14.8148));
+  height: calc(13.75rem + ((1vw - 9px) * 14.8148));
+}
+
+.diagram_cover {
+  width: calc(13.75rem + ((1vw - 9px) * 14.8148));
+}
+
+.diagram {
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  &_score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: 'Comfortaa', cursive;
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  &_shape {
+    position: relative;
+  }
+
+  &_masked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-golden-poppy;
+    -webkit-mask-image: url('../../../assets/svg/circle.svg');
+    mask-image: url('../../../assets/svg/circle.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
+    mask-size: 100%;
+  }
+
+  &_cover {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    background-color: $color-light-lime-green;
+  }
+
+  &_shadow {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    border: dashed 2px $color-black;
+    border-radius: 50%;
+  }
+
+  &_title {
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+}
+
+.statistics {
+  &_gamesContainer {
+    background-color: $color-creame;
+    width: 100%;
+    margin-top: 5%;
+    padding: 3% 2%;
+    border-top-left-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+    border-bottom-right-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+    border: dashed 2px $color-black;
+  }
+
+  &_gamesTitle {
+    font-family: 'Neucha', cursive;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &_games {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 3%;
+  }
+
+  &_game {
+    flex: 1;
+    border-top-left-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+    border-bottom-right-radius: calc(0.75rem + ((1vw - 3.2px) * 3.2143));
+
+    &:nth-child(1) {
+      background-color: $color-moonstone-blue;
+    }
+
+    &:nth-child(2) {
+      background-color: $color-sandy-brown;
+    }
+  }
+
+  &_gameTitle {
+    font-family: 'Neucha', cursive;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-align: center;
+  }
+
+  &_gameList {
+    margin-top: 20px;
+    padding-left: 32px;
+    padding-right: 16px;
+  }
+
+  &_gameItem {
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 2em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .statistics_сontainer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .statistics_girl {
+    width: 60%;
+  }
+
+  .diagram_content {
+    gap: 32px;
+  }
+
+  .diagram_masked,
+  .diagram_shadow {
+    width: calc(13.75rem + ((1vw - 3.2px) * 13.7931));
+    height: calc(13.75rem + ((1vw - 3.2px) * 13.7931));
+  }
+
+  .diagram_cover {
+    width: calc(13.75rem + ((1vw - 3.2px) * 13.7931));
+  }
+
+  .statistics_games {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .statistics_girl {
+    width: 90%;
+  }
+}
