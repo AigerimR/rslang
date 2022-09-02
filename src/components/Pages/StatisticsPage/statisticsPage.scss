@@ -1,0 +1,201 @@
+@import '../../../app.module.scss';
+
+.statistics {
+  position: relative;
+
+  &_wrapper {
+    position: relative;
+    min-height: calc(100vh - 180px);
+    background-color: $color-light-lime-green;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_сontainer {
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 2%;
+    padding-bottom: 3%;
+  }
+
+  &_title {
+    margin-top: 5%;
+    font-family: 'Neucha', cursive;
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &_girl {
+    width: 40%;
+  }
+}
+
+.chart_content {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.wordsToday {
+  display: flex;
+  gap: 50px;
+  align-items: flex-end;
+  font-family: 'Comfortaa', cursive;
+
+  &_chartTitle {
+    width: 0;
+    word-wrap: break-word;
+  }
+
+  &_chart {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 16px;
+    width: 60px;
+  }
+
+  &_count {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    border-radius: 50%;
+  }
+}
+
+.newWordsToday_block {
+  display: block;
+  width: 100%;
+  background-color: $color-turquoise-surf;
+}
+
+.learnedWordsToday_block {
+  display: block;
+  width: 100%;
+  background-color: $color-old-mauve;
+}
+
+.wordsToday_chartTitle,
+.diagram_title {
+  color: $color-dark-chocolate;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.diagram_masked,
+.diagram_shadow {
+  width: calc(13.75rem + ((1vw - 9px) * 14.8148));
+  height: calc(13.75rem + ((1vw - 9px) * 14.8148));
+}
+
+.diagram_cover {
+  width: calc(13.75rem + ((1vw - 9px) * 14.8148));
+}
+
+.diagram {
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+  }
+
+  &_score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: 'Comfortaa', cursive;
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  &_shape {
+    position: relative;
+  }
+
+  &_masked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-golden-poppy;
+    -webkit-mask-image: url('../../../assets/svg/circle.svg');
+    mask-image: url('../../../assets/svg/circle.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
+    mask-size: 100%;
+  }
+
+  &_cover {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    background-color: $color-light-lime-green;
+  }
+
+  &_shadow {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    border: dashed 2px $color-black;
+    border-radius: 50%;
+  }
+
+  &_title {
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .statistics_сontainer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .statistics_girl {
+    width: 60%;
+  }
+
+  .diagram_content {
+    gap: 32px;
+  }
+
+  .diagram_masked,
+  .diagram_shadow {
+    width: calc(13.75rem + ((1vw - 3.2px) * 13.7931));
+    height: calc(13.75rem + ((1vw - 3.2px) * 13.7931));
+  }
+
+  .diagram_cover {
+    width: calc(13.75rem + ((1vw - 3.2px) * 13.7931));
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .statistics_wrapper {
+    min-height: calc(100vh - 220px);
+  }
+
+  .statistics_girl {
+    width: 90%;
+  }
+}
