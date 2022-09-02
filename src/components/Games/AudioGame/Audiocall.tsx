@@ -204,33 +204,45 @@ const AudioGame: FC<IAudiocallProps> = ({
   useKey('Enter', handleEnter);
   const handleSpace = () => { audio.play(); }
   useKey('Space', handleSpace);
+
   const handleDigit1 = () => {
-    setDisabled(true);
-    handleUserAnswer(w0);
+    if (isDisabled === false) {
+      handleUserAnswer(w0);
+      setDisabled(true);
+    }
   }
   useKey('Digit1', handleDigit1);
   const handleDigit2 = () => {
-    setDisabled(true);
-    handleUserAnswer(w1);
+    if (isDisabled === false) {
+      handleUserAnswer(w1);
+      setDisabled(true);
+    }
   }
   useKey('Digit2', handleDigit2);
   const handleDigit3 = () => {
-    setDisabled(true);
-    handleUserAnswer(w2);
+    if (isDisabled === false) {
+      handleUserAnswer(w2);
+      setDisabled(true);
+    }
   }
   useKey('Digit3', handleDigit3);
   const handleDigit4 = () => {
-    setDisabled(true);
-    handleUserAnswer(w3);
+    if (isDisabled === false) {
+      handleUserAnswer(w3);
+      setDisabled(true);
+    }
   }
   useKey('Digit4', handleDigit4);
   const handleDigit5 = () => {
-    setDisabled(true);
-    handleUserAnswer(w4);
+    if (isDisabled === false) {
+      handleUserAnswer(w4);
+      setDisabled(true);
+    }
   }
   useKey('Digit5', handleDigit5);
 
   if (loading) return <p>Loading...</p>;
+
   return (
     <div className={classes.audiocallWrapper}>
       <div className={classes.audiocallContainer}>
@@ -241,8 +253,8 @@ const AudioGame: FC<IAudiocallProps> = ({
           <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[3]}</span>
           <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[4]}</span>
         </div>
-        <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}>
-          {isVolumeUp ? 'volume_up' : 'volume_off'}
+        <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}
+          onClick={() => isVolumeUp ? setVolumeUp(false) : setVolumeUp(true)}>{isVolumeUp ? 'volume_up' : 'volume_off'}
         </div>
       </div>
       <div className={classes.audiocallContentWrapper}>
@@ -274,7 +286,7 @@ const AudioGame: FC<IAudiocallProps> = ({
               checked={isDisabled ? true : false}
               type='radio' id='w0' name='w0' value={w0}
             ></input>
-            {w0}
+            1. {w0}
           </label>
           <label
             className={items[1]}
@@ -283,7 +295,7 @@ const AudioGame: FC<IAudiocallProps> = ({
               checked={isDisabled ? true : false}
               type='radio' id='w1' name='w1' value={w1}
             ></input>
-            {w1}
+            2. {w1}
           </label>
           <label
             className={items[2]}
@@ -292,7 +304,7 @@ const AudioGame: FC<IAudiocallProps> = ({
               checked={isDisabled ? true : false}
               type='radio' id='w2' name='w2' value={w2}
             ></input>
-            {w2}
+            3. {w2}
           </label>
           <label
             className={items[3]}
@@ -301,7 +313,7 @@ const AudioGame: FC<IAudiocallProps> = ({
               checked={isDisabled ? true : false}
               type='radio' id='w3' name='w3' value={w3}
             ></input>
-            {w3}
+            4. {w3}
           </label>
           <label
             className={items[4]}
@@ -312,7 +324,7 @@ const AudioGame: FC<IAudiocallProps> = ({
             checked={isDisabled ? true : false}
             type='radio' id='w4' name='w4' value={w4}
           ></input>
-            {w4}
+            5. {w4}
           </label>
         </fieldset>
         <button
