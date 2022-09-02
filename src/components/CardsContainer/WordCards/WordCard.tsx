@@ -7,8 +7,9 @@ import classes from './WordCard.module.scss'
 import playIcon from '../../../assets/svg/play.svg';
 import starIcon from '../../../assets/svg/star.svg';
 import CommonContext from '../../Context/CommonContext';
-import { createUserWord, deleteUserWord, getUserComplexWords } from '../../../apiHelpers/users/usersController';
+import { createUserWord, deleteUserWord, getUserComplexWords, getUserLearnedWords, updateUserWord } from '../../../apiHelpers/users/usersController';
 import ComplexWordsContext from '../../Context/ComplexWordsContext';
+import LearnedWordsContext from '../../Context/LearnedWordsContext';
 
 
 const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:boolean}> = (props) => {
@@ -21,14 +22,18 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
   const [data, setData] = useState<TWord>();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [wordIsComplex, setWordIsComplex] = useState<boolean>(false);
+  const [wordIsLearned, setWordIsLearned] = useState<boolean>(false);
   const [deleteWord, setDeleteWord] = useState<boolean>(false);
 
   const { userLogged, setUserLogged } = useContext(CommonContext);
   const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
+  const { learnedWords, setLearnedWords} = useContext(LearnedWordsContext);
+
 
 
   useEffect(()=>{getData(id)}, []);
   useEffect(()=>{setWordIsComplex(complexWords.filter(word => word.id === id).length > 0 ? true : false)}, [complexWords]);
+  useEffect(()=>{setWordIsLearned(learnedWords.filter(word => word.id === id).length > 0 ? true : false)}, [learnedWords]);
 
   const getData = async (id: string): Promise<void> => {
     const res = await getWord(id);
@@ -55,11 +60,11 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
  const playOffIcon = <svg className={classes.btn_icon} fill='grey'> <use href={`${playIcon}#play`} /></svg>;
 
   const addToComplexWords = (wordId: string) =>{
-    setWordIsComplex(true);    
+    setWordIsComplex(true);
     createUserWord({
       userId: localStorage.getItem('userId'),
       wordId: wordId,
-      word: { 'difficulty': 'hard', 'optional': {} },
+      word: { 'difficulty': 'hard', 'optional': {'complex': 'true'} },
       token: localStorage.getItem('token')
     });
     complexWords.push(data!);
@@ -68,25 +73,48 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
 
   const removeFromComplexWords = ( wordId: string) =>{
     setWordIsComplex(false);
-    deleteUserWord({
-      userId: localStorage.getItem('userId'),
-      wordId: wordId,
-      word: { 'difficulty': 'hard', 'optional': {} },
-      token: localStorage.getItem('token')
-    });
+    if(wordIsLearned){
+      updateUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {'complex': 'false','learned': 'true'} },
+        token: localStorage.getItem('token')
+      });
+    }else{
+      deleteUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {'complex': 'true'} },
+        token: localStorage.getItem('token')
+      });
+    }
+   
     complexWords.splice(complexWords.findIndex(el => el.id === wordId),1);
     setComplexWords(complexWords);
     if(props.inComplexComponent === true){setDeleteWord(true)    }
 }
 
-  const addToLearnedWords = (wordId: string) =>{
-    
-      createUserWord({
+  const addToLearnedWords = async(wordId: string) =>{
+    setWordIsLearned(true);
+    if(wordIsComplex){
+      updateUserWord({
         userId: localStorage.getItem('userId'),
         wordId: wordId,
-        word: { 'difficulty': 'weak', 'optional': {} },
+        word: { 'difficulty': 'hard', 'optional': {'complex': 'true','learned': 'true'} },
         token: localStorage.getItem('token')
       });
+    }else{
+      await createUserWord({
+        userId: localStorage.getItem('userId'),
+        wordId: wordId,
+        word: { 'difficulty': 'hard', 'optional': {'learned': 'true'} },
+        token: localStorage.getItem('token')
+      });
+    }
+    // learnedWords.push(data!);
+    // setLearnedWords(learnedWords);
+    const res = await getUserLearnedWords(localStorage.getItem('userId'), localStorage.getItem('token'));
+    setLearnedWords(res);  
   }
 
 
@@ -129,11 +157,11 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
             {wordIsComplex ? 
               <button className={classes.btn_normal} onClick = {(e)=>removeFromComplexWords(data!.id)}>
                 Вернуть из сложных
-              </button> : <button className={classes.btn_normal} onClick = {()=>addToComplexWords(data!.id)}>
+              </button> : <button className={classes.btn_normal} disabled = {wordIsLearned ? true : false} onClick = {()=>addToComplexWords(data!.id)}>
                 В сложные
               </button>}
       
-            <button className={classes.btn_normal} onClick = {()=>addToLearnedWords(data!.id)}>
+            <button className={classes.btn_normal} disabled = {wordIsLearned ? true : false} onClick = {()=>addToLearnedWords(data!.id)}>
               В изученные
             </button>
           </div>
@@ -149,7 +177,7 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
               <use href={`${starIcon}#star`} />
             </svg>
           </p> : <p className={classes.card_small_sign}></p>}
-        <div>
+        <div className={`${wordIsLearned ? classes.faded : ''}`}>
           <h3 className={classes.card_small_word}>{data.word}</h3>
           <p className={classes.card_small_transcript}>{data.transcription}</p>
         </div>
