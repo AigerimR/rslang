@@ -1,7 +1,7 @@
 import { createUserWord, deleteUserWord, getUserComplexWords } from '../../apiHelpers/users/usersController';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { TWord } from '../../@types/words';
-import CommonContext from './CommonContext';
+import UserContext from './UserContext';
 
 export const ComplexWordsContext = createContext(
   {
@@ -23,8 +23,6 @@ export const ComplexWordsContext = createContext(
     getComplexWords: ()=>{},
     addComplexWord: (wordId)=>{},
     deleteComplexWord: (wordId)=>{},
-    // complexWords: userComplexWords,
-    // setComplexWords: (complexWords)=>{},
 });
 
 function ComplexWordsProvider (props) {
@@ -32,8 +30,7 @@ function ComplexWordsProvider (props) {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  // const [userLogged, setUserLogged] = useState<boolean>(userId === null ? false : true);
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
 
   const [complexWords, setComplexWords] = useState<TWord[]>([]);
 

@@ -1,7 +1,7 @@
-import { createUserWord, getUserComplexWords, getUserLearnedWords, updateUserWord } from '../../apiHelpers/users/usersController';
-import React, { createContext, FC, useContext, useEffect, useState } from 'react';
+import { createUserWord, getUserLearnedWords, updateUserWord } from '../../apiHelpers/users/usersController';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { TWord } from '../../@types/words';
-import CommonContext from './CommonContext';
+import UserContext from './UserContext';
 
 export const LearnedWordsContext = createContext(
   {
@@ -23,8 +23,6 @@ export const LearnedWordsContext = createContext(
     getLearnedWords: ()=>{},
     addLearnedWord: (wordId)=>{},
     updateLearnedWord: (wordId)=>{},
-    // LearnedWords: userLearnedWords,
-    // setLearnedWords: (LearnedWords)=>{},
 }
 );
 
@@ -33,8 +31,7 @@ function LearnedWordsProvider (props) {
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  // const [userLogged, setUserLogged] = useState<boolean>(userId === null ? false : true);
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
 
   const [learnedWords, setLearnedWords] = useState<TWord[]>([]);
 

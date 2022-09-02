@@ -6,13 +6,12 @@ import { getWord } from '../../../apiHelpers/words/wordsController';
 import classes from './WordCard.module.scss'
 import playIcon from '../../../assets/svg/play.svg';
 import starIcon from '../../../assets/svg/star.svg';
-import CommonContext from '../../Context/CommonContext';
+import UserContext from '../../Context/UserContext';
 import { useComplexWordsContext } from '../../Context/ComplexWordsContext';
 import { useLearnedWordsContext } from '../../Context/LearnedWordsContext';
 
 
 const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:boolean}> = (props) => {
-// const WordCard: React.FC<{id: string, unitColor:string, wordIsComplex:boolean}> = (props) => {
   const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
   const id = props.id;
   const unitColor = props.unitColor;  
@@ -24,7 +23,7 @@ const WordCard: React.FC<{id: string, unitColor:string, inComplexComponent?:bool
   const [wordIsLearned, setWordIsLearned] = useState<boolean>(false);
   const [deleteWord, setDeleteWord] = useState<boolean>(false);
 
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
 
   const LearnedWordsContext  = useLearnedWordsContext();
   const ComplexWordsContext  = useComplexWordsContext();

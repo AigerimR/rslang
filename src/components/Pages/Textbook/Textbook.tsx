@@ -7,7 +7,7 @@ import CardsContainer from '../../CardsContainer/CardsContainer';
 import classes from './Textbook.module.scss'
 import { Link } from 'react-router-dom';
 import starIcon from '../../../assets/svg/star.svg';
-import CommonContext from '../../Context/CommonContext';
+import UserContext from '../../Context/UserContext';
 
 const Textbook: React.FC = () => {
 
@@ -28,7 +28,7 @@ const Textbook: React.FC = () => {
 
   useEffect(()=>{getData()}, [page, unit]);
 
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
   if(loading) return <h2 className={classes.main}>Loading...</h2>
   return(
     <div className={classes.textbook}>

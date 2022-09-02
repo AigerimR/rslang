@@ -1,5 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
-import { deleteUserWord, getAllUserWords, getUserComplexWords, getUserLearnedWords } from './apiHelpers/users/usersController';
+import React, { FC, useState } from 'react';
 import './styles/index.scss';
 import classes from './app.module.scss';
 import Header from './components/Header/Header';
@@ -10,11 +9,10 @@ import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
 import ComplexWords from './components/Pages/Dictionary/ComplexWords/ComplexWords';
 import Textbook from './components/Pages/Textbook/Textbook';
 import Authorization from './components/Pages/Authorization/Authorization';
-import CommonContext from './components/Context/CommonContext';
+import UserContext from './components/Context/UserContext';
 import { ComplexWordsProvider } from './components/Context/ComplexWordsContext';
 import Dictionary from './components/Pages/Dictionary/Dictionary';
 import GamePage from './components/Pages/GamePage/GamePage';
-import { TWord } from './@types/words';
 import { LearnedWordsProvider } from './components/Context/LearnedWordsContext';
 
 const App: FC = () => {
@@ -22,7 +20,7 @@ const App: FC = () => {
   const [userLogged, setUserLogged] = useState<boolean>((localStorage.getItem('userId') === null) ? false : true);
   
   return (
-    <CommonContext.Provider value={{userLogged, setUserLogged}}>
+    <UserContext.Provider value={{userLogged, setUserLogged}}>
        <ComplexWordsProvider>
         <LearnedWordsProvider>
           <div className={classes.wrapper} >
@@ -63,7 +61,7 @@ const App: FC = () => {
           </div >
         </LearnedWordsProvider>
        </ComplexWordsProvider>
-    </CommonContext.Provider>
+    </UserContext.Provider>
   )
 };
 

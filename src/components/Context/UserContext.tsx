@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 
-const CommonContext = createContext({
+const UserContext = createContext({
   userLogged: false,
   setUserLogged: (userLogged)=>{},
 });
 
-export default CommonContext;
+export default UserContext;

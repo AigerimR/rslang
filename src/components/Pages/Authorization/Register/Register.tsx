@@ -5,7 +5,7 @@ import { Box, Button, TextField } from '@mui/material';
 import tickIcon from '../../../../assets/svg/tick.svg';
 import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
 import { EStatusCode } from '../../../../enums/serverStatusCode';
-import CommonContext from '../../../Context/CommonContext';
+import UserContext from '../../../Context/UserContext';
 
 const Register: React.FC = () => {
   const USER_CHECK = /^[a-zA-Z][a-zA-Z0-9-_]{2,23}$/;
@@ -44,7 +44,7 @@ const Register: React.FC = () => {
     setPasswordMatchValid(match);
   }, [password, passwordMatch]);
 
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
