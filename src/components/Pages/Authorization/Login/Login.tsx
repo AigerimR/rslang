@@ -4,7 +4,7 @@ import { loginUser } from '../../../../apiHelpers/users/usersController';
 
 import classes from './login.module.scss'
 import { Box, Button, TextField } from '@mui/material';
-import CommonContext from '../../../Context/CommonContext';
+import UserContext from '../../../Context/UserContext';
 
 const Login: React.FC = () => {
 
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   const [success, setSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
 
   const handleSubmit = async(e) =>{
     e.preventDefault();

@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import classes from './menu.module.scss';
 import { Link } from 'react-router-dom';
-import CommonContext from '../../Context/CommonContext';
+import UserContext from '../../Context/UserContext';
 
 const Menu = () => {
   const [menuActive, setMenuActive] = useState(false);
   const body = document.body;
   menuActive ? body.style.overflow = 'hidden' : body.style.overflow = 'auto';
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
 
   return (
     <div className={classes.menu_container}>

@@ -47,3 +47,14 @@
   }
 }
 
+@media screen and (max-width: 900px) {
+  .auth_side{
+   display: none;
+  }
+}
+@media screen and (max-width: 420px) {
+  .auth_container{
+    width: 350px;
+    padding: 30px 20px;
+  }
+}

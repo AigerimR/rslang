@@ -1,5 +1,12 @@
 @import '../../../app.module.scss';
 
+.main{
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-color: $color-creame;
+  height: 80vh;
+  text-align: center;
+}
 .textbook{
   padding-top: 20px;
   padding-bottom: 40px;

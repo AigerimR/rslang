@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import classes from './authorizationBtn.module.scss';
 import { Link } from 'react-router-dom';
-import CommonContext from '../../Context/CommonContext';
+import UserContext from '../../Context/UserContext';
 
 const AuthorizationBtn = () => {
-  const { userLogged, setUserLogged } = useContext(CommonContext);
+  const { userLogged, setUserLogged } = useContext(UserContext);
   const handleLogOut = () => {
     setUserLogged(false);
     localStorage.clear();

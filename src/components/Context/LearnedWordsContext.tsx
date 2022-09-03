@@ -1,9 +1,9 @@
-import { getUserComplexWords } from '../../apiHelpers/users/usersController';
-import React, { createContext, FC, useContext, useEffect, useState } from 'react';
+import { createUserWord, getUserLearnedWords, updateUserWord } from '../../apiHelpers/users/usersController';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { TWord } from '../../@types/words';
-import CommonContext from './CommonContext';
+import UserContext from './UserContext';
 
-const LearnedWordsContext = createContext(
+export const LearnedWordsContext = createContext(
   {
     learnedWords: [{ 
     "id": "string",
@@ -20,10 +20,56 @@ const LearnedWordsContext = createContext(
     "wordTranslate": "string",
     "textMeaningTranslate": "string",
     "textExampleTranslate": "string"}],
-    setLearnedWords: (learnedWords)=>{},
-    // LearnedWords: userLearnedWords,
-    // setLearnedWords: (LearnedWords)=>{},
-});
+    getLearnedWords: ()=>{},
+    addLearnedWord: (wordId)=>{},
+    updateLearnedWord: (wordId)=>{},
+}
+);
+
+function LearnedWordsProvider (props) {
+  
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  const { userLogged, setUserLogged } = useContext(UserContext);
+
+  const [learnedWords, setLearnedWords] = useState<TWord[]>([]);
+
+  //to set initial values
+  const getLearnedWords = async (): Promise<void> => {
+    const res = await getUserLearnedWords(userId, token);
+    setLearnedWords(res);
+  }
+
+  useEffect(()=>{ userLogged ? getLearnedWords() : setLearnedWords([]) }, [userLogged]);
+
+  const addLearnedWord = async (wordId: string) => {
+    await createUserWord({
+      userId: userId,
+      wordId: wordId,
+      word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },
+      token: token
+    });
+    getLearnedWords();  
+  }
+
+  const updateLearnedWord = async (wordId) => {
+    await updateUserWord({
+      userId: userId,
+      wordId: wordId,
+      word: { 'difficulty': 'weak', 'optional': {'learned': 'true'} },
+      token: token
+    });
+    getLearnedWords();  
+  }
+
+  const LearnedWordsData = { learnedWords, addLearnedWord, updateLearnedWord };
+  return <LearnedWordsContext.Provider value={LearnedWordsData} {...props} />;
+}
 
 
-export default LearnedWordsContext;
+function useLearnedWordsContext() {
+  return useContext(LearnedWordsContext);
+}
+
+export { LearnedWordsProvider, useLearnedWordsContext };

@@ -1,40 +1,28 @@
-import { getAllUserWords, getUserComplexWords } from '../../../../apiHelpers/users/usersController';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './complexWords.module.scss';
 import Units from '../../Textbook/Units/Units';
 import { TWord, TWordUser } from '../../../../@types/words';
-import { getWord } from '../../../../apiHelpers/words/wordsController';
 import CardsContainer from '../../../CardsContainer/CardsContainer';
-import ComplexWordsContext from '../../../Context/ComplexWordsContext';
+import { useComplexWordsContext } from '../../../Context/ComplexWordsContext';
 
 const ComplexWords: React.FC = () => {
   const [unit, setUnit] = useState(0);
   const [unitColor, setUnitColor] = useState('#bbd66c');
   const [data, setData] = useState<TWord[]>();
-  const [dataAll, setDataAll] = useState<TWord[]>();
 
   const updateUnit = (unit:number, unitColor: string): void => { setUnit(unit); setUnitColor(unitColor);};  
 
-  const { complexWords, setComplexWords} = useContext(ComplexWordsContext);
+  const ComplexWordsContext  = useComplexWordsContext();
 
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  // const getDataAll = async (): Promise<void> => {
-  //   const res = await getUserComplexWords(userId, token);
-  //   setDataAll(res);
-  // }
-  // console.log(complexWords);
-  // console.log(dataAll);
-  
-
   const getData = () => {
-    const res = complexWords?.filter((word) => word.group === unit);    
-    // const res = dataAll?.filter((word) => word.group === unit);    
+    const res = ComplexWordsContext.complexWords?.filter((word) => word.group === unit);    
     setData(res);
   }
-  // useEffect(()=>{getDataAll()}, [complexWords]);
-  useEffect(()=>{getData()}, [complexWords, unit]);
+  
+  useEffect(()=>{getData()}, [ComplexWordsContext.complexWords, unit]);
 
   return (
     <div className={classes.complexW_main}>
