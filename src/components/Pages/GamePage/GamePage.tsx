@@ -9,6 +9,7 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({
   title,
   gameDescription,
   ruleDescription,
+  keysDescription,
   game,
 }) => {
   const [isGameStart, setIsGameStart] = useState<boolean>(false);
@@ -33,6 +34,7 @@ const GamePage: FC<PropsWithChildren<IGamesPageProps>> = ({
             <h2 className={classes.gameName}>{title}</h2>
             <p className={classes.gameInfo}>{gameDescription}</p>
             <p className={classes.gameRule}>{ruleDescription}</p>
+            <p className={classes.gameKeys}>{keysDescription}</p>
             <p className={classes.gameLevelName}>Уровень сложности</p>
             <DifficultyLevels setLevel={setDifficultyLevel} difficultyLevel={difficultyLevel} />
             <button

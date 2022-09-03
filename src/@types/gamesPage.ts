@@ -2,6 +2,7 @@ export interface IGamesPageProps {
   title: string;
   gameDescription: string;
   ruleDescription: string;
+  keysDescription?: string;
   game: string;
 }
 

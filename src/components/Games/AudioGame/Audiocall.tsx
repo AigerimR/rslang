@@ -8,6 +8,7 @@ import {
 import IAudiocallProps from '../../../interfaces/audiocallGame';
 import correctSound from '../../../assets/sounds/correctAnswer.mp3';
 import wrongSound from '../../../assets/sounds/wrongAnswer.mp3';
+import useKey from './useKey';
 
 const AudioGame: FC<IAudiocallProps> = ({
   difficultyLevel,
@@ -80,7 +81,9 @@ const AudioGame: FC<IAudiocallProps> = ({
       });
 
       const newClass = items.map((item, i) =>
-        i === correctIndex ? (item = `${classes.audioList_item} ${classes.correctWord}`) : item,
+        i === correctIndex
+          ? (item = `${classes.audioList_item} ${classes.correctWord}`)
+          : item,
       );
       setClassName(newClass);
     } else {
@@ -97,8 +100,8 @@ const AudioGame: FC<IAudiocallProps> = ({
         i === correctIndex
           ? (item = `${classes.audioList_item} ${classes.correctWord}`)
           : i === wrongIndex
-          ? (item = `${classes.audioList_item} ${classes.wrongWord}`)
-          : item,
+            ? (item = `${classes.audioList_item} ${classes.wrongWord}`)
+            : item,
       );
       setClassName(newClass);
     }
@@ -191,17 +194,55 @@ const AudioGame: FC<IAudiocallProps> = ({
       setClassName(new Array(5).fill(classes.audioList_item));
       setNextButton(missSetBtn);
       setIndex(index + 1);
-      // const audio = new Audio(wordsList[index + 1].audio);
-      // if (livesCount < 5 && correctAnswerCount < 10) {
-      //   audio.play();
-      // }
     }
     if (livesCount > 4 || correctAnswerCount > 9) {
       handleFinishGame(true);
     }
   };
 
+  const handleEnter = () => { nextPage(); }
+  useKey('Enter', handleEnter);
+  const handleSpace = () => { audio.play(); }
+  useKey('Space', handleSpace);
+
+  const handleDigit1 = () => {
+    if (isDisabled === false) {
+      handleUserAnswer(w0);
+      setDisabled(true);
+    }
+  }
+  useKey('Digit1', handleDigit1);
+  const handleDigit2 = () => {
+    if (isDisabled === false) {
+      handleUserAnswer(w1);
+      setDisabled(true);
+    }
+  }
+  useKey('Digit2', handleDigit2);
+  const handleDigit3 = () => {
+    if (isDisabled === false) {
+      handleUserAnswer(w2);
+      setDisabled(true);
+    }
+  }
+  useKey('Digit3', handleDigit3);
+  const handleDigit4 = () => {
+    if (isDisabled === false) {
+      handleUserAnswer(w3);
+      setDisabled(true);
+    }
+  }
+  useKey('Digit4', handleDigit4);
+  const handleDigit5 = () => {
+    if (isDisabled === false) {
+      handleUserAnswer(w4);
+      setDisabled(true);
+    }
+  }
+  useKey('Digit5', handleDigit5);
+
   if (loading) return <p>Loading...</p>;
+
   return (
     <div className={classes.audiocallWrapper}>
       <div className={classes.audiocallContainer}>
@@ -212,8 +253,8 @@ const AudioGame: FC<IAudiocallProps> = ({
           <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[3]}</span>
           <span className={`${'material-icons'} ${classes.audiocallLive}`}>{hearts[4]}</span>
         </div>
-        <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}>
-          {isVolumeUp ? 'volume_up' : 'volume_off'}
+        <div className={`${'material-icons'} ${classes.audiocall_sound_btn}`}
+          onClick={() => isVolumeUp ? setVolumeUp(false) : setVolumeUp(true)}>{isVolumeUp ? 'volume_up' : 'volume_off'}
         </div>
       </div>
       <div className={classes.audiocallContentWrapper}>
@@ -225,11 +266,10 @@ const AudioGame: FC<IAudiocallProps> = ({
         <div
           className={classes.audioOpenWord}
           style={isAnswerSelected ? { display: 'flex' } : { display: 'none' }}
-        >
-          <div
-            className={classes.audioOpenWord_img}
-            style={{ backgroundImage: `url(${wordsList[index].image})` }}
-          ></div>
+        ><div
+          className={classes.audioOpenWord_img}
+          style={{ backgroundImage: `url(${wordsList[index].image})` }}
+        ></div>
           <div className={classes.audioOpenWord_context}>
             <span
               className={classes.audioOpenWord_context_sound}
@@ -241,78 +281,50 @@ const AudioGame: FC<IAudiocallProps> = ({
         <fieldset disabled={isDisabled ? true : false} className={classes.audioList}>
           <label
             className={items[0]}
-            onChange={() => {
-              handleUserAnswer(w0);
-            }}
-          >
+            onChange={() => { handleUserAnswer(w0); }}>
             <input
               checked={isDisabled ? true : false}
-              type='radio'
-              id='w0'
-              name='w0'
-              value={w0}
+              type='radio' id='w0' name='w0' value={w0}
             ></input>
-            {w0}
+            1. {w0}
           </label>
           <label
             className={items[1]}
-            onChange={() => {
-              handleUserAnswer(w1);
-            }}
-          >
+            onChange={() => { handleUserAnswer(w1); }}>
             <input
               checked={isDisabled ? true : false}
-              type='radio'
-              id='w1'
-              name='w1'
-              value={w1}
+              type='radio' id='w1' name='w1' value={w1}
             ></input>
-            {w1}
+            2. {w1}
           </label>
           <label
             className={items[2]}
-            onChange={() => {
-              handleUserAnswer(w2);
-            }}
-          >
+            onChange={() => { handleUserAnswer(w2); }}>
             <input
               checked={isDisabled ? true : false}
-              type='radio'
-              id='w2'
-              name='w2'
-              value={w2}
+              type='radio' id='w2' name='w2' value={w2}
             ></input>
-            {w2}
+            3. {w2}
           </label>
           <label
             className={items[3]}
-            onChange={() => {
-              handleUserAnswer(w3);
-            }}
-          >
+            onChange={() => { handleUserAnswer(w3); }}>
             <input
               checked={isDisabled ? true : false}
-              type='radio'
-              id='w3'
-              name='w3'
-              value={w3}
+              type='radio' id='w3' name='w3' value={w3}
             ></input>
-            {w3}
+            4. {w3}
           </label>
           <label
             className={items[4]}
             onChange={() => {
               handleUserAnswer(w4);
             }}
-          >
-            <input
-              checked={isDisabled ? true : false}
-              type='radio'
-              id='w4'
-              name='w4'
-              value={w4}
-            ></input>
-            {w4}
+          ><input
+            checked={isDisabled ? true : false}
+            type='radio' id='w4' name='w4' value={w4}
+          ></input>
+            5. {w4}
           </label>
         </fieldset>
         <button
