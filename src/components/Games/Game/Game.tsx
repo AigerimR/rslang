@@ -38,19 +38,15 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
     [wrongAnswerList],
   );
 
-  const memoziedHandleAnswer = useCallback(() => {
-    setAnswersCount((prevAnswersCount) => prevAnswersCount + 1);
-  }, [answersCount]);
-
-  const memoziedHandleRightAnswer = useCallback(() => {
-    setRightAnswersCount((prevRightAnswersCount) => prevRightAnswersCount + 1);
-  }, [rightAnswersCount]);
-
-  const memoziedHandleScore = useCallback(
-    (score) => {
-      setScore(score);
+  const memoziedHandleAnswer = useCallback(
+    (isCorrect: boolean) => {
+      setAnswersCount((prevAnswersCount) => prevAnswersCount + 1);
+      if (isCorrect) {
+        setScore((prevState) => prevState + 10);
+        setRightAnswersCount((prevState) => prevState + 1);
+      }
     },
-    [score],
+    [answersCount],
   );
 
   const memoziedHandleFinishGame = useCallback(() => {
@@ -64,9 +60,7 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
         difficultyLevel={difficultyLevel}
         score={score}
         handleFinishGame={memoziedHandleFinishGame}
-        handleScore={memoziedHandleScore}
         handleAnswer={memoziedHandleAnswer}
-        handleRightAnswer={memoziedHandleRightAnswer}
         handleCorrectAnswersList={memoziedHandleCorrectAnswersList}
         handleWrongAnswersList={memoziedHandleWrongAnswersList}
       />
@@ -75,11 +69,8 @@ const Game: FC<{ difficultyLevel: string; game: string; page?: number }> = ({
       <AudiocGame
         page={page}
         difficultyLevel={difficultyLevel}
-        score={score}
         handleFinishGame={memoziedHandleFinishGame}
-        handleScore={memoziedHandleScore}
         handleAnswer={memoziedHandleAnswer}
-        handleRightAnswer={memoziedHandleRightAnswer}
         handleCorrectAnswersList={memoziedHandleCorrectAnswersList}
         handleWrongAnswersList={memoziedHandleWrongAnswersList}
         correctAnswerList={[]}

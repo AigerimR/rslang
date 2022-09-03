@@ -19,7 +19,7 @@ export type TSprintGameWord = {
   id: string;
   word: string;
   translate: string;
-  rightTranslate: string;
+  wordTranslate: string;
   audio: string;
 };
 

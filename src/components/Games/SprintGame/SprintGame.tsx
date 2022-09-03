@@ -13,9 +13,7 @@ const SprintGame: FC<ISprintGameProps> = ({
   score,
   page,
   handleFinishGame,
-  handleScore,
   handleAnswer,
-  handleRightAnswer,
   handleCorrectAnswersList,
   handleWrongAnswersList,
 }) => {
@@ -24,7 +22,7 @@ const SprintGame: FC<ISprintGameProps> = ({
       id: '',
       word: '',
       translate: '',
-      rightTranslate: '',
+      wordTranslate: '',
       audio: '',
     },
   ]);
@@ -41,16 +39,15 @@ const SprintGame: FC<ISprintGameProps> = ({
   }, []);
 
   const checkAnswer = (answer: boolean) => {
-    const rightAnswer = wordsList[index].translate === wordsList[index].rightTranslate;
+    const rightAnswer = wordsList[index].translate === wordsList[index].wordTranslate;
     if (answer === rightAnswer) {
+      handleAnswer(true);
       handleCorrectAnswersList(wordsList[index]);
-      handleScore(score + 10);
-      handleRightAnswer();
       if (isVolumeUp) {
         new Audio(correctSound).play();
       }
     } else {
-      handleScore(score);
+      handleAnswer(false);
       handleWrongAnswersList(wordsList[index]);
       if (isVolumeUp) {
         new Audio(wrongSound).play();
@@ -62,7 +59,6 @@ const SprintGame: FC<ISprintGameProps> = ({
 
   const handleUserAnswer = (answer: boolean) => {
     return () => {
-      handleAnswer();
       checkAnswer(answer);
     };
   };
@@ -71,8 +67,11 @@ const SprintGame: FC<ISprintGameProps> = ({
 
   return (
     <div className={classes.sprintContainer}>
-      <div className={`${'material-icons'} ${classes.soundBtn}`}
-        onClick={() => isVolumeUp ? setVolumeUp(false) : setVolumeUp(true)}>{isVolumeUp ? 'volume_up' : 'volume_off'}
+      <div
+        className={`${'material-icons'} ${classes.soundBtn}`}
+        onClick={() => (isVolumeUp ? setVolumeUp(false) : setVolumeUp(true))}
+      >
+        {isVolumeUp ? 'volume_up' : 'volume_off'}
       </div>
       <p className={classes.sprintScore}>Score: {score}</p>
       <p className={classes.sprintQuestion}>

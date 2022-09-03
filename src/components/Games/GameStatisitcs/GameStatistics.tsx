@@ -2,6 +2,8 @@ import { IСomment } from '../../../@types/gamesPage';
 import React, { FC, useState } from 'react';
 import classes from './gameStatistics.scss';
 import { TGameWord } from '../../../@types/words';
+import { v4 as uuidv4 } from 'uuid';
+
 const URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 
 const GameStatistics: FC<{
@@ -100,7 +102,7 @@ const GameStatistics: FC<{
             </p>
             {wrongAnswerList.map((word) => {
               return (
-                <li key={word.id}>
+                <li key={uuidv4()}>
                   <div className={classes.statisticList_word}>
                     <div
                       className={classes.statisticList_word_sound}
@@ -123,7 +125,7 @@ const GameStatistics: FC<{
             </p>
             {correctAnswerList.map((word) => {
               return (
-                <li key={word.id}>
+                <li key={uuidv4()}>
                   <div className={classes.statisticList_word}>
                     <div
                       className={classes.statisticList_word_sound}
