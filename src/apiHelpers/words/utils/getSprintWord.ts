@@ -10,7 +10,7 @@ const getSprintWord = (gettedWord: TWord, randomWord: TWord): TSprintGameWord =>
     word,
     audio,
     translate: isRightAnswer() ? wordTranslate : randomWord.wordTranslate,
-    rightTranslate: wordTranslate,
+    wordTranslate: wordTranslate,
   };
 
   return sprintWord;

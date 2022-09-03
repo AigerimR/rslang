@@ -13,9 +13,7 @@ const SprintGame: FC<ISprintGameProps> = ({
   score,
   page,
   handleFinishGame,
-  handleScore,
   handleAnswer,
-  handleRightAnswer,
   handleCorrectAnswersList,
   handleWrongAnswersList,
 }) => {
@@ -24,7 +22,7 @@ const SprintGame: FC<ISprintGameProps> = ({
       id: '',
       word: '',
       translate: '',
-      rightTranslate: '',
+      wordTranslate: '',
       audio: '',
     },
   ]);
@@ -40,14 +38,13 @@ const SprintGame: FC<ISprintGameProps> = ({
   }, []);
 
   const checkAnswer = (answer: boolean) => {
-    const rightAnswer = wordsList[index].translate === wordsList[index].rightTranslate;
+    const rightAnswer = wordsList[index].translate === wordsList[index].wordTranslate;
     if (answer === rightAnswer) {
+      handleAnswer(true);
       handleCorrectAnswersList(wordsList[index]);
-      handleScore(score + 10);
-      handleRightAnswer();
       new Audio(correctSound).play();
     } else {
-      handleScore(score);
+      handleAnswer(false);
       handleWrongAnswersList(wordsList[index]);
       new Audio(wrongSound).play();
     }
@@ -57,7 +54,6 @@ const SprintGame: FC<ISprintGameProps> = ({
 
   const handleUserAnswer = (answer: boolean) => {
     return () => {
-      handleAnswer();
       checkAnswer(answer);
     };
   };
