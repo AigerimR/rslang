@@ -8,7 +8,6 @@ import classes from './Textbook.module.scss'
 import { Link } from 'react-router-dom';
 import starIcon from '../../../assets/svg/star.svg';
 import UserContext from '../../Context/UserContext';
-import Footer from '../../Footer/Footer';
 
 const Textbook: React.FC = () => {
 
@@ -33,7 +32,6 @@ const Textbook: React.FC = () => {
   if (loading) return (
     <section>
       <h2 className={classes.main}>Loading...</h2>
-      <Footer />
     </section>
   );
 
@@ -60,7 +58,6 @@ const Textbook: React.FC = () => {
         </div>
         <CardsContainer data={data!} unitColor={unitColor} inTextbook={true} />
       </div>
-      <Footer />
     </section>
   );
 }

@@ -4,7 +4,6 @@ import Units from '../../Textbook/Units/Units';
 import { TWord, TWordUser } from '../../../../@types/words';
 import CardsContainer from '../../../CardsContainer/CardsContainer';
 import { useComplexWordsContext } from '../../../Context/ComplexWordsContext';
-import Footer from '../../../Footer/Footer';
 
 const ComplexWords: React.FC = () => {
   const [unit, setUnit] = useState(0);
@@ -35,7 +34,6 @@ const ComplexWords: React.FC = () => {
         {data?.length === 0 ? <p className={classes.complexW_info}>No words yet</p> : <CardsContainer data={data!} unitColor={unitColor} inComplexComponent={true} />}
         <br />
       </div>
-      <Footer />
     </section>
   );
 }
