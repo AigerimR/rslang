@@ -2,8 +2,8 @@
 
 .cards_container {
   display: flex;
-  flex-wrap: wrap;
   gap: 16px;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -25,7 +25,14 @@
 .textbook_games {
   position: relative;
   top: -160px;
+  margin-left: -40px;
   width: 350px;
+}
+
+.fakeGame {
+  display: none;
+  width: 120px;
+  height: 120px;
 }
 
 .game {
@@ -35,14 +42,9 @@
     position: absolute;
     width: 120px;
     height: 120px;
-    margin-top: 10px;
-    padding-top: 2px;
-    padding-right: 2px;
     color: $color-venetian-red;
     font-family: 'Neucha', cursive;
-    font-size: 1.25rem;
-    text-align: center;
-    background-color: $color-pale-spring-bud;
+    font-size: 1.3rem;
     border: none;
     border-radius: 50%;
     transition: transform 0.2s;
@@ -78,8 +80,16 @@
 @media screen and (max-width: 1180px) {
   .textbook_games {
     position: static;
-    width: 350px;
-    margin: 10px auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .fakeGame {
+    display: block;
   }
 
   .game {
@@ -87,11 +97,26 @@
     &_sprint,
     &_audio {
       position: static;
-      margin: 0 20px 0 0;
     }
+  }
+}
 
-    &_audio {
-      margin-right: 90px;
+@media screen and (max-width: 635px) {
+  .textbook_games {
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game_sprint,
+  .game_audio,
+  .fakeGame {
+    width: 300px;
+    height: 50px;
+    border-radius: 8px;
+
+    &:hover {
+      transform: scale(1);
     }
   }
 }

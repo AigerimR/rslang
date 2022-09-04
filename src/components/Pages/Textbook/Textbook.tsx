@@ -32,27 +32,30 @@ const Textbook: React.FC = () => {
   const { userLogged, setUserLogged } = useContext(UserContext);
   if (loading) return <h2 className={classes.main}>Loading...</h2>
   return (
-    <div className={classes.textbook}>
+    <section className={classes.textbook}>
       <div className={classes.container}>
+        <h2 className={classes.textbook_title}>Учебник</h2>
         <div className={classes.textbook_header}>
           <div></div>
-          <div>
+          <div className={classes.textbook_levels}>
             <Units updateUnit={updateUnit} />
             <Paginationmui updatePage={updatePage} />
           </div>
-          <Link to="/dictionary" className={userLogged ? classes.item_show : classes.item_none}>
-            <button className={classes.game_words}>
-              Словарь
-              <svg className={classes.btn_icon}>
-                <use href={`${starIcon}#star`} />
-              </svg>
-            </button>
-          </Link>
+          <div>
+            <Link to="/dictionary" className={userLogged ? classes.item_show : classes.item_none}>
+              <button className={classes.game_words}>
+                Словарь
+                <svg className={classes.btn_icon}>
+                  <use href={`${starIcon}#star`} />
+                </svg>
+              </button>
+            </Link>
+          </div>
         </div>
         <CardsContainer data={data!} unitColor={unitColor} inTextbook={true} />
       </div>
       <Footer />
-    </div>
+    </section>
   );
 }
 
