@@ -11,3 +11,7 @@ export type TUserRes = {
     id: string;
     email: string; 
 }
+export type TUserToken = {
+    userId: string;
+    refreshToken: string; 
+}

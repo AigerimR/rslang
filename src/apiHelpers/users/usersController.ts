@@ -1,5 +1,5 @@
 import { EStatusCode } from './../../enums/serverStatusCode';
-import { TUser, TUserLogIn } from './../../@types/users';
+import { TUser, TUserLogIn, TUserToken } from './../../@types/users';
 import { getWord } from '../words/wordsController';
 import { TWord } from './../../@types/words';
 
@@ -36,20 +36,20 @@ export const loginUser = async (user: TUserLogIn) => {
   return(content);
 };
 
-// export const getUserToken = async (id) => {
-  
-//   const rawResponse = await fetch(`${BASE_URL}/users/${id}/tokens`, {
-//     method: 'GET',
-//     // headers: {
-//     //   'Accept': 'application/json',
-//     //   'Content-Type': 'application/json'
-//     // },
-//     // body: JSON.stringify(user)
-//   });
-//   const content = await rawResponse.json();
-
-//   return(content);
-// };
+export const refreshUserToken = async (user: TUserToken) => {
+  const rawResponse = await fetch(`${BASE_URL}/users/${user.userId}/tokens`, {
+    method: 'GET',
+    headers: {
+    'Authorization': `Bearer ${user.refreshToken}`,
+    'Accept': 'application/json',
+    },
+  });
+  const content = await rawResponse.json();
+  // console.log(content);
+  localStorage.setItem('token', content.token);
+  localStorage.setItem('refreshToken', content.refreshToken);
+  return(content);
+};
 
 
 export const createUserWord = async ({ userId, wordId, word, token }) => {
@@ -127,3 +127,27 @@ export const getUserLearnedWords = async (userId, token) => {
   });
   return  Promise.all(allLearnedWordsData).then(val=> {return val});
 }
+
+
+export const aggregateUserWords = async (userId, token) => {
+  //filter to get all userHardWords & nonUserWords
+  const filter = {
+    	"$or": [
+    	{"userWord.difficulty":"hard"},
+    	{"userWord":null}
+    	]
+    }
+  
+  const rawResponse = await fetch(`${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=3600&filter=${encodeURIComponent(JSON.stringify(filter))}`, {
+  // const rawResponse = await fetch(`${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=3600&filter={"userWord":null}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  const content = await rawResponse.json();
+
+  console.log(content);
+};
