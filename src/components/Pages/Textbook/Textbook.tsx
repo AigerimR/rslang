@@ -30,7 +30,13 @@ const Textbook: React.FC = () => {
   useEffect(() => { getData() }, [page, unit]);
 
   const { userLogged, setUserLogged } = useContext(UserContext);
-  if (loading) return <h2 className={classes.main}>Loading...</h2>
+  if (loading) return (
+    <section>
+      <h2 className={classes.main}>Loading...</h2>
+      <Footer />
+    </section>
+  );
+
   return (
     <section className={classes.textbook}>
       <div className={classes.container}>
