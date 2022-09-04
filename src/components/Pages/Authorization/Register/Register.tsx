@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import classes from './register.module.scss'
 import { Box, Button, TextField } from '@mui/material';
 import tickIcon from '../../../../assets/svg/tick.svg';
-import { createUser, loginUser } from '../../../../apiHelpers/users/usersController';
+import { createUser, loginUser, refreshUserToken } from '../../../../apiHelpers/users/usersController';
 import { EStatusCode } from '../../../../enums/serverStatusCode';
 import UserContext from '../../../Context/UserContext';
 
@@ -53,12 +53,16 @@ const Register: React.FC = () => {
       if(res?.status === EStatusCode.Ok) {
         const user = await res.json(); 
         setSuccess(true); 
-        loginUser({'email': email, 'password': password} ).then(resp=> {
+        loginUser({'email': email, 'password': password} ).then( async (resp)=> {
           localStorage.setItem('userId', resp.userId);
           localStorage.setItem('token', resp.token);
           localStorage.setItem('refreshToken', resp.refreshToken);
           localStorage.setItem('name', resp.name);
           setUserLogged(true);
+          setInterval(
+            await refreshUserToken( {'userId': resp.userId, 'refreshToken': resp.refreshToken}),
+            4*60*60
+          )
         })
        return user}
       else if (res?.status === EStatusCode.ExistingUser) {setErrorMessage('Такой пользователь уже существует')}
