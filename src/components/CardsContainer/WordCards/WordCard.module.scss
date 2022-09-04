@@ -54,6 +54,9 @@
   display: grid;
   column-gap: 40px;
   grid-template-columns: 2fr 1fr;
+  height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   h3 {
     margin: 10px 0 5px 0;
@@ -128,12 +131,37 @@
 
 .Modal {
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: calc(50vw - 400px);
   width: 800px;
-  height: 400px;
   padding: 30px;
   background-color: $color-papaya-whip;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: none;
   border-radius: 5px;
+  outline: none;
+}
+
+@media screen and (max-width: 900px) {
+  .Modal {
+    top: 100px;
+    left: calc(50vw - 300px);
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 635px) {
+  .Modal {
+    left: calc(50vw - 48%);
+    width: 96%;
+  }
+
+  .innerContent {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .btn_normal {
+    margin-right: 10px;
+  }
 }
