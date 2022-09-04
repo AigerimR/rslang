@@ -87,6 +87,20 @@ export const refreshUserToken = async (user: TUserToken) => {
 //     // })
 // };
 
+export const getUserWord = async ({ userId, wordId, token }) => {
+  const rawResponse = await fetch(`${BASE_URL}/users/${userId}/words/${wordId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      // 'Content-Type': 'application/json',
+    },
+    // body: JSON.stringify(word)
+  });
+  const content = await rawResponse.json();
+  return content;
+  // console.log(content.optional.learned);
+};
 
 export const createUserWord = async ({ userId, wordId, word, token }) => {
   const rawResponse = await fetch(`${BASE_URL}/users/${userId}/words/${wordId}`, {
@@ -201,3 +215,13 @@ export const aggregateUserWords = async (userId, token) => {
 
   console.log(content);
 };
+
+export const getUserOldWords = async (userId, token) => {
+  const allOldWords = await getAllUserWords({ userId, token }).then(
+        (words)=>{return words.filter(word => word.optional?.new === 'false');});
+        
+  const allOldWordsData:[Promise<TWord>] = allOldWords.map(async (word) => { 
+    return  await getWord(word.wordId);
+  });
+  return  Promise.all(allOldWordsData).then(val=> {return val});
+}
