@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classes from './footer.module.scss';
 import logoRSSchool from '../../assets/svg/rsschool.svg';
 import logoGitHub from '../../assets/svg/github.svg';
+import { useLocation } from 'react-router-dom';
 
-const Footer = () => {
+const Footer: FC = () => {
+  const { pathname } = useLocation();
+  if (pathname === '/audio-game') return null;
+  if (pathname === '/sprint-game') return null;
+
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
