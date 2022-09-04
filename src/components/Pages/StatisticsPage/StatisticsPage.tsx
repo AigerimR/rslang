@@ -30,7 +30,7 @@ const StatisticsPage: FC = () => {
                 <p className={classes.wordsToday_chartTitle}>Новые&emsp;слова</p>
                 <div className={classes.wordsToday_chart}>
                   <p className={classes.wordsToday_count}>{newWordsDay}</p>
-                  <div className={classes.newWordsToday_block} style={{ height: '380px' }}></div>
+                  <div className={classes.newWordsToday_block} style={newWordsDay ? { height: '380px' } : { height: '0' }}></div>
                 </div>
               </div>
               <div className={classes.wordsToday}>
