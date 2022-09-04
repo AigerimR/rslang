@@ -23,7 +23,6 @@ const Authorization: React.FC = () => {
           <img src={manImage} alt="" className={classes.auth_img} />
         </div>
       </div>
-      <Footer />
     </section>
   );
 }
