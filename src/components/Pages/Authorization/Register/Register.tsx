@@ -59,10 +59,10 @@ const Register: React.FC = () => {
           localStorage.setItem('refreshToken', resp.refreshToken);
           localStorage.setItem('name', resp.name);
           setUserLogged(true);
-          setInterval(
-            await refreshUserToken( {'userId': resp.userId, 'refreshToken': resp.refreshToken}),
-            4*60*60
-          )
+          // setInterval(
+          //   await refreshUserToken( {'userId': resp.userId, 'refreshToken': resp.refreshToken}),
+          //   4*60*60
+          // )
         })
        return user}
       else if (res?.status === EStatusCode.ExistingUser) {setErrorMessage('Такой пользователь уже существует')}

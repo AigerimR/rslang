@@ -44,12 +44,48 @@ export const refreshUserToken = async (user: TUserToken) => {
     'Accept': 'application/json',
     },
   });
-  const content = await rawResponse.json();
-  // console.log(content);
-  localStorage.setItem('token', content.token);
-  localStorage.setItem('refreshToken', content.refreshToken);
-  return(content);
+  if (rawResponse.status === 401 || rawResponse.status === 403) {
+    localStorage.clear();
+    window.location.href = "/authorization";
+    return;
+  }
+ else{
+    const content = await rawResponse.json();
+    // console.log(content);
+    localStorage.setItem('token', content.token);
+    localStorage.setItem('refreshToken', content.refreshToken);
+    return(content);
+  }
+  // const content = await rawResponse.json();
+  // // console.log(content);
+  // localStorage.setItem('token', content.token);
+  // localStorage.setItem('refreshToken', content.refreshToken);
+  // return(content);
 };
+
+// export const refreshUserToken = async (user: TUserToken) => {
+//   const rawResponse = await fetch(`${BASE_URL}/users/${user.userId}/tokens`, {
+//     method: 'GET',
+//     headers: {
+//     'Authorization': `Bearer ${user.refreshToken}`,
+//     'Accept': 'application/json',
+//     },
+//   })
+//   // then(async (response) =>{
+//       if (rawResponse.status === 401) {
+//         console.log("aika");
+//         window.location.href = "/authorization";
+//         return;
+//       }
+//      else{
+//         const content = await rawResponse.json();
+//         // console.log(content);
+//         localStorage.setItem('token', content.token);
+//         localStorage.setItem('refreshToken', content.refreshToken);
+//         return(content);
+//       }
+//     // })
+// };
 
 
 export const createUserWord = async ({ userId, wordId, word, token }) => {
@@ -66,6 +102,7 @@ export const createUserWord = async ({ userId, wordId, word, token }) => {
 
   // console.log(content.optional.learned);
 };
+
 export const deleteUserWord = async ({ userId, wordId, word, token }) => {
   return await fetch(`${BASE_URL}/users/${userId}/words/${wordId}`, {
     method: 'DELETE',
@@ -103,9 +140,22 @@ export const getAllUserWords = async ({ userId, token }) => {
       'Accept': 'application/json',
     }
   });
-  const content = await rawResponse.json();
+  if (rawResponse.status === 401) {
+    refreshUserToken( {'userId': userId, 'refreshToken': localStorage.getItem('refreshToken')!})
+    // localStorage.clear();
+    // window.location.href = "/authorization";
+    return;
+  }
+ else{
+    const content = await rawResponse.json();
+    // console.log(content);
+    // localStorage.setItem('token', content.token);
+    // localStorage.setItem('refreshToken', content.refreshToken);
+    return(content);
+  }
+  // const content = await rawResponse.json();
   // console.log(content);
-  return content;
+  // return content;
 };
 
 export const getUserComplexWords = async (userId, token) => {
