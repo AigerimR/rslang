@@ -1,3 +1,4 @@
+import { aggregateUserWords } from '../../../../apiHelpers/users/usersController';
 import React, { useEffect, useState } from 'react';
 import classes from './Units.module.scss'
 
@@ -19,8 +20,14 @@ const Units: React.FC <{updateUnit: (unit: number, unitColor: string) => void}> 
      updateUnit(unit, unitColor)
   }, [unit, unitColor]);
 
+  // const checking = () =>{
+  //   console.log("aika");
+    
+  //   aggregateUserWords(localStorage.getItem('userId'), localStorage.getItem('token'));
+  // }
   return(
     <div className={classes.units_block}>
+      {/* <button onClick={() => checking()}>new words</button> */}
       <h4 className={classes.units_title}>РАЗДЕЛЫ</h4>
       <div className={classes.units} onClick = {handleChange}>
         <button className={`${classes.btn_unit} ${classes.btn_a1} ${unit === 0 ? classes.btn_active : ''}`} id="0">A1</button>
