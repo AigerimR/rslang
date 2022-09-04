@@ -19,11 +19,3 @@
   font-size: 2rem;
   font-weight: 700;
 }
-
-@media screen and (max-width: 540px) {
-  .complexW_main {
-    .container {
-      min-height: calc(100vh - 220px);
-    }
-  }
-}
