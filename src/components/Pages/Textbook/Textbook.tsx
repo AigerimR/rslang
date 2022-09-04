@@ -34,7 +34,7 @@ const Textbook: React.FC = () => {
   return (
     <section className={classes.textbook}>
       <div className={classes.container}>
-        <h2 className={classes.textbook_title}>Учебник</h2>
+        <h2 className={classes.containerTitle}>Учебник</h2>
         <div className={classes.textbook_header}>
           <div></div>
           <div className={classes.textbook_levels}>

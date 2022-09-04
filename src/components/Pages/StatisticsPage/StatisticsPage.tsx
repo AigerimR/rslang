@@ -23,7 +23,7 @@ const StatisticsPage: FC = () => {
     <div className={classes.statistics_wrapper}>
       <section className={classes.statistics}>
         <div className={classes.container}>
-          <h2 className={classes.statistics_title}>Общая статистика</h2>
+          <h2 className={classes.containerTitle}>Общая статистика</h2>
           <div className={classes.statistics_сontainer}>
             <div className={classes.chart_content}>
               <div className={classes.wordsToday}>
@@ -57,7 +57,7 @@ const StatisticsPage: FC = () => {
               src={statisticsGirl} alt='Statistics Girl' />
           </div>
           <div className={classes.statistics_gamesContainer}>
-            <h2 className={classes.statistics_gamesTitle}>Статистика по мини-играм</h2>
+            <h2 className={classes.containerTitle}>Статистика по мини-играм</h2>
             <div className={classes.statistics_games}>
               <div className={classes.statistics_game}>
                 <p className={classes.statistics_gameTitle}>Аудиовызов</p>
