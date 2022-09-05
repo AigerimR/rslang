@@ -12,8 +12,8 @@ const CardsContainer: React.FC<{
   unitColor: string;
   inComplexComponent?: boolean;
   inTextbook?: boolean;
-  unit: string;
-  page: number;
+  unit?: string;
+  page?: number;
 }> = (props) => {
   const LearnedWordsContext = useLearnedWordsContext();
 
@@ -80,7 +80,7 @@ const CardsContainer: React.FC<{
           setIsGameStart(false);
         }}
       >
-        <Game difficultyLevel={props.unit} game={game} page={props.page} />
+        <Game difficultyLevel={props.unit!} game={game} page={props.page} />
       </Modal>
     </>
   );
