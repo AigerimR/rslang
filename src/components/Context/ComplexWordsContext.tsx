@@ -26,6 +26,9 @@ export const ComplexWordsContext = createContext({
       textExampleTranslate: 'string',
     },
   ],
+  getComplexWords: () => { },
+  addComplexWord: (wordId) => { },
+  deleteComplexWord: (wordId) => { },
 });
 
 function ComplexWordsProvider(props) {

@@ -30,7 +30,7 @@ const LearnedWords: React.FC = () => {
         <Units updateUnit={updateUnit} />
         <br />
         <br />
-        {data?.length === 0 ? <p className={classes.learnedW_info}>No words yet</p> : <CardsContainer data={data!} unitColor={unitColor} />}
+        {data?.length === 0 ? <p className={classes.learnedW_info}>Ещё нет слов</p> : <CardsContainer data={data!} unitColor={unitColor} />}
         <br />
       </div>
     </section>

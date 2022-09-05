@@ -31,7 +31,7 @@ const ComplexWords: React.FC = () => {
         <Units updateUnit={updateUnit} />
         <br />
         <br />
-        {data?.length === 0 ? <p className={classes.complexW_info}>No words yet</p> : <CardsContainer data={data!} unitColor={unitColor} inComplexComponent={true} />}
+        {data?.length === 0 ? <p className={classes.complexW_info}>Ещё нет слов</p> : <CardsContainer data={data!} unitColor={unitColor} inComplexComponent={true} />}
         <br />
       </div>
     </section>
