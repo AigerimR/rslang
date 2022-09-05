@@ -1,134 +1,122 @@
 @import '../../app.module.scss';
-* {
-  box-sizing: border-box;
+
+.cards_container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.cards{
-  &_container{
-    width: 92%;
-    margin: auto;
-    row-gap: 2px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(30px, auto);
-  }
-} 
-
-.Modal{
+.Modal {
+  position: absolute;
+  top: 400px;
+  left: 400px;
+  right: 40px;
+  bottom: 40px;
   width: 70%;
   height: 200px;
-  position: absolute;
-    top: 400px;
-    left: 400px;
-    right: 40px;
-    bottom: 40px;
-    background-color: papayawhip;
+  background-color: $color-papaya-whip;
 }
 
-.main{
+.main {
   text-align: center;
-  // height: 52vh;
 }
 
-.textbook_games{
+.textbook_games {
   position: relative;
   top: -160px;
+  margin-left: -40px;
   width: 350px;
-
 }
 
-.game{
+.fakeGame {
+  display: none;
+  width: 120px;
+  height: 120px;
+}
+
+.game {
+
   &_sprint,
-  &_audio{
+  &_audio {
     position: absolute;
-    background-color: #E9EBBE;
-    font-family: 'Neucha', cursive;
     width: 120px;
     height: 120px;
-    margin-top: 10px;
-    text-align: center;
-    padding-right: 2px;
-    padding-top: 2px;
-    border-radius: 50%;
     color: $color-venetian-red;
+    font-family: 'Neucha', cursive;
+    font-size: 1.3rem;
     border: none;
-    font-size: 20px;
+    border-radius: 50%;
     transition: transform 0.2s;
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       transform: scale(1.1);
-    } 
+    }
   }
 
-  &_sprint{
-    right: -20px;
+  &_sprint {
     top: 20px;
+    right: -20px;
     background-color: $color-sandy-brown;
   }
 
-  &_audio{
-    left: 100px;
+  &_audio {
     top: -15px;
+    left: 100px;
     background-color: $color-golden-poppy;
   }
 }
 
-.none{
+.none {
   display: none;
 }
 
-.faded{
+.faded {
   background-color: rgba(168, 159, 148, 0.3);
 }
 
-
-@media screen and (max-width: 1350px) {
-  
-  .cards{
-    &_container{
-      grid-template-columns: repeat(3, 1fr);
-    }
-  } 
-
-}
-
 @media screen and (max-width: 1180px) {
-  .textbook_games{
+  .textbook_games {
     position: static;
-    width: 350px;
-    margin: 10px auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
   }
 
-  .game{
+  .fakeGame {
+    display: block;
+  }
+
+  .game {
+
     &_sprint,
-    &_audio{
+    &_audio {
       position: static;
-      margin: 0 20px 0 0;
-    }
-  
-    &_audio{
-      margin-right: 90px;
     }
   }
-
 }
-@media screen and (max-width: 1050px) {
-  
-  .cards{
-    &_container{
-      grid-template-columns: repeat(2, 1fr);
-    }
-  } 
 
-}
-@media screen and (max-width: 700px) {
-  
-  .cards{
-    &_container{
-      margin: auto;
-      grid-template-columns: 1fr;
-    }
-  } 
+@media screen and (max-width: 635px) {
+  .textbook_games {
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .game_sprint,
+  .game_audio,
+  .fakeGame {
+    width: 300px;
+    height: 50px;
+    border-radius: 8px;
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
 }

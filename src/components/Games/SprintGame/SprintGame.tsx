@@ -31,6 +31,7 @@ const SprintGame: FC<ISprintGameProps> = ({
   const [index, setIndex] = useState<number>(0);
 
   const [loading, setLoading] = useState<boolean>(true);
+  const [isVolumeUp, setVolumeUp] = useState<boolean>(true);
 
   useEffect(() => {
     const words: Promise<TSprintGameWord[] | void> = page
@@ -45,11 +46,15 @@ const SprintGame: FC<ISprintGameProps> = ({
       handleCorrectAnswersList(wordsList[index]);
       handleScore(score + 10);
       handleRightAnswer();
-      new Audio(correctSound).play();
+      if (isVolumeUp) {
+        new Audio(correctSound).play();
+      }
     } else {
       handleScore(score);
       handleWrongAnswersList(wordsList[index]);
-      new Audio(wrongSound).play();
+      if (isVolumeUp) {
+        new Audio(wrongSound).play();
+      }
     }
     const nextIndex = page ? getRandomIndex(20) : getRandomIndex(120);
     setIndex(nextIndex);
@@ -62,14 +67,17 @@ const SprintGame: FC<ISprintGameProps> = ({
     };
   };
 
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <p>Loading...</p>;
 
   return (
-    <div className={classes.container}>
-      <h5>Score: {score}</h5>
-      <h5>
+    <div className={classes.sprintContainer}>
+      <div className={`${'material-icons'} ${classes.soundBtn}`}
+        onClick={() => isVolumeUp ? setVolumeUp(false) : setVolumeUp(true)}>{isVolumeUp ? 'volume_up' : 'volume_off'}
+      </div>
+      <p className={classes.sprintScore}>Score: {score}</p>
+      <p className={classes.sprintQuestion}>
         {wordsList[index].word} это {wordsList[index].translate} ?
-      </h5>
+      </p>
       <div className={classes.buttonsContainer}>
         <button
           onClick={handleUserAnswer(true)}

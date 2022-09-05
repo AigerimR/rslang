@@ -1,166 +1,167 @@
 @import '../../../app.module.scss';
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
 
-.card_small{
-  background-color: $color-white;
-  width: 310px;
-  height: 70px;
-  margin: 5px;
-  text-align: center;
-  padding: 6px 30px;
-  overflow: hidden;
-  font-size: 20px;
-  transition: 0.2s all;
+.card_small {
+  flex-shrink: 0;
+  width: 300px;
+  padding: 10px;
   color: $color-raisin-black;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   line-height: 150%;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: 0.2s all;
+  overflow: hidden;
 
-  &_word{
-    margin: 0;
-  }
-
-  &_transcript{
-    margin: 0;
-  }
-  &_header{
+  &_header {
     position: relative;
   }
-  &_sign{
+
+  &_sign {
     position: absolute;
     top: 15px;
-    right: 10px;  
+    right: 10px;
   }
-  &:hover{
+
+  &:hover {
     cursor: pointer;
-  } 
+  }
 }
 
-.card{
-  &_none{
+.card {
+  &_none {
     display: none;
   }
 
-  &_header{
+  &_header {
     display: flex;
     column-gap: 20px;
     align-items: center;
-    margin-bottom: 10px;
     width: 240px;
+    margin-bottom: 10px;
   }
 
-  &_word{
-    margin: 0;
-  }
-
-  &_trans{
-    margin: 0;
-  }
-
-  &_transcript{
-    margin: 0;
-  }
-
-  &_img{
+  &_img {
     width: 240px;
     height: 180px;
-    border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border-radius: 5px;
   }
 }
 
 .innerContent {
   display: grid;
-  grid-template-columns: 2fr 1fr;
   column-gap: 40px;
-  h3{
+  grid-template-columns: 2fr 1fr;
+  height: 420px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  h3 {
     margin: 10px 0 5px 0;
   }
 
-  h4{
-    text-decoration: underline;
+  h4 {
     margin-top: 10px;
+    text-decoration: underline;
   }
 
-  p{
+  p {
     font-size: 15px;
   }
 
-  &_text{
+  &_text {
     padding-left: 10px;
   }
 }
 
-.btn{
- &_round{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: transparent;
-  &:hover{
-    cursor: pointer;
-    background-color: $color-gainsboro;
-    } 
- }
+.btn {
+  &_round {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
 
- &_normal{
-  width: 240px;
-  height: 40px;
-  margin: 10px 0;
-  border-radius: 5px;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  background-color: $color-moonstone-blue;
-  // column-gap: 40px;
-  text-transform: uppercase;
-  border: none;
-  &:hover{
-    cursor: pointer;
-    background-color:  $color-mentol-green;
-    } 
- }
+    &:hover {
+      cursor: pointer;
+      background-color: $color-gainsboro;
+    }
+  }
 
- &_expand{
-  position: absolute;
-  top: 20px;
-  right: 10px;
- }
+  &_normal {
+    width: 240px;
+    height: 40px;
+    margin: 10px 0;
+    text-transform: uppercase;
+    background-color: $color-moonstone-blue;
+    border: none;
+    border-radius: 5px;
 
- &_icon{
-  width: 20px;
-  height: 20px;
- }
+    &:hover {
+      cursor: pointer;
+      background-color: $color-mentol-green;
+    }
+  }
+
+  &_expand {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }
+
+  &_icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 
-.innerContent{
-  text-align: left;
+.innerContent {
   font-size: small;
+  text-align: left;
 }
 
-.faded{
-  color: gray;
+.faded {
+  color: $color-gray;
 }
 
-.Modal{
-  height: 400px;
-  width: 800px;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.Modal {
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: calc(50vw - 400px);
-  background-color: papayawhip;
+  width: 800px;
   padding: 30px;
+  background-color: $color-papaya-whip;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+@media screen and (max-width: 900px) {
+  .Modal {
+    top: 100px;
+    left: calc(50vw - 300px);
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 635px) {
+  .Modal {
+    left: calc(50vw - 48%);
+    width: 96%;
+  }
+
+  .innerContent {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .btn_normal {
+    margin-right: 10px;
+  }
 }

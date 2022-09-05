@@ -2,9 +2,8 @@
 
 .page {
   position: relative;
-  height: calc(100vh - 180px);
+  min-height: calc(100vh - 90px);
   background-color: $color-creame;
-  overflow-y: auto;
 
   .container {
     display: flex;
@@ -17,8 +16,8 @@
     display: flex;
     justify-content: center;
     width: 50%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 10%;
+    margin-bottom: 10%;
     font-family: 'Comfortaa', cursive;
     font-weight: 600;
   }
@@ -29,14 +28,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-  }
-
-  &Name {
-    font-family: 'Neucha', cursive;
-    font-size: 2.5rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
     text-align: center;
   }
 
@@ -92,11 +83,5 @@
 @media screen and (max-width: 900px) {
   .game_wrapper {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .page {
-    height: calc(100vh - 220px);
   }
 }
