@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { loginUser } from '../../../../apiHelpers/users/usersController';
+import { loginUser, refreshUserToken } from '../../../../apiHelpers/users/usersController';
 
 import classes from './login.module.scss'
 import { Box, Button, TextField } from '@mui/material';
@@ -19,7 +19,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
-    loginUser({'email': email, 'password': password} ).then(resp=> {
+    loginUser({'email': email, 'password': password} ).then(async(resp)=> {
       if(resp === 'Неверно указан пароль или email') {setErrorMessage('Неверно указан пароль или email')}
       else{
         setSuccess(true); 
@@ -28,10 +28,15 @@ const Login: React.FC = () => {
         localStorage.setItem('refreshToken', resp.refreshToken);
         localStorage.setItem('name', resp.name);
         setUserLogged(true);
+        // setInterval(
+        //   await refreshUserToken( {'userId': resp.userId, 'refreshToken': resp.refreshToken}),
+        //   4*60*60
+        // )
       }
-    })
+    });
+    
   }
-
+  
   if(success) { return <Navigate to="/" />}
 
   return (

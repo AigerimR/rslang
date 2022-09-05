@@ -71,8 +71,8 @@ const WordCard: React.FC<{ id: string, unitColor: string, inComplexComponent?: b
   const addToLearnedWords = async (wordId: string) => {
     setWordIsLearned(true);
     if (wordIsComplex) {
-      setWordIsComplex(false);
-      LearnedWordsContext.updateLearnedWord(wordId);
+      await ComplexWordsContext.deleteComplexWord(wordId);
+      LearnedWordsContext.addLearnedWord(wordId);
     } else {
       LearnedWordsContext.addLearnedWord(wordId);
     }

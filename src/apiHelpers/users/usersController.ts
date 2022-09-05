@@ -1,7 +1,8 @@
 import { EStatusCode } from './../../enums/serverStatusCode';
-import { TUser, TUserLogIn } from './../../@types/users';
+import { TUser, TUserLogIn, TUserToken } from './../../@types/users';
 import { getWord } from '../words/wordsController';
 import { TWord } from './../../@types/words';
+import { escape } from 'querystring';
 
 const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 
@@ -36,21 +37,26 @@ export const loginUser = async (user: TUserLogIn) => {
   return(content);
 };
 
-// export const getUserToken = async (id) => {
-  
-//   const rawResponse = await fetch(`${BASE_URL}/users/${id}/tokens`, {
-//     method: 'GET',
-//     // headers: {
-//     //   'Accept': 'application/json',
-//     //   'Content-Type': 'application/json'
-//     // },
-//     // body: JSON.stringify(user)
-//   });
-//   const content = await rawResponse.json();
-
-//   return(content);
-// };
-
+export const refreshUserToken = async (user: TUserToken) => {
+  const rawResponse = await fetch(`${BASE_URL}/users/${user.userId}/tokens`, {
+    method: 'GET',
+    headers: {
+    'Authorization': `Bearer ${user.refreshToken}`,
+    'Accept': 'application/json',
+    },
+  });
+  if (rawResponse.status === EStatusCode.Unauthorized || rawResponse.status === EStatusCode.IncorrectData) {
+    localStorage.clear();
+    window.location.href = "/authorization";
+    return;
+  }
+ else{
+    const content = await rawResponse.json();
+    localStorage.setItem('token', content.token);
+    localStorage.setItem('refreshToken', content.refreshToken);
+    return(content);
+  }
+};
 
 export const createUserWord = async ({ userId, wordId, word, token }) => {
   const rawResponse = await fetch(`${BASE_URL}/users/${userId}/words/${wordId}`, {
@@ -66,6 +72,7 @@ export const createUserWord = async ({ userId, wordId, word, token }) => {
 
   // console.log(content.optional.learned);
 };
+
 export const deleteUserWord = async ({ userId, wordId, word, token }) => {
   return await fetch(`${BASE_URL}/users/${userId}/words/${wordId}`, {
     method: 'DELETE',
@@ -103,9 +110,14 @@ export const getAllUserWords = async ({ userId, token }) => {
       'Accept': 'application/json',
     }
   });
-  const content = await rawResponse.json();
-  // console.log(content);
-  return content;
+  if (rawResponse.status === EStatusCode.Unauthorized) {
+    refreshUserToken( {'userId': userId, 'refreshToken': localStorage.getItem('refreshToken')!})
+    return;
+  }
+ else{
+    const content = await rawResponse.json();
+    return(content);
+  }
 };
 
 export const getUserComplexWords = async (userId, token) => {
