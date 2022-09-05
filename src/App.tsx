@@ -3,7 +3,7 @@ import './styles/index.scss';
 import classes from './app.module.scss';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import MainPage from './components/Pages/MainPage/MainPage';
 import StatisticsPage from './components/Pages/StatisticsPage/StatisticsPage';
 import ComplexWords from './components/Pages/Dictionary/ComplexWords/ComplexWords';
