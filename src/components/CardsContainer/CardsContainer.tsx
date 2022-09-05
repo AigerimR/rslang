@@ -40,35 +40,39 @@ const CardsContainer: React.FC<{
   return (
     <>
       <div className={classes.main}>
-        <div className={`${props.inTextbook ? classes.textbook_games : classes.none}`}>
-          <button
-            className={`${classes.game_sprint} ${pageIsLearned ? classes.faded : ''}`}
-            disabled={pageIsLearned ? true : false}
-            onClick={() => {
-              setGame('sprint');
-              setIsGameStart(true);
-            }}
-          >
-            Спринт
-          </button>
-          <button
-            className={`${classes.game_audio} ${pageIsLearned ? classes.faded : ''}`}
-            disabled={pageIsLearned ? true : false}
-            onClick={() => {
-              setGame('audiocall');
-              setIsGameStart(true);
-            }}
-          >
-            Аудиовызов
-          </button>
-          <div className={classes.fakeGame}></div>
+        <div className={classes.container}>
+          <div className={`${props.inTextbook ? classes.textbook_games : classes.none}`}>
+            <button
+              className={`${classes.game_sprint} ${pageIsLearned ? classes.faded : ''}`}
+              disabled={pageIsLearned ? true : false}
+              onClick={() => {
+                setGame('sprint');
+                setIsGameStart(true);
+              }}
+            >
+              Спринт
+            </button>
+            <button
+              className={`${classes.game_audio} ${pageIsLearned ? classes.faded : ''}`}
+              disabled={pageIsLearned ? true : false}
+              onClick={() => {
+                setGame('audiocall');
+                setIsGameStart(true);
+              }}
+            >
+              Аудиовызов
+            </button>
+            <div className={classes.fakeGame}></div>
+          </div>
+          {/* if it is a textbook and all the words on the page are learned */}
+          {props.inTextbook && pageIsLearned ? (
+            <p className={classes.allLearned}>Все слова выучены</p>
+          ) : (
+            <div className={classes.cards_container}>
+              {wordCard}
+            </div>
+          )}
         </div>
-        {/* if it is a textbook and all the words on the page are learned */}
-        {props.inTextbook && pageIsLearned ? (
-          <h2>ALL WORDS ARE LEARNED</h2>
-        ) : (
-          <div className={classes.cards_container}>{wordCard}</div>
-        )}
       </div>
       <Modal
         isOpen={isGameStart}
