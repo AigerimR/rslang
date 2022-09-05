@@ -76,7 +76,7 @@ const CardsContainer: React.FC<{
           setIsGameStart(false);
         }}
       >
-        <Game difficultyLevel={props.unit} game={game} />
+        <Game difficultyLevel={props.unit} game={game} page={props.page} />
       </Modal>
     </>
   );
