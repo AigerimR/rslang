@@ -70,7 +70,13 @@ const Textbook: React.FC = () => {
           </button>
         </Link>
       </div>
-      <CardsContainer data={data!} unitColor={unitColor} inTextbook={true} />
+      <CardsContainer
+        data={data!}
+        unitColor={unitColor}
+        inTextbook={true}
+        unit={unit.toString()}
+        page={page}
+      />
     </div>
   );
 };
