@@ -1,8 +1,10 @@
+import { TGameWord } from '../@types/words';
+
 interface IGame {
-  handleScore: (score: number) => void;
   handleFinishGame: (isFinish: boolean) => void;
-  handleAnswer: () => void;
-  handleRightAnswer: () => void;
+  handleAnswer: (isCorrect: boolean) => void;
+  handleCorrectAnswersList: (word: TGameWord) => void;
+  handleWrongAnswersList: (word: TGameWord) => void;
 }
 
 export default IGame;
