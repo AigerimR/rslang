@@ -62,7 +62,7 @@ const CardsContainer: React.FC<{
             >
               Аудиовызов
             </button>
-            <div className={classes.fakeGame}></div>
+            <button className={classes.fakeGame}></button>
           </div>
           {/* if it is a textbook and all the words on the page are learned */}
           {props.inTextbook && pageIsLearned ? (
