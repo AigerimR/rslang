@@ -1,0 +1,79 @@
+@import '../../../app.module.scss';
+
+.auth {
+  &_main {
+    background: linear-gradient(70deg, $color-mentol-green 35%, $color-moonstone-blue 55%);
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      height: calc(100vh - 180px);
+    }
+  }
+
+  &_container {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 400px;
+    padding: 50px 40px;
+    background-color: $color-white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  &_header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &_side {
+    color: $color-old-mauve;
+    font-family: 'Neucha', cursive;
+    text-align: center;
+  }
+
+  &_img {
+    margin-top: 50px;
+  }
+}
+
+.btn {
+  &_link {
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+      scale: 1.1;
+    }
+  }
+
+  &_active {
+    border-bottom: 2px solid $color-moonstone-blue;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .auth_side {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .auth_main {
+    .container {
+      height: calc(100vh - 220px);
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .auth_container {
+    width: 350px;
+    padding: 30px 20px;
+  }
+}

@@ -1,0 +1,20 @@
+<svg width="0" height="0" class="hidden">
+  <symbol xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 6.33 6.73" id="cross">
+    <defs>
+      <linearGradient id="linear-gradient" x1="3.16" y1="6.33" x2="3.16" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#bd1c8a"></stop>
+        <stop offset="1" stop-color="#961756"></stop>
+      </linearGradient>
+    </defs>
+    <title>Asset 7</title>
+    <g>
+      <g id="Layer_2">
+        <g id="Layer_1-2">
+          <path d="M1.22,6.73,3.16,4.79l2,1.94L6.33,5.51v-.4L5.11,6.33,3.16,4.39,1.22,6.33,0,5.11v.4L1.22,6.73Zm.72-3.57L0,1.22v.4L1.74,3.37l.2-.21Zm2.45,0,.2.21L6.33,1.62v-.4L4.39,3.16Z"></path>
+          <polygon points="0 5.11 1.22 6.33 3.17 4.39 5.11 6.33 6.33 5.11 4.39 3.17 6.33 1.22 5.11 0 3.17 1.94 1.22 0 0 1.22 1.94 3.17 0 5.11 0 5.11"></polygon>
+          <path d="M4.39,3.73,6.05,5.39l.28-.28L4.39,3.16v.57ZM1.94,3.16,0,5.11l.28.28L1.94,3.73V3.16ZM1.22.56,3.16,2.51l2-1.95.94.94.28-.28L5.67.56,5.11,0,4.54.56,3.16,1.94,1.79.56,1.22,0,.66.56,0,1.22l.28.28L1.22.56Z"></path>
+        </g>
+      </g>
+    </g>
+  </symbol>
+</svg>

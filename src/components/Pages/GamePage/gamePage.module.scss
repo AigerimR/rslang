@@ -1,0 +1,87 @@
+@import '../../../app.module.scss';
+
+.page {
+  position: relative;
+  min-height: calc(100vh - 90px);
+  background-color: $color-creame;
+
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.game {
+  &Wrapper {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-family: 'Comfortaa', cursive;
+    font-weight: 600;
+  }
+
+  &Container {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &Info,
+  &Rule {
+    font-size: 1.2rem;
+    line-height: 150%;
+  }
+
+  &Info {
+    color: $color-venetian-red;
+    text-transform: uppercase;
+  }
+
+  &Rule,
+  &LevelName,
+  &Keys {
+    color: $color-black;
+  }
+
+  &Keys {
+    font-size: 1.1rem;
+    line-height: 150%;
+  }
+
+  &LevelName {
+    margin-top: 3%;
+    font-size: 1.3rem;
+  }
+
+  &Start {
+    margin-top: 5%;
+    padding: 2px 8px;
+    color: $color-black;
+    font-family: 'Neucha', cursive;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background-color: transparent;
+    border: solid 2px $color-black;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+
+    &:disabled {
+      color: $color-lifeless;
+      border: solid 2px $color-lifeless;
+      cursor: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .game_wrapper {
+    width: 100%;
+  }
+}

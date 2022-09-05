@@ -1,0 +1,258 @@
+@import '../../../app.module.scss';
+
+.audiocall {
+  &Wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 10px;
+  }
+
+  &Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-right: 60px;
+  }
+
+  &Lives {
+    display: flex;
+    align-items: center;
+  }
+
+  &Live {
+    color: $color-venetian-red;
+    font-size: 1.8rem;
+  }
+
+  &_sound_btn {
+    color: $color-white;
+    font-size: 3rem;
+    cursor: pointer;
+  }
+
+  &ContentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
+  }
+
+  &Btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    color: $color-white;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.3rem;
+    background-color: $color-old-mauve;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-turquoise-surf;
+    }
+  }
+}
+
+.correctAnswer {
+  &Total,
+  &Percent {
+    height: 4px;
+    border-radius: 4px;
+  }
+
+  &Total {
+    width: 100%;
+    margin-top: 5%;
+    background-color: $color-creame;
+  }
+
+  &Percent {
+    background-color: $color-turquoise-surf;
+  }
+}
+
+.audiocallNull {
+  flex-shrink: 0;
+  width: 180px;
+  height: 180px;
+  background-color: $color-old-mauve;
+  background-image: url('../../../assets/svg/headphone.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-turquoise-surf;
+  }
+}
+
+.audioOpenWord {
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+
+  &_img {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    background-color: $color-white;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: center;
+    border-radius: 20px;
+  }
+
+  &_context {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+    &_sound {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      background-image: url('../../../assets/svg/headphone.svg');
+      background-color: $color-old-mauve;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $color-turquoise-surf;
+      }
+    }
+
+    &_value {
+      font-size: 2rem;
+    }
+  }
+}
+
+input {
+  display: none;
+}
+
+.audioList {
+  display: flex;
+  gap: 20px 48px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5%;
+  font-size: 1.5rem;
+  border: none;
+
+  &_item {
+    position: relative;
+    transition: all 0.5s ease;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      margin-bottom: -7px;
+      background: linear-gradient(to right, $color-turquoise-surf, $color-golden-poppy, $color-charm-pink 100%);
+      transform: translateX(-50%);
+      transition: width 0.5s ease 0s, right 0.5s ease 0s;
+    }
+
+    &:hover {
+      color: $color-june-bud;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  &:disabled &_item {
+    cursor: auto;
+
+    &:hover {
+      color: inherit;
+    }
+
+    &:hover::after {
+      width: 0;
+    }
+  }
+
+  &:disabled .correctWord {
+    &:hover {
+      color: $color-june-bud;
+    }
+  }
+
+  &:disabled .wrongWord {
+    &:hover {
+      color: $color-moonstone-blue;
+    }
+  }
+}
+
+.correctWord {
+  color: $color-june-bud;
+}
+
+.wrongWord {
+  color: $color-moonstone-blue;
+  text-decoration: line-through;
+}
+
+@media screen and (max-width: 1020px) {
+  .audiocall {
+    &Wrapper {
+      padding: 10px;
+    }
+
+    &Null {
+      width: 120px;
+      height: 120px;
+    }
+
+    &Btn {
+      font-size: 1.1rem;
+    }
+  }
+
+  .audioOpenWord {
+    gap: 20px;
+
+    &_img {
+      width: 120px;
+      height: 120px;
+    }
+
+    &_context {
+      &_sound {
+        width: 40px;
+        height: 40px;
+      }
+
+      &_value {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .audioList {
+    gap: 12px 32px;
+    font-size: 1.2rem;
+  }
+}

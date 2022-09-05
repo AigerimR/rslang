@@ -1,0 +1,51 @@
+@import '../../../app.module.scss';
+
+.dictionary {
+  &_main {
+    background: linear-gradient(70deg, $color-mentol-green 35%, $color-moonstone-blue 55%);
+
+    .container {
+      min-height: calc(100vh - 180px);
+      padding: 30px;
+      text-align: center;
+    }
+  }
+
+  &_title {
+    color: $color-old-mauve;
+    font-family: 'Neucha', cursive;
+    font-size: 2rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+}
+
+.btn {
+  &_link {
+    margin: 10px 15px;
+    padding-bottom: 5px;
+    color: $color-old-mauve;
+    font-family: 'Comfortaa', cursive;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      scale: 1.1;
+      cursor: pointer;
+    }
+  }
+
+  &_active {
+    scale: 1.1;
+    border-bottom: 2px solid $color-dark-chocolate;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .dictionary_main {
+    .container {
+      min-height: calc(100vh - 220px);
+    }
+  }
+}

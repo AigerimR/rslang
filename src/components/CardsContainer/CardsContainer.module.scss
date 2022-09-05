@@ -1,0 +1,131 @@
+@import '../../app.module.scss';
+
+.cards_container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.allLearned {
+  font-family: 'Comfortaa', cursive;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.Modal {
+  position: absolute;
+  top: 400px;
+  left: 400px;
+  right: 40px;
+  bottom: 40px;
+  width: 70%;
+  height: 200px;
+  background-color: $color-papaya-whip;
+}
+
+.main {
+  text-align: center;
+}
+
+.textbook_games {
+  position: relative;
+  top: -160px;
+  margin-left: -40px;
+  width: 350px;
+}
+
+.fakeGame {
+  display: none;
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-radius: 50%;
+}
+
+.game {
+
+  &_sprint,
+  &_audio {
+    position: absolute;
+    top: 10px;
+    width: 120px;
+    height: 120px;
+    color: $color-venetian-red;
+    font-family: 'Neucha', cursive;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 50%;
+    transition: transform 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      transform: scale(1.1);
+    }
+  }
+
+  &_sprint {
+    right: -20px;
+    background-color: $color-sandy-brown;
+  }
+
+  &_audio {
+    left: 100px;
+    background-color: $color-golden-poppy;
+  }
+}
+
+.none {
+  display: none;
+}
+
+.faded {
+  background-color: rgba(168, 159, 148, 0.3);
+}
+
+@media screen and (max-width: 1180px) {
+  .textbook_games {
+    position: static;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .fakeGame {
+    z-index: -1;
+    display: block;
+    background-color: transparent;
+  }
+
+  .game {
+
+    &_sprint,
+    &_audio {
+      position: static;
+    }
+  }
+}
+
+@media screen and (max-width: 635px) {
+  .textbook_games {
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game_sprint,
+  .game_audio,
+  .fakeGame {
+    width: 300px;
+    height: 50px;
+    border-radius: 8px;
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
+}
