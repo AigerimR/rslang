@@ -2,6 +2,7 @@ import { EStatusCode } from './../../enums/serverStatusCode';
 import { TUser, TUserLogIn, TUserToken } from './../../@types/users';
 import { getWord } from '../words/wordsController';
 import { TWord } from './../../@types/words';
+import { escape } from 'querystring';
 
 const BASE_URL = 'https://team99-rslang-jsfe2022q1.herokuapp.com';
 
@@ -44,49 +45,18 @@ export const refreshUserToken = async (user: TUserToken) => {
     'Accept': 'application/json',
     },
   });
-  if (rawResponse.status === 401 || rawResponse.status === 403) {
+  if (rawResponse.status === EStatusCode.Unauthorized || rawResponse.status === EStatusCode.IncorrectData) {
     localStorage.clear();
     window.location.href = "/authorization";
     return;
   }
  else{
     const content = await rawResponse.json();
-    // console.log(content);
     localStorage.setItem('token', content.token);
     localStorage.setItem('refreshToken', content.refreshToken);
     return(content);
   }
-  // const content = await rawResponse.json();
-  // // console.log(content);
-  // localStorage.setItem('token', content.token);
-  // localStorage.setItem('refreshToken', content.refreshToken);
-  // return(content);
 };
-
-// export const refreshUserToken = async (user: TUserToken) => {
-//   const rawResponse = await fetch(`${BASE_URL}/users/${user.userId}/tokens`, {
-//     method: 'GET',
-//     headers: {
-//     'Authorization': `Bearer ${user.refreshToken}`,
-//     'Accept': 'application/json',
-//     },
-//   })
-//   // then(async (response) =>{
-//       if (rawResponse.status === 401) {
-//         console.log("aika");
-//         window.location.href = "/authorization";
-//         return;
-//       }
-//      else{
-//         const content = await rawResponse.json();
-//         // console.log(content);
-//         localStorage.setItem('token', content.token);
-//         localStorage.setItem('refreshToken', content.refreshToken);
-//         return(content);
-//       }
-//     // })
-// };
-
 
 export const createUserWord = async ({ userId, wordId, word, token }) => {
   const rawResponse = await fetch(`${BASE_URL}/users/${userId}/words/${wordId}`, {
@@ -140,22 +110,14 @@ export const getAllUserWords = async ({ userId, token }) => {
       'Accept': 'application/json',
     }
   });
-  if (rawResponse.status === 401) {
+  if (rawResponse.status === EStatusCode.Unauthorized) {
     refreshUserToken( {'userId': userId, 'refreshToken': localStorage.getItem('refreshToken')!})
-    // localStorage.clear();
-    // window.location.href = "/authorization";
     return;
   }
  else{
     const content = await rawResponse.json();
-    // console.log(content);
-    // localStorage.setItem('token', content.token);
-    // localStorage.setItem('refreshToken', content.refreshToken);
     return(content);
   }
-  // const content = await rawResponse.json();
-  // console.log(content);
-  // return content;
 };
 
 export const getUserComplexWords = async (userId, token) => {
@@ -177,27 +139,3 @@ export const getUserLearnedWords = async (userId, token) => {
   });
   return  Promise.all(allLearnedWordsData).then(val=> {return val});
 }
-
-
-export const aggregateUserWords = async (userId, token) => {
-  //filter to get all userHardWords & nonUserWords
-  const filter = {
-    	"$or": [
-    	{"userWord.difficulty":"hard"},
-    	{"userWord":null}
-    	]
-    }
-  
-  const rawResponse = await fetch(`${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=3600&filter=${encodeURIComponent(JSON.stringify(filter))}`, {
-  // const rawResponse = await fetch(`${BASE_URL}/users/${userId}/aggregatedWords?wordsPerPage=3600&filter={"userWord":null}`, {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
-  const content = await rawResponse.json();
-
-  console.log(content);
-};

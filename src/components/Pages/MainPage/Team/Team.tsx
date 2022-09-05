@@ -10,8 +10,7 @@ const Team = () => {
       <div className={`${classes.container} ${classes.description_team}`}>
         <h2 className={classes.team_title}>Команда разработчиков</h2>
         <p className={classes.team_notice}>
-          <span>&#129395; </span>
-          Давайте знакомится?
+          Давайте знакомиться?
         </p>
         <p className={classes.team_location}>
           Наша команда #99 из г. Алматы (Республика Казахстан)
